@@ -18,7 +18,9 @@ class NavbarDesktop extends StatelessWidget {
       child: BackdropFilter(
         filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
         child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+            padding: widthScreen > 950
+                ? const EdgeInsets.symmetric(horizontal: 85, vertical: 16)
+                : const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             decoration: BoxDecoration(color: Colors.white.withOpacity(0.6)),
             width: double.infinity,
             child: SizedBox(
