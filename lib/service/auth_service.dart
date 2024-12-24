@@ -1,3 +1,4 @@
+import 'package:agrolyn_web/main.dart';
 import 'package:agrolyn_web/shared/custom_snackbar.dart';
 import 'package:agrolyn_web/view/auth/login_page.dart';
 import 'package:agrolyn_web/view/home/home_page.dart';
@@ -59,7 +60,11 @@ class AuthService {
         if (response.data['roles_id'] == 2) {
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => HomePage()),
+            MaterialPageRoute(
+                builder: (context) => ResponsiveLayout(
+                      mobileBody: MobileScreen(),
+                      desktopBody: DesktopScreen(),
+                    )),
           );
         }
 

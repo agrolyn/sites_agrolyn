@@ -40,6 +40,9 @@ dependencies:
   another_flutter_splash_screen: ^1.2.1
   dio: ^5.7.0
   awesome_snackbar_content: ^0.1.1
+  lottie: ^3.2.0
+  youtube_player_flutter: ^9.1.1
+  sidebarx: ^0.17.1
 
 dev_dependencies:
   flutter_test:
