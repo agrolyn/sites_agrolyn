@@ -1,11 +1,11 @@
-import 'package:agrolyn_web/main.dart';
 import 'package:agrolyn_web/shared/custom_snackbar.dart';
 import 'package:agrolyn_web/view/auth/login_page.dart';
-import 'package:agrolyn_web/view/home/home_page.dart';
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../widget/navbar/responsive_layout.dart';
 
 class AuthService {
   Dio _dio = Dio();
