@@ -1,4 +1,5 @@
 import 'package:agrolyn_web/service/article_service.dart';
+import 'package:agrolyn_web/service/recipe_service.dart';
 import 'package:agrolyn_web/service/video_service.dart';
 import 'package:flutter/material.dart';
 
@@ -8,6 +9,7 @@ class HomeNotifier extends ChangeNotifier {
   HomeNotifier({required this.context}) {
     fetchArticles();
     fetchVideo();
+    fetchRecipe();
   }
 
   bool _isSecondPageVisible = false;
@@ -32,6 +34,14 @@ class HomeNotifier extends ChangeNotifier {
 
   void fetchVideo() async {
     videos = await _videoService.getVideos();
+    notifyListeners();
+  }
+
+  final RecipeService _recipeService = RecipeService();
+  List recipes = [];
+
+  void fetchRecipe() async {
+    recipes = await _recipeService.getRecipes();
     notifyListeners();
   }
 }
