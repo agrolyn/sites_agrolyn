@@ -1,146 +1,213 @@
 import 'package:agrolyn_web/provider/home_notifier.dart';
 import 'package:agrolyn_web/shared/constans.dart';
 import 'package:agrolyn_web/utils/assets_path.dart';
+import 'package:agrolyn_web/view/community/community_page.dart';
+import 'package:agrolyn_web/view/detection/detection_page.dart';
+import 'package:agrolyn_web/widget/spacing.dart';
+import 'package:agrolyn_web/widget/typography.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final widthScreen = MediaQuery.of(context).size.width;
-
     return ChangeNotifierProvider(
       create: (_) => HomeNotifier(context: context),
       child: Consumer<HomeNotifier>(builder: (context, value, child) {
-        return Scaffold(
-          body: Stack(
-            children: [
-              SingleChildScrollView(
-                child: Column(
-                  children: [
-                    // // Navbar Desktop
-                    // widthScreen > 700
-                    //     ? const NavbarDesktop(navbarActive: "beranda")
-                    //     : Container(),
-                    SizedBox(
-                      height: widthScreen > 700
-                          ? MediaQuery.of(context).size.height
-                          : MediaQuery.of(context).size.height * 0.85,
-                      child: Column(
+        return Container(
+          decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(32),
+              border: Border.all(color: border)),
+          margin: blockMargin,
+          padding: const EdgeInsets.all(40),
+          child: Align(
+            alignment: Alignment.center,
+            child: Container(
+              constraints: const BoxConstraints(maxWidth: 780),
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 32),
+                    child: RichText(
+                      text: TextSpan(
                         children: [
-                          Expanded(
-                            child: Stack(
-                              children: [
-                                // Background Lottie Animation
-                                Align(
-                                  alignment: Alignment.center,
-                                  child: Lottie.asset(
-                                    ImageAssets.backgorundAnimation,
-                                    fit: BoxFit.cover,
-                                    width: double.infinity,
-                                    height: double.infinity,
-                                  ),
-                                ),
-                                // Teks di atas Lottie Animation
-                                Align(
-                                  alignment: Alignment
-                                      .center, // Posisikan teks di tengah
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        'SELAMAT DATANG DI AGROLYN',
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 24,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                        textAlign: TextAlign.center,
-                                      ),
-                                      SizedBox(height: 20),
-                                      Text(
-                                        'Solusi pertanian masa depan yang cerdas dan inovatif',
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 18,
-                                        ),
-                                        textAlign: TextAlign.center,
-                                      ),
-                                      SizedBox(height: 40),
-                                      // Tombol untuk berpindah ke halaman kedua
-                                      InkWell(
-                                        onTap: () {
-                                          value.toggleSecondPageVisibility();
-                                        },
-                                        child: Container(
-                                          height: 40,
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              0.265,
-                                          alignment: Alignment
-                                              .center, // Posisikan teks di tengah
-                                          decoration: BoxDecoration(
-                                            color: MyColors
-                                                .primaryColorDark, // Warna tombol
-                                            borderRadius: BorderRadius.circular(
-                                                8), // Sudut melengkung
-                                            boxShadow: [
-                                              BoxShadow(
-                                                color: Colors.black
-                                                    .withOpacity(0.2),
-                                                offset: const Offset(0, 4),
-                                                blurRadius: 8,
-                                              ),
-                                            ],
-                                          ),
-                                          child: const Text(
-                                            "Ayo Mulai",
-                                            style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.white, // Warna teks
-                                              fontSize: 14,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
+                          const TextSpan(
+                              text:
+                                  "Agrolyn adalah sebuah sistem yang membantu petani dalam mengelola lahan pertanian mereka dengan membantu ",
+                              style: headlineSecondaryTextStyle),
+                          TextSpan(
+                              recognizer: TapGestureRecognizer()
+                                ..onTap = () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const DetectionPage()),
+                                  );
+                                },
+                              text: "deteksi penyakit tanaman",
+                              style: headlineSecondaryTextStyle.copyWith(
+                                  color: MyColors.primaryColorDark)),
+                          const TextSpan(
+                              text: ", ", style: headlineSecondaryTextStyle),
+                          TextSpan(
+                              recognizer: TapGestureRecognizer()
+                                ..onTap = () {
+                                  // Navigator.push(
+                                  //   context,
+                                  //   MaterialPageRoute(
+                                  //       builder: (context) =>
+                                  //           const Prediction()),
+                                  // );
+                                },
+                              text: "prediksi hasil tani",
+                              style: headlineSecondaryTextStyle.copyWith(
+                                  color: MyColors.primaryColorDark)),
+                          const TextSpan(
+                              text: ", dan ",
+                              style: headlineSecondaryTextStyle),
+                          TextSpan(
+                              recognizer: TapGestureRecognizer()
+                                ..onTap = () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const CommunityPage()),
+                                  );
+                                },
+                              text: "diskusi dengan petani lain",
+                              style: headlineSecondaryTextStyle.copyWith(
+                                  color: MyColors.primaryColorDark)),
+                          const TextSpan(
+                              text: " dari seluruh Indonesia",
+                              style: headlineSecondaryTextStyle),
+                        ],
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 32),
+                    child: ResponsiveRowColumn(
+                      layout:
+                          ResponsiveBreakpoints.of(context).smallerThan(DESKTOP)
+                              ? ResponsiveRowColumnType.COLUMN
+                              : ResponsiveRowColumnType.ROW,
+                      rowMainAxisAlignment: MainAxisAlignment.center,
+                      rowCrossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        ResponsiveRowColumnItem(
+                          child: TextButton(
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const CommunityPage()),
+                              );
+                            },
+                            style: ButtonStyle(
+                                backgroundColor: WidgetStateProperty.all<Color>(
+                                    MyColors.primaryColorDark),
+                                overlayColor:
+                                    WidgetStateProperty.resolveWith<Color>(
+                                        (Set<WidgetState> states) {
+                                  if (states.contains(WidgetState.hovered)) {
+                                    return MyColors.primaryColor;
+                                  }
+                                  if (states.contains(WidgetState.focused) ||
+                                      states.contains(WidgetState.pressed)) {
+                                    return MyColors.primaryColor;
+                                  }
+                                  return MyColors.primaryColorDark;
+                                }),
+                                shape: WidgetStateProperty.resolveWith<
+                                    OutlinedBorder>((Set<WidgetState> states) {
+                                  if (states.contains(WidgetState.focused) ||
+                                      states.contains(WidgetState.pressed)) {
+                                    return const RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(16)));
+                                  }
+                                  return const RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(16)));
+                                }),
+                                padding:
+                                    WidgetStateProperty.all<EdgeInsetsGeometry>(
+                                        const EdgeInsets.symmetric(
+                                            vertical: 32, horizontal: 84)),
+                                side:
+                                    WidgetStateProperty.resolveWith<BorderSide>(
+                                        (Set<WidgetState> states) {
+                                  if (states.contains(WidgetState.focused) ||
+                                      states.contains(WidgetState.pressed)) {
+                                    return const BorderSide(
+                                        width: 3,
+                                        color: buttonPrimaryPressedOutline);
+                                  }
+                                  return const BorderSide(
+                                      width: 3, color: Colors.white);
+                                })),
+                            child: Text(
+                              "Komunitas",
+                              style: buttonTextStyle.copyWith(fontSize: 18),
                             ),
                           ),
-                          SizedBox(
-                              height:
-                                  20), // Menambahkan jarak antara teks dan container bawah
-                          Container(
-                            height: 256,
-                            width: double.infinity,
-                            color: Colors.white, // Container putih di bawah
-                            child: Center(
-                              child: Text(
-                                'Ini page ke dua',
-                                style: TextStyle(
-                                    fontSize: 24, fontWeight: FontWeight.bold),
+                        ),
+                        ResponsiveRowColumnItem(
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 8),
+                            child: TextButton(
+                              onPressed: () => {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const DetectionPage()),
+                                )
+                              },
+                              style: TextButton.styleFrom(
+                                shape: const RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(16))),
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 20, horizontal: 20),
+                              ),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  const Padding(
+                                    padding: EdgeInsets.only(right: 8),
+                                    child: Icon(
+                                      Icons.camera_alt_rounded,
+                                      size: 24,
+                                      color: MyColors.primaryColorDark,
+                                    ),
+                                  ),
+                                  Text(
+                                    "Deteksi Penyakit",
+                                    style: buttonTextStyle.copyWith(
+                                        fontSize: 16,
+                                        color: MyColors.primaryColorDark),
+                                  ),
+                                ],
                               ),
                             ),
                           ),
-                        ],
-                      ),
+                        )
+                      ],
                     ),
-                    // // Navbar Mobile
-                    // widthScreen <= 700
-                    //     ? const NavbarMobile(navbarActive: "beranda")
-                    //     : Container(),
-                  ],
-                ),
+                  ),
+                ],
               ),
-            ],
+            ),
           ),
         );
       }),

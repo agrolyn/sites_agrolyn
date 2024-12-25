@@ -1,3 +1,4 @@
+import 'package:agrolyn_web/main.dart';
 import 'package:agrolyn_web/shared/constans.dart';
 import 'package:agrolyn_web/view/community/community_page.dart';
 import 'package:agrolyn_web/view/detection/detection_page.dart';
@@ -39,8 +40,12 @@ class MobileScreen extends StatefulWidget {
 class _MobileScreenState extends State<MobileScreen> {
   int _selectedIndex = 0;
 
-  final List<Widget> _pages = const [
-    HomePage(),
+  final List<Widget> _pages = [
+    ListView.builder(
+        itemCount: blocks.length,
+        itemBuilder: (context, index) {
+          return blocks[index];
+        }),
     CommunityPage(),
     DetectionPage(),
     RecipePage(),
@@ -84,8 +89,12 @@ class DesktopScreen extends StatefulWidget {
 class _DesktopScreenState extends State<DesktopScreen> {
   int _selectedIndex = 0;
 
-  final List<Widget> _pages = const [
-    HomePage(),
+  final List<Widget> _pages = [
+    ListView.builder(
+        itemCount: blocks.length,
+        itemBuilder: (context, index) {
+          return blocks[index];
+        }),
     CommunityPage(),
     DetectionPage(),
     RecipePage(),
