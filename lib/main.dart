@@ -1,6 +1,7 @@
 import 'package:agrolyn_web/view/auth/login_page.dart';
 import 'package:agrolyn_web/view/home/detection_section.dart';
 import 'package:agrolyn_web/view/home/home_page.dart';
+import 'package:agrolyn_web/view/splash_screen.dart';
 import 'package:agrolyn_web/widget/block_wraper.dart';
 import 'package:agrolyn_web/widget/carousel.dart';
 import 'package:agrolyn_web/widget/navbar/responsive_layout.dart';
@@ -37,7 +38,7 @@ class MyApp extends StatelessWidget {
               ],
             ),
         debugShowCheckedModeBanner: false,
-        home: LoginPage());
+        home: SplashScreen());
   }
 }
 
