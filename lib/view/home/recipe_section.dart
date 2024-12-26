@@ -1,6 +1,9 @@
 import 'package:agrolyn_web/provider/home_notifier.dart';
 import 'package:agrolyn_web/shared/constans.dart';
 import 'package:agrolyn_web/view/community/community_page.dart';
+import 'package:agrolyn_web/view/recipe/detail_recipe.dart';
+import 'package:agrolyn_web/view/recipe/recipe_page.dart';
+import 'package:agrolyn_web/widget/no_found_custom.dart';
 import 'package:agrolyn_web/widget/typography.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -79,8 +82,7 @@ class RecipeSection extends StatelessWidget {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) =>
-                                        const CommunityPage()),
+                                    builder: (context) => const RecipePage()),
                               );
                             },
                             style: ButtonStyle(
@@ -211,12 +213,13 @@ class RecipeSection extends StatelessWidget {
                                             const SizedBox(height: 8),
                                             InkWell(
                                               onTap: () {
-                                                // pushWithoutNavBar(
-                                                //     context,
-                                                //     MaterialPageRoute(
-                                                //         builder: (context) =>
-                                                //             DetailCommonRecipe(
-                                                //                 recipe: recipe)));
+                                                Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            DetailRecipe(
+                                                                recipe:
+                                                                    recipe)));
                                               },
                                               child: Container(
                                                 height: 32,
@@ -250,7 +253,10 @@ class RecipeSection extends StatelessWidget {
                             );
                           })
                       : const Center(
-                          child: Text("No Recipes available"),
+                          child: NoFoundCustom(
+                            message: "No Recipe Found",
+                            subMessage: "We can’t find any recipe for you",
+                          ),
                         ),
                 ],
               ),

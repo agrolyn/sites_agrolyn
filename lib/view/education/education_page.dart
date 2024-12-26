@@ -3,6 +3,7 @@ import 'package:agrolyn_web/shared/constans.dart';
 import 'package:agrolyn_web/utils/assets_path.dart';
 import 'package:agrolyn_web/utils/date.dart';
 import 'package:agrolyn_web/view/education/detail_article.dart';
+import 'package:agrolyn_web/widget/no_found_custom.dart';
 import 'package:agrolyn_web/widget/video_player_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
@@ -299,8 +300,11 @@ class EducationPage extends StatelessWidget {
                                             ),
                                           )
                                         : const Center(
-                                            child:
-                                                Text("No articles available")),
+                                            child: NoFoundCustom(
+                                            message: "No Articles Available",
+                                            subMessage:
+                                                "We can't find any articles for you",
+                                          )),
                                   ],
                                 ),
                               ),
@@ -731,7 +735,11 @@ class EducationPage extends StatelessWidget {
                                       ),
                                     )
                                   : const Center(
-                                      child: Text("No articles available")),
+                                      child: NoFoundCustom(
+                                      message: "No Articles Available",
+                                      subMessage:
+                                          "We can't find any articles for you",
+                                    )),
                             ],
                           ),
                           // Video Section on mobile
