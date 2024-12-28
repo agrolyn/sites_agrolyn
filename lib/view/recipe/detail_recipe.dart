@@ -97,11 +97,11 @@ class DetailRecipe extends StatelessWidget {
                                               mainAxisAlignment:
                                                   MainAxisAlignment.center,
                                               children: [
-                                                Text(
+                                                const Text(
                                                   "Protein",
                                                   style: bodyTextStyle,
                                                 ),
-                                                SizedBox(
+                                                const SizedBox(
                                                   height: 2,
                                                 ),
                                                 RichText(
@@ -116,7 +116,7 @@ class DetailRecipe extends StatelessWidget {
                                                       TextSpan(
                                                           text:
                                                               "${recipe['protein']}",
-                                                          style: TextStyle(
+                                                          style: const TextStyle(
                                                               color: MyColors
                                                                   .primaryColorDark)),
                                                     ],
@@ -148,11 +148,11 @@ class DetailRecipe extends StatelessWidget {
                                               mainAxisAlignment:
                                                   MainAxisAlignment.center,
                                               children: [
-                                                Text(
+                                                const Text(
                                                   "Calories",
                                                   style: bodyTextStyle,
                                                 ),
-                                                SizedBox(
+                                                const SizedBox(
                                                   height: 2,
                                                 ),
                                                 RichText(
@@ -167,7 +167,7 @@ class DetailRecipe extends StatelessWidget {
                                                       TextSpan(
                                                           text:
                                                               "${recipe['calories']}",
-                                                          style: TextStyle(
+                                                          style: const TextStyle(
                                                               color: MyColors
                                                                   .primaryColorDark)),
                                                     ],
@@ -199,11 +199,11 @@ class DetailRecipe extends StatelessWidget {
                                               mainAxisAlignment:
                                                   MainAxisAlignment.center,
                                               children: [
-                                                Text(
+                                                const Text(
                                                   "Karbo",
                                                   style: bodyTextStyle,
                                                 ),
-                                                SizedBox(
+                                                const SizedBox(
                                                   height: 2,
                                                 ),
                                                 RichText(
@@ -218,7 +218,7 @@ class DetailRecipe extends StatelessWidget {
                                                       TextSpan(
                                                           text:
                                                               "${recipe['karbo']}",
-                                                          style: TextStyle(
+                                                          style: const TextStyle(
                                                               color: MyColors
                                                                   .primaryColorDark)),
                                                     ],
@@ -230,7 +230,7 @@ class DetailRecipe extends StatelessWidget {
                                         ],
                                       ),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 24,
                                     ),
                                     RichText(
@@ -262,7 +262,7 @@ class DetailRecipe extends StatelessWidget {
                                         ],
                                       ),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 8,
                                     ),
                                     Text(
@@ -302,7 +302,7 @@ class DetailRecipe extends StatelessWidget {
                                         ],
                                       ),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 8,
                                     ),
                                     Text(
@@ -344,7 +344,7 @@ class DetailRecipe extends StatelessWidget {
                                         ],
                                       ),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 8,
                                     ),
                                     Text(
@@ -353,7 +353,7 @@ class DetailRecipe extends StatelessWidget {
                                       overflow: TextOverflow.ellipsis,
                                       style: bodyTextStyle,
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 16,
                                     ),
                                   ],

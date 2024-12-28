@@ -19,7 +19,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
     // Membuat controller Youtube dengan ID video dari URL
     _controller = YoutubePlayerController(
       initialVideoId: YoutubePlayer.convertUrlToId(widget.videoUrl) ?? '',
-      flags: YoutubePlayerFlags(
+      flags: const YoutubePlayerFlags(
         autoPlay: true, // Menentukan apakah video langsung diputar
         mute: false, // Tidak di-mute
       ),

@@ -4,7 +4,6 @@ import 'package:agrolyn_web/utils/assets_path.dart';
 import 'package:agrolyn_web/view/detection/detection_page.dart';
 import 'package:agrolyn_web/widget/spacing.dart';
 import 'package:agrolyn_web/widget/typography.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
@@ -56,9 +55,9 @@ class DetectionSection extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.only(
-                            bottom: 16, left: 16, right: 8),
+                      const Padding(
+                        padding:
+                            EdgeInsets.only(bottom: 16, left: 16, right: 8),
                         child: Text(
                           "Deteksi Penyakit Tanaman Kamu",
                           style: TextStyle(
@@ -69,9 +68,9 @@ class DetectionSection extends StatelessWidget {
                           ),
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(
-                            bottom: 16, left: 16, right: 8),
+                      const Padding(
+                        padding:
+                            EdgeInsets.only(bottom: 16, left: 16, right: 8),
                         child: Text(
                           "Agrolyn menggunakan teknologi AI untuk mendeteksi penyakit tanaman kamu. Dengan teknologi ini, kamu bisa mendeteksi penyakit tanaman kamu dengan mudah dan cepat.",
                           style: TextStyle(
@@ -136,7 +135,7 @@ class DetectionSection extends StatelessWidget {
                                   width: 3, color: Colors.white);
                             }),
                           ),
-                          child: Text(
+                          child: const Text(
                             "Deteksi",
                             style: TextStyle(
                                 fontSize: 18,

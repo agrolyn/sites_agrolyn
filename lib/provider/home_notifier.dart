@@ -44,4 +44,10 @@ class HomeNotifier extends ChangeNotifier {
     recipes = await _recipeService.getRecipes();
     notifyListeners();
   }
+
+  int page = 0;
+  gantiPage(int value) {
+    page = value;
+    notifyListeners();
+  }
 }

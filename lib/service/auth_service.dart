@@ -1,7 +1,6 @@
-import 'package:agrolyn_web/main.dart';
 import 'package:agrolyn_web/shared/custom_snackbar.dart';
 import 'package:agrolyn_web/view/auth/login_page.dart';
-import 'package:agrolyn_web/widget/navbar/responsive_layout.dart';
+import 'package:agrolyn_web/widget/navbar/navbar.dart';
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -61,10 +60,7 @@ class AuthService {
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-              builder: (context) => ResponsiveLayout(
-                mobileBody: MobileScreen(),
-                desktopBody: DesktopScreen(),
-              ),
+              builder: (context) => Navbar(),
             ),
           );
         }

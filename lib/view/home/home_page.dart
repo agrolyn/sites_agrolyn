@@ -1,6 +1,6 @@
 import 'package:agrolyn_web/provider/home_notifier.dart';
+import 'package:agrolyn_web/provider/menu_notifier.dart';
 import 'package:agrolyn_web/shared/constans.dart';
-import 'package:agrolyn_web/utils/assets_path.dart';
 import 'package:agrolyn_web/view/community/community_page.dart';
 import 'package:agrolyn_web/view/detection/detection_page.dart';
 import 'package:agrolyn_web/widget/spacing.dart';
@@ -77,8 +77,7 @@ class HomePage extends StatelessWidget {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) =>
-                                            const CommunityPage()),
+                                        builder: (context) => const HomePage()),
                                   );
                                 },
                               text: "diskusi dengan petani lain",
@@ -106,11 +105,10 @@ class HomePage extends StatelessWidget {
                           child: TextButton(
                             onPressed: () {
                               Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        const CommunityPage()),
-                              );
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const CommunityPage(),
+                                  ));
                             },
                             style: ButtonStyle(
                                 backgroundColor: WidgetStateProperty.all<Color>(
@@ -165,14 +163,8 @@ class HomePage extends StatelessWidget {
                           child: Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 8),
                             child: TextButton(
-                              onPressed: () => {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const DetectionPage()),
-                                )
-                              },
+                              onPressed: () =>
+                                  {context.read<MenuNotifier>().gantiPage(2)},
                               style: TextButton.styleFrom(
                                 shape: const RoundedRectangleBorder(
                                     borderRadius:

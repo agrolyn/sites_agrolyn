@@ -1,6 +1,5 @@
 import 'package:agrolyn_web/provider/home_notifier.dart';
 import 'package:agrolyn_web/shared/constans.dart';
-import 'package:agrolyn_web/view/community/community_page.dart';
 import 'package:agrolyn_web/view/recipe/detail_recipe.dart';
 import 'package:agrolyn_web/view/recipe/recipe_page.dart';
 import 'package:agrolyn_web/widget/no_found_custom.dart';
@@ -132,7 +131,7 @@ class RecipeSection extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                Icon(
+                                const Icon(
                                   Icons.restaurant,
                                   size: 24,
                                   color: Colors.white,
@@ -191,7 +190,7 @@ class RecipeSection extends StatelessWidget {
                                           children: [
                                             Text(
                                               "${recipe['title']}",
-                                              style: TextStyle(
+                                              style: const TextStyle(
                                                 fontSize: 24,
                                                 color: Colors.white,
                                                 height: 1.2,
@@ -203,7 +202,7 @@ class RecipeSection extends StatelessWidget {
                                               "${recipe['description']}",
                                               maxLines: 2,
                                               overflow: TextOverflow.ellipsis,
-                                              style: TextStyle(
+                                              style: const TextStyle(
                                                 fontSize: 16,
                                                 color: Colors.white,
                                                 height: 1.5,
