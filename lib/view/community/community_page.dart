@@ -12,40 +12,12 @@ class CommunityPage extends StatelessWidget {
       create: (_) => HomeNotifier(context: context),
       child: Consumer<HomeNotifier>(
         builder: (context, value, child) {
-          return SafeArea(
-            child: Scaffold(
-              body: Stack(
+          return const Scaffold(
+            body: SingleChildScrollView(
+              child: Column(
                 children: [
-                  Column(
-                    children: [
-                      // // Navbar Desktop
-                      // widthScreen > 700
-                      //     ? const NavbarDesktop(
-                      //         navbarActive: "beranda",
-                      //       )
-                      //     : Container(),
-                      SizedBox(
-                        height: widthScreen > 700
-                            ? MediaQuery.of(context).size.height * 0.8
-                            : MediaQuery.of(context).size.height * 0.85,
-                        child: const SingleChildScrollView(
-                            child: Column(
-                          children: [
-                            // mulai coding disini
-
-                            Text('CommunityPage'),
-                          ],
-                        )),
-                      ),
-
-                      // // Navbar Mobile
-                      // widthScreen <= 700
-                      //     ? const NavbarMobile(
-                      //         navbarActive: "beranda",
-                      //       )
-                      //     : Container(),
-                    ],
-                  )
+                  // mulai coding disini
+                  Text('CommunityPages'),
                 ],
               ),
             ),

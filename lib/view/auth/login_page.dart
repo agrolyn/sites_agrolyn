@@ -4,6 +4,7 @@ import 'package:agrolyn_web/provider/login_notifier.dart';
 import 'package:agrolyn_web/service/auth_service.dart';
 import 'package:agrolyn_web/shared/constans.dart';
 import 'package:agrolyn_web/utils/assets_path.dart';
+import 'package:agrolyn_web/view/auth/forgot_password_page.dart';
 import 'package:agrolyn_web/view/auth/register_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -191,19 +192,19 @@ class LoginPage extends StatelessWidget {
                                     Row(
                                       mainAxisAlignment: MainAxisAlignment.end,
                                       children: [
-                                        // TextButton(
-                                        //     onPressed: () {
-                                        //       Navigator.push(
-                                        //           context,
-                                        //           MaterialPageRoute(
-                                        //               builder: (context) =>
-                                        //                   ForgotPasswordScreen()));
-                                        //     },
-                                        //     child: const Text(
-                                        //       'Lupa Kata Sandi',
-                                        //       style: TextStyle(
-                                        //           color: Colors.white),
-                                        //     ))
+                                        TextButton(
+                                            onPressed: () {
+                                              Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          ForgotPasswordPage()));
+                                            },
+                                            child: const Text(
+                                              'Lupa Kata Sandi',
+                                              style: TextStyle(
+                                                  color: Colors.white),
+                                            ))
                                       ],
                                     ),
                                     const SizedBox(height: 16),
