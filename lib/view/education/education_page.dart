@@ -3,6 +3,7 @@ import 'package:agrolyn_web/shared/constans.dart';
 import 'package:agrolyn_web/utils/assets_path.dart';
 import 'package:agrolyn_web/utils/date.dart';
 import 'package:agrolyn_web/view/education/detail_article.dart';
+import 'package:agrolyn_web/widget/no_found_custom.dart';
 import 'package:agrolyn_web/widget/video_player_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
@@ -22,7 +23,6 @@ class EducationPage extends StatelessWidget {
           length: 2,
           child: Scaffold(
               appBar: AppBar(
-                title: const Text("Artikel dan Video Edukasi"),
                 bottom: const TabBar(
                   tabs: [
                     Tab(
@@ -30,7 +30,7 @@ class EducationPage extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Icon(Icons.article_outlined),
-                          const SizedBox(width: 5),
+                          SizedBox(width: 5),
                           Text('Artikel'),
                         ],
                       ),
@@ -40,7 +40,7 @@ class EducationPage extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Icon(Icons.video_library_outlined),
-                          const SizedBox(width: 5),
+                          SizedBox(width: 5),
                           Text('Video'),
                         ],
                       ),
@@ -70,8 +70,8 @@ class EducationPage extends StatelessWidget {
                                         children: [
                                           Expanded(
                                             child: Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
                                               children: [
                                                 Row(
                                                   children: [
@@ -81,7 +81,7 @@ class EducationPage extends StatelessWidget {
                                                       width: 24,
                                                     ),
                                                     const SizedBox(width: 4),
-                                                    Text(
+                                                    const Text(
                                                       'Agrolyn',
                                                       style: TextStyle(
                                                           fontSize: 16,
@@ -92,14 +92,25 @@ class EducationPage extends StatelessWidget {
                                                     ),
                                                   ],
                                                 ),
-                                                SizedBox(height: 16),
+                                                const SizedBox(height: 16),
                                                 const Text(
-                                                  "Baca berbagai bacaan menarik tentang pertanian di Agrolyn Artikel",
+                                                  "Berita, Artikel, dan Bacaan Menarik",
                                                   maxLines: 3,
                                                   style: TextStyle(
                                                     color: Colors.black,
                                                     fontSize: 20,
                                                     fontWeight: FontWeight.bold,
+                                                  ),
+                                                ),
+                                                const SizedBox(height: 8),
+                                                const Text(
+                                                  "Baca berbagai bacaan menarik tentang pertanian di Agrolyn Artikel",
+                                                  maxLines: 3,
+                                                  style: TextStyle(
+                                                    color: Colors.black,
+                                                    fontSize: 16,
+                                                    fontWeight:
+                                                        FontWeight.normal,
                                                   ),
                                                 ),
                                               ],
@@ -299,8 +310,11 @@ class EducationPage extends StatelessWidget {
                                             ),
                                           )
                                         : const Center(
-                                            child:
-                                                Text("No articles available")),
+                                            child: NoFoundCustom(
+                                            message: "No Articles Available",
+                                            subMessage:
+                                                "We can't find any articles for you",
+                                          )),
                                   ],
                                 ),
                               ),
@@ -322,10 +336,12 @@ class EducationPage extends StatelessWidget {
                                           const SizedBox(width: 8),
                                           Expanded(
                                             child: Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.end,
                                               children: [
                                                 Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.end,
                                                   children: [
                                                     Image.asset(
                                                       ImageAssets.logo,
@@ -333,7 +349,7 @@ class EducationPage extends StatelessWidget {
                                                       width: 24,
                                                     ),
                                                     const SizedBox(width: 4),
-                                                    Text(
+                                                    const Text(
                                                       'Agrolyn',
                                                       style: TextStyle(
                                                           fontSize: 16,
@@ -346,12 +362,23 @@ class EducationPage extends StatelessWidget {
                                                 ),
                                                 const SizedBox(height: 16),
                                                 const Text(
-                                                  "Tonton berbagai tontonan edukasi menarik tentang pertanian di Agrolyn Video Edukasi",
+                                                  "Tontoan Edukasi Pertanian Terbaik",
                                                   maxLines: 3,
                                                   style: TextStyle(
                                                     color: Colors.black,
                                                     fontSize: 20,
                                                     fontWeight: FontWeight.bold,
+                                                  ),
+                                                ),
+                                                const SizedBox(height: 8),
+                                                const Text(
+                                                  "Tonton berbagai tontonan edukasi menarik tentang pertanian di Agrolyn Video Edukasi",
+                                                  maxLines: 3,
+                                                  style: TextStyle(
+                                                    color: Colors.black,
+                                                    fontSize: 16,
+                                                    fontWeight:
+                                                        FontWeight.normal,
                                                   ),
                                                 ),
                                               ],
@@ -526,7 +553,7 @@ class EducationPage extends StatelessWidget {
                                                 width: 24,
                                               ),
                                               const SizedBox(width: 4),
-                                              Text(
+                                              const Text(
                                                 'Agrolyn',
                                                 style: TextStyle(
                                                     fontSize: 16,
@@ -536,7 +563,7 @@ class EducationPage extends StatelessWidget {
                                               ),
                                             ],
                                           ),
-                                          SizedBox(height: 16),
+                                          const SizedBox(height: 16),
                                           const Text(
                                             "Baca berbagai bacaan menarik tentang pertanian di Agrolyn Artikel",
                                             maxLines: 3,
@@ -731,7 +758,11 @@ class EducationPage extends StatelessWidget {
                                       ),
                                     )
                                   : const Center(
-                                      child: Text("No articles available")),
+                                      child: NoFoundCustom(
+                                      message: "No Articles Available",
+                                      subMessage:
+                                          "We can't find any articles for you",
+                                    )),
                             ],
                           ),
                           // Video Section on mobile

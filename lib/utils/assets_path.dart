@@ -43,6 +43,7 @@ class ImageAssets {
   static String completed = "$lotties/completed.json";
   static String proses = "$lotties/proses.json";
   static String videos = "$lotties/videos.json";
+  static String error = "$lotties/404.json";
   static String piring1 = "$root/Untitled design (11).png";
   static String piring2 = "$root/Untitled design (12).png";
   static String map = "$root/acuma.png";
