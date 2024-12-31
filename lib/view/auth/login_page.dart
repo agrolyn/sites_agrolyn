@@ -189,7 +189,7 @@ class LoginPage extends StatelessWidget {
                                     const SizedBox(height: 8),
 
                                     // Section: Forgot Password
-                                    const Row(
+                                    Row(
                                       mainAxisAlignment: MainAxisAlignment.end,
                                       children: [
                                         TextButton(

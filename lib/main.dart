@@ -1,3 +1,4 @@
+import 'package:agrolyn_web/view/community/community_page.dart';
 import 'package:agrolyn_web/view/home/detection_section.dart';
 import 'package:agrolyn_web/view/home/home_page.dart';
 import 'package:agrolyn_web/view/home/recipe_section.dart';

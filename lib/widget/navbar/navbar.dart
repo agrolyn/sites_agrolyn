@@ -40,7 +40,7 @@ class Navbar extends StatelessWidget {
                           icon: Icon(Icons.camera_alt_rounded),
                           label: 'Deteksi'),
                       BottomNavigationBarItem(
-                          icon: Icon(Icons.restaurant), label: 'Resep'),
+                          icon: Icon(Icons.restaurant), label: 'Olahan'),
                       BottomNavigationBarItem(
                           icon: Icon(Icons.article), label: 'Edukasi'),
                     ],
@@ -105,7 +105,7 @@ class Navbar extends StatelessWidget {
                           ),
                           SidebarXItem(
                             icon: Icons.restaurant,
-                            label: 'Resep',
+                            label: 'Olahan',
                             onTap: () {
                               value.gantiPage(3);
                             },
