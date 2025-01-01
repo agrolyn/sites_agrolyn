@@ -1,8 +1,8 @@
 import 'package:agrolyn_web/main.dart';
+import 'package:agrolyn_web/view/detection/detection_screen.dart';
 import 'package:agrolyn_web/view/olahan/category_olahan_page.dart';
 import 'package:agrolyn_web/view/olahan/detail_olahan_page.dart';
 import 'package:agrolyn_web/view/olahan/olahan_page.dart';
-import 'package:agrolyn_web/view/detection/detection_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:sidebarx/sidebarx.dart';
 import 'package:provider/provider.dart';

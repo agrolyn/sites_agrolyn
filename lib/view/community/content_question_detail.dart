@@ -1,10 +1,12 @@
 import 'package:agrolyn_web/service/community_service.dart';
 import 'package:agrolyn_web/provider/community_notifer.dart';
+import 'package:agrolyn_web/shared/constans.dart';
 import 'package:agrolyn_web/utils/inter_prefs.dart';
 import 'package:agrolyn_web/view/community/edit_question.dart';
 import 'package:flutter/material.dart';
 import 'package:agrolyn_web/utils/date.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ContentQuestionDetail extends StatelessWidget {
   Map<String, dynamic> dataQuestion = {};
