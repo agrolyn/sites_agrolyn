@@ -1,7 +1,7 @@
 import 'package:agrolyn_web/view/auth/login_page.dart';
 import 'package:agrolyn_web/view/auth/register_page.dart';
 import 'package:agrolyn_web/view/community/community_page.dart';
-import 'package:agrolyn_web/view/detection/detection_page.dart';
+import 'package:agrolyn_web/view/detection/detection_screen.dart';
 import 'package:agrolyn_web/view/education/education_page.dart';
 import 'package:agrolyn_web/view/home/detection_section.dart';
 import 'package:agrolyn_web/view/home/home_page.dart';
@@ -48,7 +48,9 @@ class MyApp extends StatelessWidget {
       routes: {
         '/navbar': (context) => Navbar(),
         '/login': (context) => LoginPage(context: context),
-        '/splashScreen': (context) => const SplashScreen(),
+        '/splashScreen': (context) => SplashScreen(
+              context: context,
+            ),
         '/register': (context) => const RegisterPage(),
         '/home': (context) => ListView.builder(
             itemCount: blocks.length,
@@ -56,7 +58,7 @@ class MyApp extends StatelessWidget {
               return blocks[index];
             }),
         '/community': (context) => const CommunityPage(),
-        '/detection': (context) => const DetectionPage(),
+        '/detection': (context) => const DetectionScreen(),
         '/olahan': (context) => const OlahanPage(
               idCat: 0, // Replace 'someId' with the appropriate value
             ),

@@ -1,11 +1,11 @@
 import 'package:agrolyn_web/main.dart';
 import 'package:agrolyn_web/view/olahan/category_olahan_page.dart';
 import 'package:agrolyn_web/view/olahan/olahan_page.dart';
+import 'package:agrolyn_web/view/detection/detection_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:sidebarx/sidebarx.dart';
 import 'package:provider/provider.dart';
 import 'package:agrolyn_web/view/community/community_page.dart';
-import 'package:agrolyn_web/view/detection/detection_page.dart';
 import 'package:agrolyn_web/view/education/education_page.dart';
 import 'package:agrolyn_web/view/recipe/recipe_page.dart';
 import 'package:agrolyn_web/shared/constans.dart';
@@ -149,11 +149,11 @@ class Navbar extends StatelessWidget {
         //       return blocks[index];
         //     }),
         ),
-    const DetectionPage(),
-    // const OlahanPage(
-    //   idCat: 0, // Replace 'someId' with the appropriate value
-    // ),
-    const CategoryOlahanPage(idCat: 4),
+    const DetectionScreen(),
+    const OlahanPage(
+      idCat: 0, // Replace 'someId' with the appropriate value
+    ),
+    // const CategoryOlahanPage(idCat: 1),
     const EducationPage(),
   ];
 }
