@@ -1,11 +1,29 @@
 import 'package:agrolyn_web/provider/splash_notiier.dart';
 import 'package:agrolyn_web/utils/assets_path.dart';
+import 'package:agrolyn_web/widget/navbar/navbar.dart';
 import 'package:another_flutter_splash_screen/another_flutter_splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreen extends StatelessWidget {
-  const SplashScreen({super.key});
+  final BuildContext context;
+  SplashScreen({required this.context, super.key}) {
+    initialize();
+  }
+
+  void initialize() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    print(prefs.getBool('isLogedIn'));
+    if (prefs.getBool('isLogedIn') == true) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => Navbar(),
+        ),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {

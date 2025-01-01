@@ -1,7 +1,7 @@
 import 'package:agrolyn_web/provider/home_notifier.dart';
 import 'package:agrolyn_web/shared/constans.dart';
 import 'package:agrolyn_web/utils/assets_path.dart';
-import 'package:agrolyn_web/view/detection/detection_page.dart';
+import 'package:agrolyn_web/view/detection/detection_screen.dart';
 import 'package:agrolyn_web/widget/spacing.dart';
 import 'package:agrolyn_web/widget/typography.dart';
 import 'package:flutter/material.dart';
@@ -88,7 +88,8 @@ class DetectionSection extends StatelessWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => const DetectionPage()),
+                                  builder: (context) =>
+                                      const DetectionScreen()),
                             );
                           },
                           style: ButtonStyle(

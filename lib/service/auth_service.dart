@@ -46,6 +46,7 @@ class AuthService {
       if (response.statusCode == 200) {
         // Simpan token di SharedPreferences
         SharedPreferences prefs = await SharedPreferences.getInstance();
+
         await prefs.setString('refresh_token', response.data['refresh_token']);
         await prefs.setString('access_token', response.data['access_token']);
         await prefs.setString('name', response.data['name']);
@@ -55,15 +56,14 @@ class AuthService {
         await prefs.setString('id', response.data['id'].toString());
         await prefs.setString('img_profile', response.data['img_profile']);
         await prefs.setString('roles_id', response.data['roles_id'].toString());
+        await prefs.setBool('isLogedIn', true);
 
-        if (response.data['roles_id'] == 2) {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (context) => Navbar(),
-            ),
-          );
-        }
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => Navbar(),
+          ),
+        );
 
         return true;
       } else {

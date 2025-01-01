@@ -2,7 +2,7 @@ import 'package:agrolyn_web/provider/home_notifier.dart';
 import 'package:agrolyn_web/provider/menu_notifier.dart';
 import 'package:agrolyn_web/shared/constans.dart';
 import 'package:agrolyn_web/view/community/community_page.dart';
-import 'package:agrolyn_web/view/detection/detection_page.dart';
+import 'package:agrolyn_web/view/detection/detection_screen.dart';
 import 'package:agrolyn_web/widget/spacing.dart';
 import 'package:agrolyn_web/widget/typography.dart';
 import 'package:flutter/gestures.dart';
@@ -47,7 +47,7 @@ class HomePage extends StatelessWidget {
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) =>
-                                            const DetectionPage()),
+                                            const DetectionScreen()),
                                   );
                                 },
                               text: "deteksi penyakit tanaman",

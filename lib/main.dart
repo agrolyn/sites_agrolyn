@@ -6,6 +6,7 @@ import 'package:agrolyn_web/view/splash_screen.dart';
 import 'package:agrolyn_web/widget/block_wraper.dart';
 import 'package:agrolyn_web/widget/carousel.dart';
 import 'package:agrolyn_web/widget/footer.dart';
+import 'package:agrolyn_web/widget/navbar/navbar.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
@@ -39,7 +40,10 @@ class MyApp extends StatelessWidget {
               ],
             ),
         debugShowCheckedModeBanner: false,
-        home: const SplashScreen());
+        home: SplashScreen(
+          context: context,
+        ));
+    // home: Navbar());
   }
 }
 

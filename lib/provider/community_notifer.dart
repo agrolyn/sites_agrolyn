@@ -1,6 +1,7 @@
 import 'package:agrolyn_web/service/community_service.dart';
 import 'package:agrolyn_web/shared/constans.dart';
 import 'package:agrolyn_web/view/community/community_page.dart';
+import 'package:agrolyn_web/view/community/detail_community_screen.dart';
 import 'package:agrolyn_web/view/community/item_filter.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -110,16 +111,16 @@ class CommunityNotifer extends ChangeNotifier {
 
       print(formData.fields);
 
-      // await CommunityService().fetchEditQuestion(id, formData).whenComplete(() {
-      //   Navigator.push(
-      //       context,
-      //       MaterialPageRoute(
-      //           builder: (context) => DetailCommunityScreen(
-      //                 id: id,
-      //               )));
-      //   showCustomSnackbar(context, "Berhasil Diperbarui",
-      //       "Pertanyaan Anda Berhasil Diperbarui!", ContentType.success);
-      // });
+      await CommunityService().fetchEditQuestion(id, formData).whenComplete(() {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => DetailCommunityScreen(
+                      id: id,
+                    )));
+        showCustomSnackbar(context, "Berhasil Diperbarui",
+            "Pertanyaan Anda Berhasil Diperbarui!", ContentType.success);
+      });
     }
   }
 
@@ -182,71 +183,73 @@ class CommunityNotifer extends ChangeNotifier {
   // Answer
   // ==================================
 
-  // Future<void> createAnswer(
-  //     {context,
-  //     required int questionId,
-  //     required int type,
-  //     required String answer}) async {
-  //   try {
-  //     await _communityService
-  //         .fetchNewAnswer(questionId: questionId, type: type, answer: answer)
-  //         .whenComplete(() {
-  //       pushWithoutNavBar(
-  //           context,
-  //           MaterialPageRoute(
-  //               builder: (context) => DetailCommunityScreen(id: questionId)));
-  //     });
+  Future<void> createAnswer(
+      {context,
+      required int questionId,
+      required int type,
+      required String answer}) async {
+    try {
+      await _communityService
+          .fetchNewAnswer(questionId: questionId, type: type, answer: answer)
+          .whenComplete(() {
+        Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+                builder: (context) => DetailCommunityScreen(id: questionId)));
+      });
 
-  //     notifyListeners();
-  //     showCustomSnackbar(context, "Berhasil",
-  //         "Selamat Jawaban Anda Berhasil Ditambahkan", ContentType.success);
-  //   } catch (e) {
-  //     print(e);
-  //     showCustomSnackbar(context, "Gagal Menambahkan Jawaban",
-  //         "Jawaban Anda Gagal Ditambahkan", ContentType.failure);
-  //   }
-  // }
+      notifyListeners();
+      showCustomSnackbar(context, "Berhasil",
+          "Selamat Jawaban Anda Berhasil Ditambahkan", ContentType.success);
+    } catch (e) {
+      print(e);
+      showCustomSnackbar(context, "Gagal Menambahkan Jawaban",
+          "Jawaban Anda Gagal Ditambahkan", ContentType.failure);
+    }
+  }
 
-  // Future<void> deleteAnswer(context, int answerId, int questionId) async {
-  //   try {
-  //     await _communityService.fetchDeleteAnwser(answerId).whenComplete(() {
-  //       pushWithoutNavBar(
-  //           context,
-  //           MaterialPageRoute(
-  //               builder: (context) => DetailCommunityScreen(id: questionId)));
-  //       showCustomSnackbar(context, "Berhasil Dihapus",
-  //           "Jawaban Anda Berhasil Dihapus!", ContentType.success);
-  //     });
+  Future<void> deleteAnswer(context, int answerId, int questionId) async {
+    try {
+      await _communityService.fetchDeleteAnwser(answerId).whenComplete(() {
+        Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+                builder: (context) => DetailCommunityScreen(id: questionId)));
 
-  //     notifyListeners();
-  //   } catch (e) {
-  //     print(e);
-  //     showCustomSnackbar(context, "Gagal Menghapus Jawaban",
-  //         "Jawaban Anda Gagal Dihapus", ContentType.failure);
-  //   }
-  // }
+        showCustomSnackbar(context, "Berhasil Dihapus",
+            "Jawaban Anda Berhasil Dihapus!", ContentType.success);
+      });
 
-  // Future<void> editAnswer(
-  //     context, int answerId, String answer, int questionId) async {
-  //   try {
-  //     await _communityService
-  //         .fetchEditAnswer(answerId, answer)
-  //         .whenComplete(() {
-  //       pushWithoutNavBar(
-  //           context,
-  //           MaterialPageRoute(
-  //               builder: (context) => DetailCommunityScreen(id: questionId)));
-  //       showCustomSnackbar(context, "Berhasil Diperbarui",
-  //           "Jawaban Anda Berhasil Diperbarui!", ContentType.success);
-  //     });
+      notifyListeners();
+    } catch (e) {
+      print(e);
+      showCustomSnackbar(context, "Gagal Menghapus Jawaban",
+          "Jawaban Anda Gagal Dihapus", ContentType.failure);
+    }
+  }
 
-  //     notifyListeners();
-  //   } catch (e) {
-  //     print(e);
-  //     showCustomSnackbar(context, "Gagal Mengubah Jawaban",
-  //         "Jawaban Anda Gagal Diubah", ContentType.failure);
-  //   }
-  // }
+  Future<void> editAnswer(
+      context, int answerId, String answer, int questionId) async {
+    try {
+      await _communityService
+          .fetchEditAnswer(answerId, answer)
+          .whenComplete(() {
+        Navigator.pop(context);
+        Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+                builder: (context) => DetailCommunityScreen(id: questionId)));
+        showCustomSnackbar(context, "Berhasil Diperbarui",
+            "Jawaban Anda Berhasil Diperbarui!", ContentType.success);
+      });
+
+      notifyListeners();
+    } catch (e) {
+      print(e);
+      showCustomSnackbar(context, "Gagal Mengubah Jawaban",
+          "Jawaban Anda Gagal Diubah", ContentType.failure);
+    }
+  }
 
   Future<void> likeAnswer(int answerId) async {
     await _communityService.fetchLikeAnswer(answerId);
@@ -272,134 +275,295 @@ class CommunityNotifer extends ChangeNotifier {
   }
 
   void showFilterQuestion() async {
+    final widthScreen = MediaQuery.of(context).size.width;
     showDialog(
         context: context,
         builder: (BuildContext context) {
-          return Center(
-              child: Material(
-            type: MaterialType.transparency,
-            child: Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(16),
-                ),
-                padding: const EdgeInsets.all(16),
-                child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(16),
-                        child: Image.asset(ImageAssets.imgFilter),
-                      ),
-                      const SizedBox(height: 16),
-                      const Text(
-                        "Filter Diskusi Berdasarkan",
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      const SizedBox(height: 16),
-                      const Text("Kategori Tanaman",
-                          style: TextStyle(
-                              fontSize: 15, fontWeight: FontWeight.w500)),
-                      Row(
-                        children: [
-                          ItemFilter(
-                              name: "Semua",
-                              onTap: () async {
-                                await InterPrefs.init();
-                                InterPrefs.setPrefs("filterBy", "semua");
-                                print("filter berdasarkan : semua");
-                                notifyListeners();
-                              }),
-                          ItemFilter(
-                              name: "Jagung",
-                              onTap: () async {
-                                await InterPrefs.init();
-                                InterPrefs.setPrefs("filterBy", "jagung");
-                                print("filter berdasarkan : jagung");
-                                notifyListeners();
-                              }),
-                          ItemFilter(
-                              name: "Padi",
-                              onTap: () async {
-                                await InterPrefs.init();
-                                InterPrefs.setPrefs("filterBy", "padi");
-                                print("filter berdasarkan : padi");
-                                notifyListeners();
-                              }),
-                        ],
-                      ),
-                      const Text("Lainnya",
-                          style: TextStyle(
-                              fontSize: 15, fontWeight: FontWeight.w500)),
-                      Row(
-                        children: [
-                          ItemFilter(
-                              name: "Umum",
-                              onTap: () async {
-                                await InterPrefs.init();
-                                InterPrefs.setPrefs("filterBy", "umum");
-                                print("filter berdasarkan : umum");
-                              }),
-                          ItemFilter(
-                              name: "Pertanyaanku",
-                              onTap: () async {
-                                await InterPrefs.init();
-                                InterPrefs.setPrefs("filterBy", "pertanyaanku");
-                                print("filter berdasarkan : answerme");
-                              }),
-                        ],
-                      ),
-                      const SizedBox(
-                        width: 16,
-                      ),
-                      Divider(color: Colors.grey[300], thickness: 1),
-                      const SizedBox(
-                        width: 20,
-                      ),
-                      Row(
-                        children: [
-                          ElevatedButton(
-                              onPressed: () {
-                                Navigator.pop(context);
-                              },
-                              style: ButtonStyle(
-                                backgroundColor:
-                                    WidgetStateProperty.all(Colors.red),
-                                foregroundColor:
-                                    WidgetStateProperty.all(Colors.white),
+          return Container(
+            width: widthScreen > 850 ? widthScreen * 0.3 : widthScreen * 0.9,
+            height: widthScreen > 850 ? 300 : 500,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(16),
+            ),
+            margin: widthScreen > 850
+                ? const EdgeInsets.symmetric(vertical: 100, horizontal: 150)
+                : const EdgeInsets.all(0),
+            child: Material(
+              type: MaterialType.transparency,
+              child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  padding: const EdgeInsets.all(16),
+                  child: widthScreen > 850
+                      ? Row(
+                          children: [
+                            SizedBox(
+                              height: 300,
+                              width: 600,
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(16),
+                                child: Image.asset(ImageAssets.imgFilter),
                               ),
-                              child: const Text("Batalkan")),
-                          const SizedBox(
-                            width: 16,
-                          ),
-                          ElevatedButton(
-                              onPressed: () async {
-                                await InterPrefs.init();
-                                String value = InterPrefs.getPrefs("filterBy");
-                                if (value == 'pertanyaanku') {
-                                  fetchFilterQuestion('answerme');
-                                } else if (value == 'semua') {
-                                  fetchFilterQuestion('all');
-                                }
-                                fetchFilterQuestion(value);
-                                Navigator.pop(context);
-                              },
-                              style: ButtonStyle(
-                                backgroundColor: WidgetStateProperty.all(
-                                    MyColors.primaryColorDark),
-                                foregroundColor:
-                                    WidgetStateProperty.all(Colors.white),
+                            ),
+                            Column(
+                              mainAxisSize: MainAxisSize.min,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Text(
+                                  "Filter Diskusi Berdasarkan",
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                const SizedBox(height: 16),
+                                const Text("Kategori Tanaman",
+                                    style: TextStyle(
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.w500)),
+                                Row(
+                                  children: [
+                                    ItemFilter(
+                                        name: "Semua",
+                                        onTap: () async {
+                                          await InterPrefs.init();
+                                          InterPrefs.setPrefs(
+                                              "filterBy", "semua");
+                                          print("filter berdasarkan : semua");
+                                          notifyListeners();
+                                        }),
+                                    ItemFilter(
+                                        name: "Jagung",
+                                        onTap: () async {
+                                          await InterPrefs.init();
+                                          InterPrefs.setPrefs(
+                                              "filterBy", "jagung");
+                                          print("filter berdasarkan : jagung");
+                                          notifyListeners();
+                                        }),
+                                    ItemFilter(
+                                        name: "Padi",
+                                        onTap: () async {
+                                          await InterPrefs.init();
+                                          InterPrefs.setPrefs(
+                                              "filterBy", "padi");
+                                          print("filter berdasarkan : padi");
+                                          notifyListeners();
+                                        }),
+                                  ],
+                                ),
+                                const Text("Lainnya",
+                                    style: TextStyle(
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.w500)),
+                                Row(
+                                  children: [
+                                    ItemFilter(
+                                        name: "Umum",
+                                        onTap: () async {
+                                          await InterPrefs.init();
+                                          InterPrefs.setPrefs(
+                                              "filterBy", "umum");
+                                          print("filter berdasarkan : umum");
+                                        }),
+                                    ItemFilter(
+                                        name: "Pertanyaanku",
+                                        onTap: () async {
+                                          await InterPrefs.init();
+                                          InterPrefs.setPrefs(
+                                              "filterBy", "pertanyaanku");
+                                          print(
+                                              "filter berdasarkan : answerme");
+                                        }),
+                                  ],
+                                ),
+                                const SizedBox(
+                                  width: 16,
+                                ),
+                                Divider(color: Colors.grey[300], thickness: 1),
+                                const SizedBox(
+                                  width: 20,
+                                ),
+                                Row(
+                                  children: [
+                                    ElevatedButton(
+                                        onPressed: () {
+                                          Navigator.pop(context);
+                                        },
+                                        style: ButtonStyle(
+                                          backgroundColor:
+                                              WidgetStateProperty.all(
+                                                  Colors.red),
+                                          foregroundColor:
+                                              WidgetStateProperty.all(
+                                                  Colors.white),
+                                        ),
+                                        child: const Text("Batalkan")),
+                                    const SizedBox(
+                                      width: 16,
+                                    ),
+                                    ElevatedButton(
+                                        onPressed: () async {
+                                          await InterPrefs.init();
+                                          String value =
+                                              InterPrefs.getPrefs("filterBy");
+                                          if (value == 'pertanyaanku') {
+                                            fetchFilterQuestion('answerme');
+                                          } else if (value == 'semua') {
+                                            fetchFilterQuestion('all');
+                                          }
+                                          fetchFilterQuestion(value);
+                                          Navigator.pop(context);
+                                        },
+                                        style: ButtonStyle(
+                                          backgroundColor:
+                                              WidgetStateProperty.all(
+                                                  MyColors.primaryColorDark),
+                                          foregroundColor:
+                                              WidgetStateProperty.all(
+                                                  Colors.white),
+                                        ),
+                                        child: const Text("Terapkan"))
+                                  ],
+                                ),
+                              ],
+                            )
+                          ],
+                        )
+                      : Column(
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                              SizedBox(
+                                width: double.infinity,
+                                height: 300,
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(16),
+                                  child: Image.asset(ImageAssets.imgFilter),
+                                ),
                               ),
-                              child: const Text("Terapkan"))
-                        ],
-                      ),
-                    ])),
-          ));
+                              const SizedBox(height: 16),
+                              const Text(
+                                "Filter Diskusi Berdasarkan",
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              const SizedBox(height: 16),
+                              const Text("Kategori Tanaman",
+                                  style: TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w500)),
+                              Row(
+                                children: [
+                                  ItemFilter(
+                                      name: "Semua",
+                                      onTap: () async {
+                                        await InterPrefs.init();
+                                        InterPrefs.setPrefs(
+                                            "filterBy", "semua");
+                                        print("filter berdasarkan : semua");
+                                        notifyListeners();
+                                      }),
+                                  ItemFilter(
+                                      name: "Jagung",
+                                      onTap: () async {
+                                        await InterPrefs.init();
+                                        InterPrefs.setPrefs(
+                                            "filterBy", "jagung");
+                                        print("filter berdasarkan : jagung");
+                                        notifyListeners();
+                                      }),
+                                  ItemFilter(
+                                      name: "Padi",
+                                      onTap: () async {
+                                        await InterPrefs.init();
+                                        InterPrefs.setPrefs("filterBy", "padi");
+                                        print("filter berdasarkan : padi");
+                                        notifyListeners();
+                                      }),
+                                ],
+                              ),
+                              const Text("Lainnya",
+                                  style: TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w500)),
+                              Row(
+                                children: [
+                                  ItemFilter(
+                                      name: "Umum",
+                                      onTap: () async {
+                                        await InterPrefs.init();
+                                        InterPrefs.setPrefs("filterBy", "umum");
+                                        print("filter berdasarkan : umum");
+                                      }),
+                                  ItemFilter(
+                                      name: "Pertanyaanku",
+                                      onTap: () async {
+                                        await InterPrefs.init();
+                                        InterPrefs.setPrefs(
+                                            "filterBy", "pertanyaanku");
+                                        print("filter berdasarkan : answerme");
+                                      }),
+                                ],
+                              ),
+                              const SizedBox(
+                                width: 16,
+                              ),
+                              Divider(color: Colors.grey[300], thickness: 1),
+                              const SizedBox(
+                                width: 20,
+                              ),
+                              Row(
+                                children: [
+                                  ElevatedButton(
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                      },
+                                      style: ButtonStyle(
+                                        backgroundColor:
+                                            WidgetStateProperty.all(Colors.red),
+                                        foregroundColor:
+                                            WidgetStateProperty.all(
+                                                Colors.white),
+                                      ),
+                                      child: const Text("Batalkan")),
+                                  const SizedBox(
+                                    width: 16,
+                                  ),
+                                  ElevatedButton(
+                                      onPressed: () async {
+                                        await InterPrefs.init();
+                                        String value =
+                                            InterPrefs.getPrefs("filterBy");
+                                        if (value == 'pertanyaanku') {
+                                          fetchFilterQuestion('answerme');
+                                        } else if (value == 'semua') {
+                                          fetchFilterQuestion('all');
+                                        }
+                                        fetchFilterQuestion(value);
+                                        Navigator.pop(context);
+                                      },
+                                      style: ButtonStyle(
+                                        backgroundColor:
+                                            WidgetStateProperty.all(
+                                                MyColors.primaryColorDark),
+                                        foregroundColor:
+                                            WidgetStateProperty.all(
+                                                Colors.white),
+                                      ),
+                                      child: const Text("Terapkan"))
+                                ],
+                              ),
+                            ])),
+            ),
+          );
         });
   }
 

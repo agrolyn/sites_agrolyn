@@ -1,9 +1,9 @@
 import 'package:agrolyn_web/main.dart';
+import 'package:agrolyn_web/view/detection/detection_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:sidebarx/sidebarx.dart';
 import 'package:provider/provider.dart';
 import 'package:agrolyn_web/view/community/community_page.dart';
-import 'package:agrolyn_web/view/detection/detection_page.dart';
 import 'package:agrolyn_web/view/education/education_page.dart';
 import 'package:agrolyn_web/view/recipe/recipe_page.dart';
 import 'package:agrolyn_web/shared/constans.dart';
@@ -147,7 +147,7 @@ class Navbar extends StatelessWidget {
         //       return blocks[index];
         //     }),
         ),
-    const DetectionPage(),
+    const DetectionScreen(),
     const RecipePage(),
     const EducationPage(),
   ];
