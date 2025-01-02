@@ -3,60 +3,70 @@ import 'package:agrolyn_web/shared/constans.dart';
 import 'package:agrolyn_web/utils/assets_path.dart';
 import 'package:agrolyn_web/utils/date.dart';
 import 'package:agrolyn_web/view/education/detail_article.dart';
+import 'package:agrolyn_web/widget/footer.dart';
 import 'package:agrolyn_web/widget/no_found_custom.dart';
 import 'package:agrolyn_web/widget/video_player_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 class EducationPage extends StatelessWidget {
   const EducationPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final widthScreen = MediaQuery.of(context).size.width;
-
     return ChangeNotifierProvider(
       create: (_) => HomeNotifier(context: context),
       child: Consumer<HomeNotifier>(builder: (context, value, child) {
         return DefaultTabController(
           length: 2,
           child: Scaffold(
-              appBar: AppBar(
-                bottom: const TabBar(
-                  tabs: [
-                    Tab(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(Icons.article_outlined),
-                          SizedBox(width: 5),
-                          Text('Artikel'),
-                        ],
-                      ),
-                    ),
-                    Tab(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(Icons.video_library_outlined),
-                          SizedBox(width: 5),
-                          Text('Video'),
-                        ],
-                      ),
-                    ),
-                  ],
-                  indicatorColor: MyColors.primaryColorDark,
-                  labelColor: MyColors.primaryColorDark,
-                  unselectedLabelColor: Colors.grey,
-                ),
-              ),
-              body: widthScreen > 700
-                  ? // Desktop Layout
-                  Column(
+            appBar: AppBar(
+              bottom: const TabBar(
+                tabs: [
+                  Tab(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        SizedBox(
-                          height: MediaQuery.of(context).size.height * 0.8,
+                        Icon(Icons.article_outlined),
+                        SizedBox(width: 5),
+                        Text('Artikel'),
+                      ],
+                    ),
+                  ),
+                  Tab(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(Icons.video_library_outlined),
+                        SizedBox(width: 5),
+                        Text('Video'),
+                      ],
+                    ),
+                  ),
+                ],
+                indicatorColor: MyColors.primaryColorDark,
+                labelColor: MyColors.primaryColorDark,
+                unselectedLabelColor: Colors.grey,
+              ),
+            ),
+            body: SingleChildScrollView(
+              child: Column(
+                children: [
+                  ResponsiveRowColumn(
+                    layout:
+                        ResponsiveBreakpoints.of(context).smallerThan(DESKTOP)
+                            ? ResponsiveRowColumnType.COLUMN
+                            : ResponsiveRowColumnType.ROW,
+                    rowCrossAxisAlignment: CrossAxisAlignment.start,
+                    columnCrossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      ResponsiveRowColumnItem(
+                        rowFlex: 1,
+                        rowFit: FlexFit.tight,
+                        child: SizedBox(
+                          height: MediaQuery.of(context).size.height * 1,
                           child: TabBarView(
                             children: [
                               // Artikel Section
@@ -127,8 +137,8 @@ class EducationPage extends StatelessWidget {
                                     ),
                                     value.articles.isNotEmpty
                                         ? Padding(
-                                            padding: const EdgeInsets.only(
-                                                right: 8, left: 8),
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 8),
                                             child: ListView.builder(
                                               shrinkWrap: true,
                                               physics:
@@ -138,17 +148,16 @@ class EducationPage extends StatelessWidget {
                                                 var article =
                                                     value.articles[index];
                                                 return InkWell(
-                                                  key: ValueKey(article[
-                                                      'title']), // Key unik berdasarkan judul artikel
+                                                  key: ValueKey(
+                                                      article['title']),
                                                   onTap: () {
-                                                    // pushWithNavBar
                                                     Navigator.push(
                                                       context,
                                                       MaterialPageRoute(
                                                         builder: (context) =>
                                                             DetailArticle(
-                                                                article:
-                                                                    article),
+                                                          article: article,
+                                                        ),
                                                       ),
                                                     );
                                                   },
@@ -209,7 +218,8 @@ class EducationPage extends StatelessWidget {
                                                                   const SizedBox(
                                                                       width: 4),
                                                                   Text(
-                                                                    "${article['location']}",
+                                                                    article[
+                                                                        'location'],
                                                                     style:
                                                                         const TextStyle(
                                                                       fontSize:
@@ -226,7 +236,8 @@ class EducationPage extends StatelessWidget {
                                                               const SizedBox(
                                                                   height: 2),
                                                               Text(
-                                                                "${article['title']}",
+                                                                article[
+                                                                    'title'],
                                                                 style:
                                                                     const TextStyle(
                                                                   fontSize: 16,
@@ -240,7 +251,8 @@ class EducationPage extends StatelessWidget {
                                                                         .ellipsis,
                                                               ),
                                                               Text(
-                                                                "${article['description']}",
+                                                                article[
+                                                                    'description'],
                                                                 style:
                                                                     const TextStyle(
                                                                   fontSize: 14,
@@ -315,6 +327,7 @@ class EducationPage extends StatelessWidget {
                                             subMessage:
                                                 "We can't find any articles for you",
                                           )),
+                                    const Footer()
                                   ],
                                 ),
                               ),
@@ -520,255 +533,20 @@ class EducationPage extends StatelessWidget {
                                         },
                                       ),
                                     ),
+                                    const Footer()
                                   ],
                                 ),
                               ),
                             ],
                           ),
                         ),
-                      ],
-                    )
-                  : // Mobile Layout
-                  SingleChildScrollView(
-                      child: Column(
-                        children: [
-                          // Artikel Section (Mobile Version)
-                          Column(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 16, vertical: 8),
-                                child: Row(
-                                  children: [
-                                    Expanded(
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Row(
-                                            children: [
-                                              Image.asset(
-                                                ImageAssets.logo,
-                                                height: 24,
-                                                width: 24,
-                                              ),
-                                              const SizedBox(width: 4),
-                                              const Text(
-                                                'Agrolyn',
-                                                style: TextStyle(
-                                                    fontSize: 16,
-                                                    fontWeight: FontWeight.bold,
-                                                    color: MyColors
-                                                        .primaryColorDark),
-                                              ),
-                                            ],
-                                          ),
-                                          const SizedBox(height: 16),
-                                          const Text(
-                                            "Baca berbagai bacaan menarik tentang pertanian di Agrolyn Artikel",
-                                            maxLines: 3,
-                                            style: TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 20,
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: 200,
-                                      width: 200,
-                                      child: Lottie.asset(ImageAssets.article),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              // Article list on mobile
-                              value.articles.isNotEmpty
-                                  ? Padding(
-                                      padding: const EdgeInsets.only(
-                                          right: 8, left: 8),
-                                      child: ListView.builder(
-                                        shrinkWrap: true,
-                                        physics:
-                                            const NeverScrollableScrollPhysics(),
-                                        itemCount: value.articles.length,
-                                        itemBuilder: (context, index) {
-                                          var article = value.articles[index];
-                                          return InkWell(
-                                            key: ValueKey(article[
-                                                'title']), // Key unik berdasarkan judul artikel
-                                            onTap: () {
-                                              Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      DetailArticle(
-                                                          article: article),
-                                                ),
-                                              );
-                                            },
-                                            child: Container(
-                                              padding:
-                                                  const EdgeInsets.all(12.0),
-                                              margin: const EdgeInsets.only(
-                                                  bottom: 8),
-                                              decoration: BoxDecoration(
-                                                color: Colors.white,
-                                                borderRadius:
-                                                    BorderRadius.circular(8),
-                                                boxShadow: [
-                                                  BoxShadow(
-                                                    color: Colors.black
-                                                        .withOpacity(0.1),
-                                                    blurRadius: 6,
-                                                    spreadRadius: 2,
-                                                    offset: const Offset(0, 2),
-                                                  ),
-                                                ],
-                                              ),
-                                              child: Row(
-                                                children: [
-                                                  ClipRRect(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            8),
-                                                    child: Image.network(
-                                                      article['thumbnail'],
-                                                      height: 100,
-                                                      width: 70,
-                                                      fit: BoxFit.cover,
-                                                    ),
-                                                  ),
-                                                  const SizedBox(width: 12),
-                                                  Expanded(
-                                                    child: Column(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        Row(
-                                                          children: [
-                                                            const Icon(
-                                                              Icons
-                                                                  .location_on_outlined,
-                                                              size: 11,
-                                                              color:
-                                                                  Colors.grey,
-                                                            ),
-                                                            const SizedBox(
-                                                                width: 4),
-                                                            Text(
-                                                              "${article['location']}",
-                                                              style:
-                                                                  const TextStyle(
-                                                                fontSize: 12,
-                                                                color:
-                                                                    Colors.grey,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold,
-                                                              ),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                        const SizedBox(
-                                                            height: 2),
-                                                        Text(
-                                                          "${article['title']}",
-                                                          style:
-                                                              const TextStyle(
-                                                            fontSize: 16,
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                          ),
-                                                          maxLines: 2,
-                                                          overflow: TextOverflow
-                                                              .ellipsis,
-                                                        ),
-                                                        Text(
-                                                          "${article['description']}",
-                                                          style:
-                                                              const TextStyle(
-                                                            fontSize: 14,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .normal,
-                                                          ),
-                                                          maxLines: 2,
-                                                          overflow: TextOverflow
-                                                              .ellipsis,
-                                                        ),
-                                                        const SizedBox(
-                                                            height: 4),
-                                                        Row(
-                                                          children: [
-                                                            const Icon(
-                                                              Icons
-                                                                  .calendar_month_outlined,
-                                                              size: 11,
-                                                              color:
-                                                                  Colors.grey,
-                                                            ),
-                                                            const SizedBox(
-                                                                width: 4),
-                                                            FutureBuilder(
-                                                              future: formatRelativeTime(
-                                                                  article[
-                                                                      "released_date"]),
-                                                              builder: (context,
-                                                                  snapshot) {
-                                                                if (snapshot
-                                                                        .connectionState ==
-                                                                    ConnectionState
-                                                                        .waiting) {
-                                                                  return const CircularProgressIndicator();
-                                                                } else if (snapshot
-                                                                    .hasError) {
-                                                                  return Text(
-                                                                      "Error: ${snapshot.error}");
-                                                                } else if (snapshot
-                                                                    .hasData) {
-                                                                  return Text(
-                                                                    snapshot
-                                                                        .data
-                                                                        .toString(),
-                                                                    style: const TextStyle(
-                                                                        fontSize:
-                                                                            12,
-                                                                        color: Colors
-                                                                            .grey),
-                                                                  );
-                                                                }
-                                                                return const Text(
-                                                                    "No data available");
-                                                              },
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          );
-                                        },
-                                      ),
-                                    )
-                                  : const Center(
-                                      child: NoFoundCustom(
-                                      message: "No Articles Available",
-                                      subMessage:
-                                          "We can't find any articles for you",
-                                    )),
-                            ],
-                          ),
-                          // Video Section on mobile
-                        ],
                       ),
-                    )),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
         );
       }),
     );
