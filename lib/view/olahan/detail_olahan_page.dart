@@ -91,7 +91,7 @@ class DetailOlahanPage extends StatelessWidget {
                                               children: [
                                                 // Title
                                                 Text(
-                                                  "${value.detailOlahans['title'] ?? 'Unknown'}",
+                                                  "${value.detailOlahans['title'] ?? 'Unknownn'}",
                                                   maxLines: 1,
                                                   overflow:
                                                       TextOverflow.ellipsis,
