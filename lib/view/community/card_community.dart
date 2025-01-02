@@ -80,6 +80,9 @@ class CardCommunity extends StatelessWidget {
                                   fit: BoxFit.cover,
                                   width: double.infinity,
                                   height: 150,
+                                  errorBuilder: (context, error, stackTrace) {
+                                    return Text('Error loading image: $error');
+                                  },
                                 )
                               : const Text("No image available"),
                         ),

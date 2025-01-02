@@ -40,10 +40,10 @@ class MyApp extends StatelessWidget {
               ],
             ),
         debugShowCheckedModeBanner: false,
-        home: SplashScreen(
-          context: context,
-        ));
-    // home: Navbar());
+        // home: SplashScreen(
+        //   context: context,
+        // ));
+        home: Navbar());
   }
 }
 
