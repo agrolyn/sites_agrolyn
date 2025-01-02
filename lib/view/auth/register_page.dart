@@ -362,7 +362,8 @@ class RegisterPage extends StatelessWidget {
                                                 context,
                                                 MaterialPageRoute(
                                                     builder: (context) =>
-                                                        const LoginPage()),
+                                                        LoginPage(
+                                                            context: context)),
                                               );
                                             },
                                             child: const Text(

@@ -150,10 +150,10 @@ class Navbar extends StatelessWidget {
         //     }),
         ),
     const DetectionPage(),
-    const OlahanPage(
-      idCat: 0, // Replace 'someId' with the appropriate value
-    ),
-    // const CategoryOlahanPage(idCat: 1),
+    // const OlahanPage(
+    //   idCat: 0, // Replace 'someId' with the appropriate value
+    // ),
+    const CategoryOlahanPage(idCat: 4),
     const EducationPage(),
   ];
 }

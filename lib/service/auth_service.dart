@@ -55,14 +55,10 @@ class AuthService {
         await prefs.setString('id', response.data['id'].toString());
         await prefs.setString('img_profile', response.data['img_profile']);
         await prefs.setString('roles_id', response.data['roles_id'].toString());
+        await prefs.setBool('isLogedin', true);
 
         if (response.data['roles_id'] == 2) {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (context) => Navbar(),
-            ),
-          );
+          Navigator.pushReplacementNamed(context, '/navbar');
         }
 
         return true;
@@ -108,7 +104,10 @@ class AuthService {
         );
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => const LoginPage()),
+          MaterialPageRoute(
+              builder: (context) => LoginPage(
+                    context: context,
+                  )),
         );
         return true;
       } else {
@@ -243,7 +242,7 @@ class AuthService {
   //         SharedPreferences prefs = await SharedPreferences.getInstance();
   //         await prefs.remove('access_token');
   //         pushReplacementWithoutNavBar(context,
-  //             MaterialPageRoute(builder: (context) => const LoginPage()));
+  //             MaterialPageRoute(builder: (context) => LoginPage(context: context)));
   //       }
   //     } on DioException catch (e) {
   //       print("Register error: ${e.response?.data['message']}");
@@ -268,8 +267,12 @@ class AuthService {
       );
       print(response);
       if (response.statusCode == 200) {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => const LoginPage()));
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => LoginPage(
+                      context: context,
+                    )));
         showCustomSnackbar(
             context,
             "Permintaan Berhasil",

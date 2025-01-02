@@ -13,7 +13,10 @@ class SplashNotifier extends ChangeNotifier {
     Future.delayed(const Duration(seconds: 3)).then((value) {
       Navigator.pushAndRemoveUntil(
           context,
-          MaterialPageRoute(builder: (context) => const LoginPage()),
+          MaterialPageRoute(
+              builder: (context) => LoginPage(
+                    context: context,
+                  )),
           (route) => false);
     });
   }

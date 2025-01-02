@@ -8,9 +8,20 @@ import 'package:agrolyn_web/view/auth/forgot_password_page.dart';
 import 'package:agrolyn_web/view/auth/register_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+  final BuildContext context;
+  LoginPage({super.key, required this.context}) {
+    init();
+  }
+
+  void init() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    if (prefs.getBool('isLogedin') != null) {
+      Navigator.pushReplacementNamed(context, '/navbar');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {

@@ -125,9 +125,9 @@ class _CarouselSlide2State extends State<CarouselSlide2>
             ),
           ),
           Positioned(
-            left: 441,
-            top: 37,
-            width: 317,
+            left: 224,
+            top: 60,
+            width: 816,
             height: 565,
             child: Image.asset(ImageAssets.deviceFrame, fit: BoxFit.fill),
           ),
