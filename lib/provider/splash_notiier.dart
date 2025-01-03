@@ -1,5 +1,4 @@
 // ignore_for_file: use_build_context_synchronously
-import 'package:agrolyn_web/view/auth/login_page.dart';
 import 'package:flutter/material.dart';
 
 class SplashNotifier extends ChangeNotifier {

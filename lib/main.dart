@@ -1,12 +1,14 @@
+import 'package:agrolyn_web/view/auth/forgot_password_page.dart';
 import 'package:agrolyn_web/view/auth/login_page.dart';
 import 'package:agrolyn_web/view/auth/register_page.dart';
 import 'package:agrolyn_web/view/community/community_page.dart';
+import 'package:agrolyn_web/view/detection/choose_types_scan.dart';
 import 'package:agrolyn_web/view/detection/detection_screen.dart';
+import 'package:agrolyn_web/view/detection/history_scan_screen.dart';
 import 'package:agrolyn_web/view/education/education_page.dart';
 import 'package:agrolyn_web/view/home/detection_section.dart';
 import 'package:agrolyn_web/view/home/home_page.dart';
 import 'package:agrolyn_web/view/home/recipe_section.dart';
-import 'package:agrolyn_web/view/olahan/category_olahan_page.dart';
 import 'package:agrolyn_web/view/olahan/olahan_page.dart';
 import 'package:agrolyn_web/view/splash_screen.dart';
 import 'package:agrolyn_web/widget/block_wraper.dart';
@@ -48,17 +50,20 @@ class MyApp extends StatelessWidget {
       routes: {
         '/navbar': (context) => Navbar(),
         '/login': (context) => LoginPage(context: context),
+        '/register': (context) => const RegisterPage(),
+        '/forgot-password': (context) => ForgotPasswordPage(),
         '/splashScreen': (context) => SplashScreen(
               context: context,
             ),
-        '/register': (context) => const RegisterPage(),
         '/home': (context) => ListView.builder(
             itemCount: blocks.length,
             itemBuilder: (context, index) {
               return blocks[index];
             }),
-        '/community': (context) => const CommunityPage(),
         '/detection': (context) => const DetectionScreen(),
+        '/upload-detection': (context) => const ChooseTypesScan(),
+        '/history-detection': (context) => const HistoryScanScreen(),
+        '/community': (context) => const CommunityPage(),
         '/olahan': (context) => const OlahanPage(
               idCat: 0, // Replace 'someId' with the appropriate value
             ),

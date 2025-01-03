@@ -54,14 +54,32 @@ class DetectionScreen extends StatelessWidget {
                         const SizedBox(
                           height: 20,
                         ),
-                        const CardScanType(
-                          title: "Jagung",
-                          image: ImageAssets.logoJagung,
-                        ),
-                        const CardScanType(
-                          title: "Padi",
-                          image: ImageAssets.logoPadi,
-                        ),
+                        widthScreen > 850
+                            ? const Row(
+                                children: [
+                                  CardScanType(
+                                    title: "Padi",
+                                    image: ImageAssets.logoPadi,
+                                  ),
+                                  Spacer(),
+                                  CardScanType(
+                                    title: "Jagung",
+                                    image: ImageAssets.logoJagung,
+                                  ),
+                                ],
+                              )
+                            : const Column(
+                                children: [
+                                  CardScanType(
+                                    title: "Jagung",
+                                    image: ImageAssets.logoJagung,
+                                  ),
+                                  CardScanType(
+                                    title: "Padi",
+                                    image: ImageAssets.logoPadi,
+                                  ),
+                                ],
+                              ),
                         const SizedBox(
                           height: 20,
                         ),
@@ -75,7 +93,7 @@ class DetectionScreen extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.all(16.0),
                           child: Container(
-                              width: double.maxFinite - 50,
+                              width: double.infinity,
                               height: 55,
                               decoration: BoxDecoration(
                                 color: MyColors.secondaryColorDark,

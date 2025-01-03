@@ -1,8 +1,6 @@
 import 'dart:convert';
-
 import 'package:agrolyn_web/service/auth_service.dart';
 import 'package:agrolyn_web/shared/custom_snackbar.dart';
-import 'package:agrolyn_web/view/detection/history_scan_screen.dart';
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -60,6 +58,9 @@ class DetectionService {
     } on DioException catch (e) {
       print("Fetch disease error: $e");
       return false;
+    } catch (e) {
+      print("Fetch disease error: $e");
+      return false;
     }
   }
 
@@ -82,6 +83,9 @@ class DetectionService {
     } on DioException catch (e) {
       print("Feth History error: $e");
       return [];
+    } catch (e) {
+      print("Feth History error: $e");
+      return [];
     }
   }
 
@@ -95,8 +99,7 @@ class DetectionService {
               }));
       if (response.statusCode == 200) {
         print("Delete History Berhasil");
-        Navigator.pushReplacement(context,
-            MaterialPageRoute(builder: (context) => HistoryScanScreen()));
+        Navigator.pushReplacementNamed(context, '/history-detection');
         showCustomSnackbar(context, "Berhasil Dihapus",
             "Riwayat Berhasil Dihapus!", ContentType.success);
         return "Delete History Berhasil";
@@ -111,6 +114,9 @@ class DetectionService {
       showCustomSnackbar(context, "Gagal Dihapus", "Riwayat Gagal Dihapus!",
           ContentType.failure);
       return "Delete History Gagal";
+    } catch (e) {
+      print("Delete History error: $e");
+      return "Delete History Gagal";
     }
   }
 
@@ -122,11 +128,10 @@ class DetectionService {
               options: Options(headers: {
                 'Authorization': 'Bearer $token',
               }));
-      // print(response);
       if (response.statusCode == 200) {
-        print("Delete All History Berhasil");
-        Navigator.pushReplacement(context,
-            MaterialPageRoute(builder: (context) => HistoryScanScreen()));
+        // print("Delete All History Berhasil");
+        Navigator.pushReplacementNamed(
+            context, '/history-detection'); // navigasi ke halaman history
         showCustomSnackbar(context, "Berhasil Dihapus",
             "Semua Riwayat Berhasil Dihapus!", ContentType.success);
         return "Delete All History Berhasil";
@@ -140,6 +145,9 @@ class DetectionService {
       print("Delete All History error: $e");
       showCustomSnackbar(context, "Gagal Dihapus",
           "Semua Riwayat Gagal Dihapus!", ContentType.failure);
+      return "Delete All History Gagal";
+    } catch (e) {
+      print("Delete All History error: $e");
       return "Delete All History Gagal";
     }
   }
@@ -161,6 +169,9 @@ class DetectionService {
         return response.data['message'];
       }
     } on DioException catch (e) {
+      print("Feth Detail History error: $e");
+      return {};
+    } catch (e) {
       print("Feth Detail History error: $e");
       return {};
     }

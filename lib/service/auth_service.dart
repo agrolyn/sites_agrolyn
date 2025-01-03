@@ -1,6 +1,4 @@
 import 'package:agrolyn_web/shared/custom_snackbar.dart';
-import 'package:agrolyn_web/view/auth/login_page.dart';
-import 'package:agrolyn_web/widget/navbar/navbar.dart';
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -103,18 +101,15 @@ class AuthService {
           "Silakan cek email Anda untuk verifikasi akun",
           ContentType.success,
         );
-        Navigator.push(
+        Navigator.pushNamed(
           context,
-          MaterialPageRoute(
-              builder: (context) => LoginPage(
-                    context: context,
-                  )),
+          '/login',
         );
         return true;
       } else {
         // Menampilkan status code jika bukan 201
-        print("Response status code: ${response.statusCode}");
-        print("Response data: ${response.data}");
+        // print("Response status code: ${response.statusCode}");
+        // print("Response data: ${response.data}");
         showCustomSnackbar(
           context,
           "Pendaftaran Gagal",
@@ -148,53 +143,6 @@ class AuthService {
     }
   }
 
-  // edit profile
-  // Future<bool> editProfile(context, FormData formData) async {
-  //   print(formData.fields);
-  //   try {
-  //     final token = await getToken();
-  //     final response = await _dio.put(
-  //       "/edit-profile/",
-  //       data: formData,
-  //       options: Options(headers: {
-  //         'Authorization': 'Bearer $token',
-  //       }),
-  //     );
-  //     // print(response);
-  //     if (response.statusCode == 200) {
-  //       SharedPreferences prefs = await SharedPreferences.getInstance();
-  //       await prefs.setString('name', formData.fields[0].value);
-  //       await prefs.setString('address', formData.fields[1].value);
-  //       await prefs.setString('phone_number', formData.fields[2].value);
-  //       PersistentTabController profile =
-  //           PersistentTabController(initialIndex: 4);
-
-  //       showCustomSnackbar(context, "Data Tersimpan",
-  //           "Berhasil Menyimpan perubahan data", ContentType.success);
-  //       Future.delayed(const Duration(seconds: 3), () {
-  //         pushWithNavBar(
-  //             context,
-  //             MaterialPageRoute(
-  //                 builder: (context) => Menu(
-  //                       page: profile,
-  //                     )));
-  //       });
-  //       print(response.data);
-  //       return true;
-  //     }
-  //     return false;
-  //   } on DioException catch (e) {
-  //     print("Update Profile error: ${e.response?.data['message']}");
-  //     showCustomSnackbar(
-  //         context,
-  //         "Gagal Menyimpan Data",
-  //         "Gagal Menyimpan perubahan data, silahkan coba lagi",
-  //         ContentType.failure);
-
-  //     return false;
-  //   }
-  // }
-
   // Fungsi untuk mengambil token
   Future<String?> getToken() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -226,32 +174,32 @@ class AuthService {
   }
 
   // Fungsi untuk logout
-  // Future<void> logout(context) async {
-  //   // buatkan code untuk logout dengan endpoint /logout dan menambahkan token bernama 'access_token' di header
-  //   final token = await getToken();
-  //   print("Token: $token");
-  //   if (token != null) {
-  //     try {
-  //       final res = await _dio.post(
-  //         "/logout/",
-  //         options: Options(headers: {
-  //           'Authorization': 'Bearer $token',
-  //         }),
-  //       );
+  Future<void> logout(context) async {
+    // buatkan code untuk logout dengan endpoint /logout dan menambahkan token bernama 'access_token' di header
+    final token = await getToken();
+    print("Token: $token");
+    if (token != null) {
+      try {
+        final res = await _dio.post(
+          "/logout/",
+          options: Options(headers: {
+            'Authorization': 'Bearer $token',
+          }),
+        );
 
-  //       if (res.statusCode == 200) {
-  //         SharedPreferences prefs = await SharedPreferences.getInstance();
-  //         await prefs.remove('access_token');
-  //         pushReplacementWithoutNavBar(context,
-  //             MaterialPageRoute(builder: (context) => LoginPage(context: context)));
-  //       }
-  //     } on DioException catch (e) {
-  //       print("Register error: ${e.response?.data['message']}");
-  //       showCustomSnackbar(context, "Gagal Logout",
-  //           "Logout gagal, silahkan dicoba lagi", ContentType.failure);
-  //     }
-  //   }
-  // }
+        if (res.statusCode == 200) {
+          SharedPreferences prefs = await SharedPreferences.getInstance();
+          await prefs.remove('access_token');
+          Navigator.pushNamed(
+              context, '/login'); // navigasi ke halaman login setelah logout
+        }
+      } on DioException catch (e) {
+        print("Register error: ${e.response?.data['message']}");
+        showCustomSnackbar(context, "Gagal Logout",
+            "Logout gagal, silahkan dicoba lagi", ContentType.failure);
+      }
+    }
+  }
 
   // reset password
   Future<bool> forgotPassword(context, String email) async {
@@ -268,12 +216,8 @@ class AuthService {
       );
       print(response);
       if (response.statusCode == 200) {
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => LoginPage(
-                      context: context,
-                    )));
+        Navigator.pushNamed(context,
+            '/login'); // navigasi ke halaman login setelah reset password
         showCustomSnackbar(
             context,
             "Permintaan Berhasil",
@@ -290,7 +234,6 @@ class AuthService {
           "Permintaan Gagal",
           "Gagal Mengirimkan Permintaan Reset kata sandi, silahkan coba lagi",
           ContentType.failure);
-
       return false;
     } catch (e) {
       print("error : $e");

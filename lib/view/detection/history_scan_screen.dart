@@ -49,10 +49,8 @@ class HistoryScanScreen extends StatelessWidget {
                         child: Column(
                           children: [
                             InkWell(
-                              onTap: () => Navigator.push(context,
-                                  MaterialPageRoute(builder: (context) {
-                                return const DetectionScreen();
-                              })),
+                              onTap: () =>
+                                  Navigator.pushNamed(context, '/detection'),
                               child: Row(children: [
                                 const Icon(Icons.arrow_back),
                                 const SizedBox(

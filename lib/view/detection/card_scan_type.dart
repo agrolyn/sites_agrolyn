@@ -1,5 +1,4 @@
 import 'package:agrolyn_web/view/detection/choose_types_scan.dart';
-import 'package:agrolyn_web/view/detection/detection_scan_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -15,8 +14,7 @@ class CardScanType extends StatelessWidget {
       onTap: () async {
         SharedPreferences prefs = await SharedPreferences.getInstance();
         prefs.setString('scan_type', title);
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => const ChooseTypesScan()));
+        Navigator.pushNamed(context, '/upload-detection');
       },
       child: Container(
         padding: const EdgeInsets.all(8.0),
@@ -34,7 +32,7 @@ class CardScanType extends StatelessWidget {
             )
           ],
         ),
-        width: MediaQuery.of(context).size.width - 50,
+        width: MediaQuery.of(context).size.width * 0.4,
         child: Row(children: [
           Image.asset(
             image,

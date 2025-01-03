@@ -25,7 +25,6 @@ class DetectionNotifier extends ChangeNotifier {
   Uint8List? bytes;
 
   Future<void> pickAndUploadFile() async {
-    predictionIsLoading = true;
     try {
       // Pilih file
       FilePickerResult? result = await FilePicker.platform.pickFiles(
@@ -33,9 +32,15 @@ class DetectionNotifier extends ChangeNotifier {
       );
       if (result != null && result.files.isNotEmpty) {
         bytes = result.files.first.bytes;
+        predictionIsLoading = true;
+        notifyListeners();
 
         // Data objek yang akan dikirim
         var formData = FormData.fromMap({
+          "img_pred": MultipartFile.fromBytes(bytes as List<int>,
+              filename: 'objek-deteksi.jpg')
+        });
+        var formData2 = FormData.fromMap({
           "img_pred": MultipartFile.fromBytes(bytes as List<int>,
               filename: 'objek-deteksi.jpg')
         });
@@ -45,7 +50,7 @@ class DetectionNotifier extends ChangeNotifier {
           SharedPreferences prefs = await SharedPreferences.getInstance();
           String disease = prefs.getString('disease') ?? '';
           await DetectionService()
-              .fetchPredictCornDisease(disease, formData)
+              .fetchPredictCornDisease(disease, formData2)
               .whenComplete(() {
             Navigator.push(
               context,
@@ -64,8 +69,8 @@ class DetectionNotifier extends ChangeNotifier {
       print("upload file error cuy: $e");
     } finally {
       predictionIsLoading = false;
-      notifyListeners();
     }
+    notifyListeners();
   }
 
   // ==================================

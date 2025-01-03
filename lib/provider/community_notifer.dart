@@ -11,8 +11,6 @@ import 'package:image_picker_web/image_picker_web.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:agrolyn_web/shared/custom_snackbar.dart';
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
-import 'dart:io';
-import 'package:image_picker/image_picker.dart';
 import 'package:agrolyn_web/utils/assets_path.dart';
 import 'package:agrolyn_web/utils/inter_prefs.dart';
 
@@ -92,8 +90,7 @@ class CommunityNotifer extends ChangeNotifier {
       print(formData.fields);
 
       await CommunityService().fetchAddQuestion(formData).whenComplete(() {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => const CommunityPage()));
+        Navigator.pushNamed(context, '/community');
         showCustomSnackbar(context, "Berhasil Ditambahkan",
             "Pertanyaan Anda Berhasil Ditambahkan!", ContentType.success);
       });
