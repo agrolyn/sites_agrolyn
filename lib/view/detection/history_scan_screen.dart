@@ -3,6 +3,7 @@ import 'package:agrolyn_web/provider/detection_notifier.dart';
 import 'package:agrolyn_web/utils/assets_path.dart';
 import 'package:agrolyn_web/view/detection/card_history.dart';
 import 'package:agrolyn_web/view/detection/detection_screen.dart';
+import 'package:agrolyn_web/widget/footer.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -98,6 +99,7 @@ class HistoryScanScreen extends StatelessWidget {
                                       )),
                                     ],
                                   ),
+                            const Footer()
                           ],
                         ),
                       ),

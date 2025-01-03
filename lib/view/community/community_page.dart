@@ -4,6 +4,7 @@ import 'package:agrolyn_web/shared/constans.dart';
 import 'package:agrolyn_web/utils/assets_path.dart';
 import 'package:agrolyn_web/view/community/add_question.dart';
 import 'package:agrolyn_web/view/community/card_community.dart';
+import 'package:agrolyn_web/widget/footer.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -203,6 +204,7 @@ class CommunityPage extends StatelessWidget {
                           margin: const EdgeInsets.only(top: 20),
                           child: const Text('Belum ada topik diskusi'),
                         ),
+                  const Footer()
                 ],
               ),
             ),

@@ -99,8 +99,8 @@ class EditQuestion extends StatelessWidget {
                                             ? ClipRRect(
                                                 borderRadius:
                                                     BorderRadius.circular(16),
-                                                child: Image.file(
-                                                  value.imageQuestion!,
+                                                child: Image.memory(
+                                                  value.imageQuestion,
                                                   height: 150,
                                                   width: double.infinity,
                                                   fit: BoxFit.cover,
@@ -146,8 +146,8 @@ class EditQuestion extends StatelessWidget {
                                                           color:
                                                               Colors.grey[300],
                                                         ),
-                                                        child: Image.file(
-                                                          value.imageQuestion!,
+                                                        child: Image.memory(
+                                                          value.imageQuestion,
                                                           height: 150,
                                                           width:
                                                               double.infinity,

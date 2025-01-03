@@ -3,6 +3,7 @@ import 'package:agrolyn_web/shared/constans.dart';
 import 'package:agrolyn_web/utils/assets_path.dart';
 import 'package:agrolyn_web/view/detection/card_scan_type.dart';
 import 'package:agrolyn_web/view/detection/history_scan_screen.dart';
+import 'package:agrolyn_web/widget/footer.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -103,7 +104,8 @@ class DetectionScreen extends StatelessWidget {
                         )
                       ],
                     ),
-                  )
+                  ),
+                  const Footer()
                 ]),
               )),
         ),
