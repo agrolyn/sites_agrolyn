@@ -6,7 +6,7 @@ class DetectionExtService {
   final Dio _dio = Dio();
 
   DetectionExtService() {
-    _dio.options.baseUrl = "http://linggashop.my.id:3333/disease-predict/";
+    _dio.options.baseUrl = "http://linggashop.my.id/disease-predict/";
     _dio.options.headers = {
       'Accept': 'application/json',
     };
@@ -28,6 +28,7 @@ class DetectionExtService {
       if (response.statusCode == 200) {
         print("Prediksi Berhasil");
         final disease = response.data['prediction'];
+        print(disease);
         SharedPreferences prefs = await SharedPreferences.getInstance();
         prefs.setString('disease', disease);
         print('=====');

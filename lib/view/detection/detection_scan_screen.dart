@@ -44,25 +44,30 @@ class _DetectionScanScreenState extends State<DetectionScanScreen>
   }
 
   Future<void> _initializeCamera() async {
-    // Meminta izin akses kamera
-    if (await Permission.camera.request().isGranted) {
-      _cameras = await availableCameras();
-      if (_cameras != null && _cameras!.isNotEmpty) {
-        _cameraController = CameraController(
-          _cameras![0],
-          ResolutionPreset.high,
-        );
+    try {
+      // Meminta izin akses kamera
+      if (await Permission.camera.request().isGranted) {
+        _cameras = await availableCameras();
+        if (_cameras != null && _cameras!.isNotEmpty) {
+          _cameraController = CameraController(
+            _cameras![0],
+            ResolutionPreset.high,
+          );
 
-        await _cameraController!.initialize();
-        setState(() {
-          _isCameraInitialized = true;
-        });
+          await _cameraController!.initialize();
+          setState(() {
+            _isCameraInitialized = true;
+          });
+        }
+      } else {
+        // Tangani jika izin tidak diberikan
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Izin kamera ditolak')),
+        );
+        print('Izin kamera ditolak');
       }
-    } else {
-      // Tangani jika izin tidak diberikan
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Izin kamera ditolak')),
-      );
+    } catch (e) {
+      print('Error: $e');
     }
   }
 
