@@ -4,7 +4,6 @@ import 'package:agrolyn_web/provider/register_notifier.dart';
 import 'package:agrolyn_web/utils/responsive.dart';
 import 'package:agrolyn_web/service/auth_service.dart';
 import 'package:agrolyn_web/utils/assets_path.dart';
-import 'package:agrolyn_web/view/auth/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -23,7 +22,7 @@ class RegisterPage extends StatelessWidget {
               children: [
                 Positioned.fill(
                   child: IgnorePointer(
-                    child: Image.asset(ImageAssets.bgPagi,
+                    child: Image.asset(ImageAssets.bgMalam,
                         fit: BoxFit.cover, height: double.infinity),
                   ),
                 ),
