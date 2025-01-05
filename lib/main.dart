@@ -3,6 +3,7 @@ import 'package:agrolyn_web/view/auth/login_page.dart';
 import 'package:agrolyn_web/view/auth/register_page.dart';
 import 'package:agrolyn_web/view/community/community_page.dart';
 import 'package:agrolyn_web/view/detection/choose_types_scan.dart';
+import 'package:agrolyn_web/view/detection/detection_result_screen.dart';
 import 'package:agrolyn_web/view/detection/detection_screen.dart';
 import 'package:agrolyn_web/view/detection/history_scan_screen.dart';
 import 'package:agrolyn_web/view/education/education_page.dart';
@@ -62,6 +63,7 @@ class MyApp extends StatelessWidget {
             }),
         '/detection': (context) => const DetectionScreen(),
         '/upload-detection': (context) => const ChooseTypesScan(),
+        '/result-detection': (context) => const DetectionResultScreen(),
         '/history-detection': (context) => const HistoryScanScreen(),
         '/community': (context) => const CommunityPage(),
         '/olahan': (context) => const OlahanPage(

@@ -2,8 +2,8 @@ import 'dart:ui';
 
 import 'package:agrolyn_web/provider/login_notifier.dart';
 import 'package:agrolyn_web/service/auth_service.dart';
-import 'package:agrolyn_web/shared/constans.dart';
 import 'package:agrolyn_web/utils/assets_path.dart';
+import 'package:agrolyn_web/utils/responsive.dart';
 import 'package:agrolyn_web/view/auth/register_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -32,7 +32,7 @@ class LoginPage extends StatelessWidget {
             body: Stack(
               children: [
                 Image.asset(
-                  ImageAssets.bgPagi, // Path animasi Anda
+                  ImageAssets.bgMalam, // Path animasi Anda
                   width: double.infinity, // Lebar penuh
                   height: double.infinity, // Tinggi penuh
                   fit: BoxFit.cover, // Menyesuaikan animasi agar memenuhi area
@@ -48,6 +48,11 @@ class LoginPage extends StatelessWidget {
                           filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
                           child: Container(
                             height: MediaQuery.of(context).size.height - 190,
+                            width: Responsive.isMobile(context)
+                                ? double.infinity
+                                : Responsive.isTablet(context)
+                                    ? 500
+                                    : 600,
                             decoration: BoxDecoration(
                               color: Colors.white
                                   .withOpacity(0.2), // Semi-transparent color
@@ -83,22 +88,11 @@ class LoginPage extends StatelessWidget {
                                                 MainAxisAlignment.center,
                                             children: [
                                               Text(
-                                                'Masuk',
+                                                'Masuk Agrolyn',
                                                 style: TextStyle(
                                                     fontSize: 20,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.white),
-                                              ),
-                                              SizedBox(
-                                                width: 4,
-                                              ),
-                                              Text(
-                                                'Agrolyn',
-                                                style: TextStyle(
-                                                    fontSize: 20,
-                                                    fontWeight: FontWeight.bold,
-                                                    color:
-                                                        MyColors.primaryColor),
                                               ),
                                             ],
                                           ),
@@ -163,8 +157,8 @@ class LoginPage extends StatelessWidget {
                                         const SizedBox(height: 8),
                                         TextFormField(
                                           controller: value.passwordController,
-                                          obscureText:
-                                              true, // Menyembunyikan input password
+                                          obscureText: value
+                                              .isObscure, // Menyembunyikan input password
                                           decoration: InputDecoration(
                                             labelText: 'Kata Sandi',
                                             labelStyle: const TextStyle(
@@ -183,6 +177,17 @@ class LoginPage extends StatelessWidget {
                                               borderSide: const BorderSide(
                                                   color: Colors
                                                       .white), // Border saat fokus
+                                            ),
+                                            suffixIcon: IconButton(
+                                              onPressed: () {
+                                                value.toggleObscure();
+                                              },
+                                              icon: Icon(
+                                                value.isObscure
+                                                    ? Icons.visibility
+                                                    : Icons.visibility_off,
+                                                color: Colors.white,
+                                              ),
                                             ),
                                           ),
                                           style: const TextStyle(
@@ -267,12 +272,8 @@ class LoginPage extends StatelessWidget {
                                           ),
                                           TextButton(
                                             onPressed: () {
-                                              Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        const RegisterPage()),
-                                              );
+                                              Navigator.pushNamed(
+                                                  context, '/register');
                                             },
                                             child: const Text(
                                               'Daftar Akun',

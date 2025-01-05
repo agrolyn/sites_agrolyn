@@ -2,7 +2,9 @@ import 'dart:convert';
 import 'dart:typed_data';
 import 'package:agrolyn_web/service/detection_ext_service.dart';
 import 'package:agrolyn_web/service/detection_service.dart';
+import 'package:agrolyn_web/shared/custom_snackbar.dart';
 import 'package:agrolyn_web/view/detection/detection_result_screen.dart';
+import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:dio/dio.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
@@ -52,15 +54,19 @@ class DetectionNotifier extends ChangeNotifier {
           await DetectionService()
               .fetchPredictCornDisease(disease, formData2)
               .whenComplete(() {
-            Navigator.push(
+            Navigator.pushNamed(
               context,
-              MaterialPageRoute(
-                builder: (context) => const DetectionResultScreen(),
-              ),
+              '/result-detection',
             );
           });
         } else {
           print("Gagal memprediksi");
+          showCustomSnackbar(
+            context,
+            "Deteksi Gagal",
+            "Gagal memprediksi penyakit tanaman, silahkan coba lagi",
+            ContentType.failure,
+          );
         }
       } else {
         print("No file selected");

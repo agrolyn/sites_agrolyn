@@ -79,7 +79,7 @@ class CardCommunity extends StatelessWidget {
                                   thumbnail,
                                   fit: BoxFit.cover,
                                   width: double.infinity,
-                                  height: 150,
+                                  height: 210,
                                   errorBuilder: (context, error, stackTrace) {
                                     return Text('Error loading image: $error');
                                   },

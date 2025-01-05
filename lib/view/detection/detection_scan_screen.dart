@@ -152,28 +152,31 @@ class _DetectionScanScreenState extends State<DetectionScanScreen>
                         ],
                       )),
                 ),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: MyColors.primaryColor,
-                    foregroundColor: Colors.white,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
+                SizedBox(
+                  height: 56,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: MyColors.primaryColor,
+                      foregroundColor: Colors.white,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
                     ),
-                  ),
-                  onPressed: loading ? null : _takePicture,
-                  child: loading
-                      ? const Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: CircularProgressIndicator(
-                            color: Colors.green,
-                            semanticsLabel: "Sedang Mengidentifikasi Tanaman",
-                            semanticsValue: "Sedang Mengidentifikasi Tanaman",
+                    onPressed: loading ? null : _takePicture,
+                    child: loading
+                        ? const Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: CircularProgressIndicator(
+                              color: Colors.green,
+                              semanticsLabel: "Sedang Mengidentifikasi Tanaman",
+                              semanticsValue: "Sedang Mengidentifikasi Tanaman",
+                            ),
+                          )
+                        : const Text(
+                            'Ambil Foto',
+                            style: TextStyle(fontWeight: FontWeight.bold),
                           ),
-                        )
-                      : const Text(
-                          'Ambil Foto',
-                          style: TextStyle(fontWeight: FontWeight.bold),
-                        ),
+                  ),
                 ),
               ],
             )
