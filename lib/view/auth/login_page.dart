@@ -205,11 +205,8 @@ class LoginPage extends StatelessWidget {
                                       children: [
                                         TextButton(
                                             onPressed: () {
-                                              Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          ForgotPasswordPage()));
+                                              Navigator.pushReplacementNamed(
+                                                  context, '/forgotPassword');
                                             },
                                             child: const Text(
                                               'Lupa Kata Sandi',
@@ -271,12 +268,8 @@ class LoginPage extends StatelessWidget {
                                           ),
                                           TextButton(
                                             onPressed: () {
-                                              Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        const RegisterPage()),
-                                              );
+                                              Navigator.pushReplacementNamed(
+                                                  context, '/register');
                                             },
                                             child: const Text(
                                               'Daftar Akun',

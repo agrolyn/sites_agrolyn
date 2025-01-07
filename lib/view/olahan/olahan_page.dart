@@ -151,135 +151,150 @@ class OlahanPage extends StatelessWidget {
                                   ),
                                 ),
                                 const SizedBox(height: 8),
-                                // Olahan list horizontal
+                                // Olahan list horizontal using GridView.builder
                                 value.olahans.isNotEmpty
-                                    ? ListView.builder(
+                                    ? GridView.builder(
                                         shrinkWrap: true,
                                         physics:
                                             const NeverScrollableScrollPhysics(),
+                                        gridDelegate:
+                                            SliverGridDelegateWithFixedCrossAxisCount(
+                                          crossAxisCount:
+                                              ResponsiveBreakpoints.of(context)
+                                                      .largerThan(TABLET)
+                                                  ? 2
+                                                  : 1,
+                                          crossAxisSpacing: 8,
+                                          mainAxisSpacing: 8,
+                                          mainAxisExtent:
+                                              200, // Set the height for each grid item (adjust this value)
+                                          childAspectRatio: 2 /
+                                              2, // Adjust width-to-height ratio if needed
+                                        ),
                                         itemCount: value.olahans.length,
-                                        itemBuilder: (context, index) {
+                                        itemBuilder:
+                                            (BuildContext context, int index) {
                                           var olahan = value.olahans[index];
                                           return Padding(
-                                              padding:
-                                                  const EdgeInsets.all(8.0),
-                                              child: Container(
-                                                height: 160,
-                                                width: double.infinity,
-                                                decoration: BoxDecoration(
-                                                    color: MyColors
-                                                        .primaryColorDark,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            16)),
-                                                child: Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(8.0),
-                                                  child: Row(
-                                                    children: [
-                                                      // Safe check for null value in 'thumbnail'
-                                                      olahan['thumbnail'] !=
-                                                                  null &&
-                                                              olahan['thumbnail']
-                                                                  .isNotEmpty
-                                                          ? ClipOval(
-                                                              child:
-                                                                  Image.network(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Container(
+                                              decoration: BoxDecoration(
+                                                color:
+                                                    MyColors.primaryColorDark,
+                                                borderRadius:
+                                                    BorderRadius.circular(16),
+                                              ),
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.all(8.0),
+                                                child: Row(
+                                                  children: [
+                                                    olahan['thumbnail'] !=
+                                                                null &&
+                                                            olahan['thumbnail']
+                                                                .isNotEmpty
+                                                        ? ClipOval(
+                                                            child:
+                                                                Image.network(
                                                               olahan['thumbnail'] ??
                                                                   '',
                                                               fit: BoxFit.cover,
                                                               width: 128,
                                                               height: 128,
-                                                            ))
-                                                          : const Icon(
-                                                              Icons.image,
-                                                              size: 64),
-                                                      const SizedBox(width: 8),
-                                                      Expanded(
-                                                        child: Column(
-                                                          crossAxisAlignment:
-                                                              CrossAxisAlignment
-                                                                  .start,
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .center,
-                                                          children: [
-                                                            Text(
-                                                              "${olahan['label'] ?? 'Unknown'}",
-                                                              style: const TextStyle(
-                                                                  fontSize: 18,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold,
-                                                                  color: Colors
-                                                                      .white),
                                                             ),
-                                                            const SizedBox(
-                                                                height: 2),
-                                                            Text(
-                                                              "Tersedia berbagai olahan dari ${olahan['label'] ?? 'Olahan Tidak Diketahui'} yang bisa menjadi inspirasi untuk ide usaha kuliner kamu. Coba dan temukan resep terbaik untuk bisnismu!",
-                                                              maxLines: 2,
-                                                              overflow:
-                                                                  TextOverflow
-                                                                      .ellipsis,
-                                                              style: const TextStyle(
-                                                                  fontSize: 14,
-                                                                  color: Colors
-                                                                      .white),
-                                                            ),
-                                                            const SizedBox(
-                                                                height: 8),
-                                                            InkWell(
-                                                              onTap: () {
-                                                                int idCat = int.tryParse(
-                                                                        olahan['id']
-                                                                            .toString()) ??
-                                                                    0; // Pastikan idCat adalah integer
-                                                                Navigator.push(
-                                                                  context,
-                                                                  MaterialPageRoute(
-                                                                    builder: (context) =>
-                                                                        CategoryOlahanPage(
-                                                                            idCat:
-                                                                                idCat), // gunakan idCat yang sudah diverifikasi
-                                                                  ),
-                                                                ).then((_) {
-                                                                  print(
-                                                                      "Navigated to CategoryOlahanPage with idCat: $idCat");
-                                                                });
-                                                              },
-                                                              child: Container(
-                                                                height: 32,
-                                                                width: 160,
-                                                                decoration: BoxDecoration(
+                                                          )
+                                                        : const Icon(
+                                                            Icons.image,
+                                                            size: 64),
+                                                    const SizedBox(width: 8),
+                                                    Expanded(
+                                                      child: Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .center,
+                                                        children: [
+                                                          Text(
+                                                            "${olahan['label'] ?? 'Unknown'}",
+                                                            style: const TextStyle(
+                                                                fontSize: 18,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
+                                                                color: Colors
+                                                                    .white),
+                                                          ),
+                                                          const SizedBox(
+                                                              height: 8),
+                                                          Text(
+                                                            "Tersedia berbagai olahan dari ${olahan['label'] ?? 'Olahan Tidak Diketahui'} yang bisa menjadi inspirasi untuk ide usaha kuliner kamu. Coba dan temukan resep terbaik untuk bisnismu!",
+                                                            maxLines: 2,
+                                                            overflow:
+                                                                TextOverflow
+                                                                    .ellipsis,
+                                                            style:
+                                                                const TextStyle(
+                                                                    fontSize:
+                                                                        14,
                                                                     color: Colors
-                                                                        .white,
-                                                                    borderRadius:
-                                                                        BorderRadius.circular(
-                                                                            8)),
-                                                                child:
-                                                                    const Center(
-                                                                  child: Text(
-                                                                    "Lihat Selengkapnya",
-                                                                    style: TextStyle(
-                                                                        color: MyColors
-                                                                            .primaryColorDark,
-                                                                        fontSize:
-                                                                            14,
-                                                                        fontWeight:
-                                                                            FontWeight.bold),
-                                                                  ),
+                                                                        .white),
+                                                          ),
+                                                          const SizedBox(
+                                                              height: 8),
+                                                          InkWell(
+                                                            onTap: () {
+                                                              int idCat = int.tryParse(
+                                                                      olahan['id']
+                                                                          .toString()) ??
+                                                                  0;
+                                                              Navigator.push(
+                                                                context,
+                                                                MaterialPageRoute(
+                                                                  builder: (context) =>
+                                                                      CategoryOlahanPage(
+                                                                          idCat:
+                                                                              idCat),
+                                                                ),
+                                                              );
+                                                            },
+                                                            child: Container(
+                                                              height: 32,
+                                                              width: 160,
+                                                              decoration: BoxDecoration(
+                                                                  color: Colors
+                                                                      .white,
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              8)),
+                                                              child:
+                                                                  const Center(
+                                                                child: Text(
+                                                                  "Lihat Selengkapnya",
+                                                                  style: TextStyle(
+                                                                      color: MyColors
+                                                                          .primaryColorDark,
+                                                                      fontSize:
+                                                                          14,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold),
                                                                 ),
                                                               ),
-                                                            )
-                                                          ],
-                                                        ),
+                                                            ),
+                                                          )
+                                                        ],
                                                       ),
-                                                    ],
-                                                  ),
+                                                    ),
+                                                  ],
                                                 ),
-                                              ));
-                                        })
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                      )
                                     : const Center(
                                         child: NoFoundCustom(
                                           message: "Olahan Kosong",

@@ -1,9 +1,11 @@
+import 'package:agrolyn_web/view/auth/forgot_password_page.dart';
 import 'package:agrolyn_web/view/auth/login_page.dart';
 import 'package:agrolyn_web/view/auth/register_page.dart';
 import 'package:agrolyn_web/view/community/community_page.dart';
 import 'package:agrolyn_web/view/detection/detection_page.dart';
 import 'package:agrolyn_web/view/education/education_page.dart';
 import 'package:agrolyn_web/view/home/detection_section.dart';
+import 'package:agrolyn_web/view/home/harvest_calculator_section.dart';
 import 'package:agrolyn_web/view/home/home_page.dart';
 import 'package:agrolyn_web/view/home/recipe_section.dart';
 import 'package:agrolyn_web/view/olahan/category_olahan_page.dart';
@@ -48,8 +50,8 @@ class MyApp extends StatelessWidget {
       routes: {
         '/navbar': (context) => Navbar(),
         '/login': (context) => LoginPage(context: context),
-        '/splashScreen': (context) => const SplashScreen(),
         '/register': (context) => const RegisterPage(),
+        '/splashScreen': (context) => const SplashScreen(),
         '/home': (context) => ListView.builder(
             itemCount: blocks.length,
             itemBuilder: (context, index) {
@@ -61,6 +63,7 @@ class MyApp extends StatelessWidget {
               idCat: 0, // Replace 'someId' with the appropriate value
             ),
         '/education': (context) => const EducationPage(),
+        'forgotPassword': (context) => ForgotPasswordPage(),
       },
     );
   }
@@ -80,8 +83,11 @@ List<Widget> blocks = [
       ),
     ),
   ),
+  const BlockWrapper(HarvestCalculatorSection()),
   const BlockWrapper(HomePage()),
   const BlockWrapper(DetectionSection()),
-  const BlockWrapper(RecipeSection()),
+  const BlockWrapper(RecipeSection(
+    idCat: 0,
+  )),
   const Footer()
 ];

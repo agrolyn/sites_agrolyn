@@ -102,13 +102,7 @@ class AuthService {
           "Silakan cek email Anda untuk verifikasi akun",
           ContentType.success,
         );
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) => LoginPage(
-                    context: context,
-                  )),
-        );
+        Navigator.pushReplacementNamed(context, '/login');
         return true;
       } else {
         // Menampilkan status code jika bukan 201
@@ -267,12 +261,7 @@ class AuthService {
       );
       print(response);
       if (response.statusCode == 200) {
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => LoginPage(
-                      context: context,
-                    )));
+        Navigator.pushReplacementNamed(context, '/login');
         showCustomSnackbar(
             context,
             "Permintaan Berhasil",
