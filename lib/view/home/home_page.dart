@@ -43,12 +43,8 @@ class HomePage extends StatelessWidget {
                           TextSpan(
                               recognizer: TapGestureRecognizer()
                                 ..onTap = () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            const DetectionScreen()),
-                                  );
+                                  Navigator.pushReplacementNamed(
+                                      context, '/detection');
                                 },
                               text: "deteksi penyakit tanaman",
                               style: headlineSecondaryTextStyle.copyWith(
@@ -58,12 +54,8 @@ class HomePage extends StatelessWidget {
                           TextSpan(
                               recognizer: TapGestureRecognizer()
                                 ..onTap = () {
-                                  // Navigator.push(
-                                  //   context,
-                                  //   MaterialPageRoute(
-                                  //       builder: (context) =>
-                                  //           const Prediction()),
-                                  // );
+                                  Navigator.pushReplacementNamed(
+                                      context, '/detection');
                                 },
                               text: "prediksi hasil tani",
                               style: headlineSecondaryTextStyle.copyWith(
@@ -74,11 +66,8 @@ class HomePage extends StatelessWidget {
                           TextSpan(
                               recognizer: TapGestureRecognizer()
                                 ..onTap = () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => const HomePage()),
-                                  );
+                                  Navigator.pushReplacementNamed(
+                                      context, '/community');
                                 },
                               text: "diskusi dengan petani lain",
                               style: headlineSecondaryTextStyle.copyWith(
@@ -104,11 +93,8 @@ class HomePage extends StatelessWidget {
                         ResponsiveRowColumnItem(
                           child: TextButton(
                             onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => const CommunityPage(),
-                                  ));
+                              Navigator.pushReplacementNamed(
+                                  context, '/community');
                             },
                             style: ButtonStyle(
                                 backgroundColor: WidgetStateProperty.all<Color>(

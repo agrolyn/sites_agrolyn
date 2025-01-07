@@ -69,7 +69,7 @@ class EducationPage extends StatelessWidget {
                           height: MediaQuery.of(context).size.height * 1,
                           child: TabBarView(
                             children: [
-                              // Artikel Section
+                              // Artikel Section (GridView)
                               SingleChildScrollView(
                                 child: Column(
                                   children: [
@@ -137,13 +137,26 @@ class EducationPage extends StatelessWidget {
                                     ),
                                     value.articles.isNotEmpty
                                         ? Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                                horizontal: 8),
-                                            child: ListView.builder(
+                                            padding: const EdgeInsets.all(16.0),
+                                            child: GridView.builder(
                                               shrinkWrap: true,
                                               physics:
                                                   const NeverScrollableScrollPhysics(),
                                               itemCount: value.articles.length,
+                                              gridDelegate:
+                                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                                crossAxisCount:
+                                                    ResponsiveBreakpoints.of(
+                                                                context)
+                                                            .smallerThan(
+                                                                DESKTOP)
+                                                        ? 1
+                                                        : 2,
+                                                crossAxisSpacing: 10,
+                                                mainAxisSpacing: 10,
+                                                childAspectRatio:
+                                                    2, // Bisa diganti jika perlu rasio tinggi:lebar tertentu
+                                              ),
                                               itemBuilder: (context, index) {
                                                 var article =
                                                     value.articles[index];
@@ -184,7 +197,7 @@ class EducationPage extends StatelessWidget {
                                                         ),
                                                       ],
                                                     ),
-                                                    child: Row(
+                                                    child: Column(
                                                       children: [
                                                         ClipRRect(
                                                           borderRadius:
@@ -194,12 +207,13 @@ class EducationPage extends StatelessWidget {
                                                             article[
                                                                 'thumbnail'],
                                                             height: 100,
-                                                            width: 70,
+                                                            width:
+                                                                double.infinity,
                                                             fit: BoxFit.cover,
                                                           ),
                                                         ),
                                                         const SizedBox(
-                                                            width: 12),
+                                                            height: 12),
                                                         Expanded(
                                                           child: Column(
                                                             crossAxisAlignment:
@@ -265,52 +279,6 @@ class EducationPage extends StatelessWidget {
                                                                     TextOverflow
                                                                         .ellipsis,
                                                               ),
-                                                              const SizedBox(
-                                                                  height: 4),
-                                                              Row(
-                                                                children: [
-                                                                  const Icon(
-                                                                    Icons
-                                                                        .calendar_month_outlined,
-                                                                    size: 11,
-                                                                    color: Colors
-                                                                        .grey,
-                                                                  ),
-                                                                  const SizedBox(
-                                                                      width: 4),
-                                                                  FutureBuilder(
-                                                                    future: formatRelativeTime(
-                                                                        article[
-                                                                            "released_date"]),
-                                                                    builder:
-                                                                        (context,
-                                                                            snapshot) {
-                                                                      if (snapshot
-                                                                              .connectionState ==
-                                                                          ConnectionState
-                                                                              .waiting) {
-                                                                        return const CircularProgressIndicator();
-                                                                      } else if (snapshot
-                                                                          .hasError) {
-                                                                        return Text(
-                                                                            "Error: ${snapshot.error}");
-                                                                      } else if (snapshot
-                                                                          .hasData) {
-                                                                        return Text(
-                                                                          snapshot
-                                                                              .data
-                                                                              .toString(),
-                                                                          style: const TextStyle(
-                                                                              fontSize: 12,
-                                                                              color: Colors.grey),
-                                                                        );
-                                                                      }
-                                                                      return const Text(
-                                                                          "No data available");
-                                                                    },
-                                                                  ),
-                                                                ],
-                                                              ),
                                                             ],
                                                           ),
                                                         ),
@@ -319,19 +287,17 @@ class EducationPage extends StatelessWidget {
                                                   ),
                                                 );
                                               },
-                                            ),
-                                          )
+                                            ))
                                         : const Center(
                                             child: NoFoundCustom(
                                             message: "No Articles Available",
                                             subMessage:
                                                 "We can't find any articles for you",
                                           )),
-                                    const Footer()
                                   ],
                                 ),
                               ),
-                              // Video Section
+                              // Video Section (GridView)
                               SingleChildScrollView(
                                 child: Column(
                                   children: [
@@ -403,11 +369,29 @@ class EducationPage extends StatelessWidget {
                                     Padding(
                                       padding: const EdgeInsets.symmetric(
                                           horizontal: 8),
-                                      child: ListView.builder(
+                                      child: GridView.builder(
                                         shrinkWrap: true,
                                         physics:
                                             const NeverScrollableScrollPhysics(),
                                         itemCount: value.videos.length,
+                                        gridDelegate:
+                                            SliverGridDelegateWithFixedCrossAxisCount(
+                                                crossAxisCount:
+                                                    ResponsiveBreakpoints.of(
+                                                                context)
+                                                            .smallerThan(
+                                                                DESKTOP)
+                                                        ? 1
+                                                        : 2,
+                                                crossAxisSpacing: 10,
+                                                mainAxisSpacing: 10,
+                                                childAspectRatio:
+                                                    ResponsiveBreakpoints.of(
+                                                                context)
+                                                            .smallerThan(
+                                                                DESKTOP)
+                                                        ? 1.55
+                                                        : 1.63),
                                         itemBuilder: (context, index) {
                                           final video = value.videos[index];
                                           return Container(

@@ -8,6 +8,7 @@ import 'package:agrolyn_web/view/detection/detection_screen.dart';
 import 'package:agrolyn_web/view/detection/history_scan_screen.dart';
 import 'package:agrolyn_web/view/education/education_page.dart';
 import 'package:agrolyn_web/view/home/detection_section.dart';
+import 'package:agrolyn_web/view/home/harvest_calculator_section.dart';
 import 'package:agrolyn_web/view/home/home_page.dart';
 import 'package:agrolyn_web/view/home/recipe_section.dart';
 import 'package:agrolyn_web/view/olahan/olahan_page.dart';
@@ -70,6 +71,7 @@ class MyApp extends StatelessWidget {
               idCat: 0, // Replace 'someId' with the appropriate value
             ),
         '/education': (context) => const EducationPage(),
+        'forgotPassword': (context) => ForgotPasswordPage(),
       },
     );
   }
@@ -89,8 +91,11 @@ List<Widget> blocks = [
       ),
     ),
   ),
+  const BlockWrapper(HarvestCalculatorSection()),
   const BlockWrapper(HomePage()),
   const BlockWrapper(DetectionSection()),
-  const BlockWrapper(RecipeSection()),
+  const BlockWrapper(RecipeSection(
+    idCat: 0,
+  )),
   const Footer()
 ];

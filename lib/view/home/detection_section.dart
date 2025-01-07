@@ -85,12 +85,8 @@ class DetectionSection extends StatelessWidget {
                         padding: const EdgeInsets.only(left: 16, right: 8),
                         child: TextButton(
                           onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      const DetectionScreen()),
-                            );
+                            Navigator.pushReplacementNamed(
+                                context, '/detection');
                           },
                           style: ButtonStyle(
                             backgroundColor:

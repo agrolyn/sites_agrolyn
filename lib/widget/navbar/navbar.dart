@@ -1,5 +1,6 @@
 import 'package:agrolyn_web/main.dart';
 import 'package:agrolyn_web/view/olahan/category_olahan_page.dart';
+import 'package:agrolyn_web/view/olahan/detail_olahan_page.dart';
 import 'package:agrolyn_web/view/olahan/olahan_page.dart';
 import 'package:agrolyn_web/view/detection/detection_screen.dart';
 import 'package:flutter/material.dart';
@@ -142,18 +143,12 @@ class Navbar extends StatelessWidget {
         itemBuilder: (context, index) {
           return blocks[index];
         }),
-    const CommunityPage(
-        // back: () => ListView.builder(
-        //     itemCount: blocks.length,
-        //     itemBuilder: (context, index) {
-        //       return blocks[index];
-        //     }),
-        ),
+    const CommunityPage(),
     const DetectionScreen(),
-    const OlahanPage(
-      idCat: 0, // Replace 'someId' with the appropriate value
-    ),
-    // const CategoryOlahanPage(idCat: 1),
+    // const OlahanPage(
+    //   idCat: 0, // Replace 'someId' with the appropriate value
+    // ),
+    const CategoryOlahanPage(idCat: 4),
     const EducationPage(),
   ];
 }
