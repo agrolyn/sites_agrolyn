@@ -147,8 +147,7 @@ class Navbar extends StatelessWidget {
     // const OlahanPage(
     //   idCat: 0, // Replace 'someId' with the appropriate value
     // ),
-    const CategoryOlahanPage(idCat: 3),
-    // const DetailOlahanPage(id: 10),
+    const CategoryOlahanPage(idCat: 4),
     const EducationPage(),
   ];
 }
