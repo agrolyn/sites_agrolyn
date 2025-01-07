@@ -3,6 +3,7 @@ import 'package:agrolyn_web/shared/custom_snackbar.dart';
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class CommunityService {
   final Dio _dio = Dio();
@@ -45,6 +46,11 @@ class CommunityService {
       if (e is DioException) {
         print('DioError: ${e.response?.data}');
         print('Status code: ${e.response?.statusCode}');
+
+        if (e.response?.statusCode == 442) {
+          SharedPreferences prefs = await SharedPreferences.getInstance();
+          prefs.setBool('isLogedin', false);
+        }
       }
       throw Exception('Error fetching question details: $e');
     }

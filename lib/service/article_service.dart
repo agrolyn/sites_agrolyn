@@ -1,5 +1,6 @@
 import 'package:agrolyn_web/service/auth_service.dart';
 import 'package:dio/dio.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ArticleService {
   final Dio _dio = Dio();
@@ -18,6 +19,15 @@ class ArticleService {
       }
     } catch (e) {
       print("Error: $e");
+      if (e is DioException) {
+        print('DioError: ${e.response?.data}');
+        print('Status code: ${e.response?.statusCode}');
+
+        if (e.response?.statusCode == 442) {
+          SharedPreferences prefs = await SharedPreferences.getInstance();
+          prefs.setBool('isLogedin', false);
+        }
+      }
       return [];
     }
   }

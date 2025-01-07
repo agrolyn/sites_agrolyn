@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:agrolyn_web/service/community_service.dart';
@@ -6,6 +7,7 @@ import 'package:agrolyn_web/view/community/community_page.dart';
 import 'package:agrolyn_web/view/community/detail_community_screen.dart';
 import 'package:agrolyn_web/view/community/item_filter.dart';
 import 'package:dio/dio.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker_web/image_picker_web.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -29,13 +31,19 @@ class CommunityNotifer extends ChangeNotifier {
 
   String _titleQuestion = '';
   String _descriptionQuestion = '';
-  Uint8List? _imageQuestion;
+  String? _imageQuestion;
   String? _imageQuestionDefault;
 
   // Getters
   String get titleQuestion => _titleQuestion;
   String get descriptionQuestion => _descriptionQuestion;
-  Uint8List get imageQuestion => _imageQuestion!;
+  String? get imageQuestion {
+    if (_imageQuestion == null) {
+      return null;
+    }
+    return _imageQuestion;
+  }
+
   String? get imageQuestionDefault => _imageQuestionDefault;
 
   // Setters
@@ -51,9 +59,15 @@ class CommunityNotifer extends ChangeNotifier {
 
   void setImageQuestion() async {
     // Memilih file dari web
-    final pickedFile = await ImagePickerWeb.getImageAsBytes();
-    if (pickedFile != null) {
-      _imageQuestion = pickedFile; // pickedFile adalah Uint8List
+    FilePickerResult? result = await FilePicker.platform.pickFiles(
+      type: FileType.image,
+      allowMultiple: false,
+      withData: true,
+    );
+
+    if (result != null && result.files.single.bytes != null) {
+      String base64Image = base64Encode(result.files.single.bytes!);
+      _imageQuestion = base64Image; // pickedFile adalah Uint8List
       _imageQuestionDefault = '';
     }
     notifyListeners();
@@ -78,12 +92,12 @@ class CommunityNotifer extends ChangeNotifier {
 
   Future<void> submitAddQuestion() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    if (formKey.currentState!.validate()) {
+    if (formKey.currentState!.validate() && imageQuestion != null) {
       final formData = FormData.fromMap({
         'title_q': titleQuestion,
         'description': descriptionQuestion,
         'plant_types_id': prefs.getInt("category_id"),
-        'img_q': MultipartFile.fromBytes(imageQuestion,
+        'img_q': MultipartFile.fromBytes(base64Decode(imageQuestion!),
             filename: 'img-question.jpg'),
       });
 
@@ -104,8 +118,9 @@ class CommunityNotifer extends ChangeNotifier {
         'title_q': titleQuestion,
         'description': descriptionQuestion,
         'plant_types_id': prefs.getInt("category_id"),
-        'img_q': MultipartFile.fromBytes(imageQuestion,
-            filename: 'img-question.jpg'),
+        if (imageQuestion != null)
+          'img_q': MultipartFile.fromBytes(base64Decode(imageQuestion!),
+              filename: 'img-question.jpg'),
       });
 
       print(formData.fields);
@@ -129,7 +144,7 @@ class CommunityNotifer extends ChangeNotifier {
     prefs.setInt('category_id', 0);
     _titleQuestion = '';
     _descriptionQuestion = '';
-    _imageQuestion = Uint8List(0);
+    _imageQuestion = '';
     _imageQuestionDefault = "";
     notifyListeners();
   }

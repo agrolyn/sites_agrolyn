@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:agrolyn_web/provider/community_notifer.dart';
 import 'package:agrolyn_web/shared/constans.dart';
 import 'package:agrolyn_web/utils/assets_path.dart';
@@ -103,7 +105,8 @@ class AddQuestion extends StatelessWidget {
                                                 borderRadius:
                                                     BorderRadius.circular(16),
                                                 child: Image.memory(
-                                                  value.imageQuestion,
+                                                  base64Decode(
+                                                      value.imageQuestion!),
                                                   height: 150,
                                                   width: double.infinity,
                                                   fit: BoxFit.cover,
