@@ -9,7 +9,8 @@ class SplashNotifier extends ChangeNotifier {
 
   effectSplashScreen() {
     Future.delayed(const Duration(seconds: 3)).then((value) {
-      Navigator.pushNamedAndRemoveUntil(context, '/login', (route) => false);
+      Navigator.pushNamedAndRemoveUntil(
+          context, '/login', (Route<dynamic> route) => false);
     });
   }
 }

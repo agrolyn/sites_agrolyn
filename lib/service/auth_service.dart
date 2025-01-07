@@ -101,10 +101,7 @@ class AuthService {
           "Silakan cek email Anda untuk verifikasi akun",
           ContentType.success,
         );
-        Navigator.pushReplacementNamed(
-          context,
-          '/login',
-        );
+        Navigator.pushReplacementNamed(context, '/login');
         return true;
       } else {
         // Menampilkan status code jika bukan 201
@@ -217,8 +214,7 @@ class AuthService {
       );
       print(response);
       if (response.statusCode == 200) {
-        Navigator.pushReplacementNamed(context,
-            '/login'); // navigasi ke halaman login setelah reset password
+        Navigator.pushReplacementNamed(context, '/login');
         showCustomSnackbar(
             context,
             "Permintaan Berhasil",
