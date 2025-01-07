@@ -109,9 +109,13 @@ class DetectionNotifier extends ChangeNotifier {
 
   Future<List> fetchHistory() async {
     var result = await DetectionService().fetchGetHistory();
-    print(result);
-    resultHistories = result;
-    notifyListeners();
+    try {
+      print(result);
+      resultHistories = result;
+      notifyListeners();
+    } catch (e) {
+      print("error fetch history: $e");
+    }
     return result;
   }
 

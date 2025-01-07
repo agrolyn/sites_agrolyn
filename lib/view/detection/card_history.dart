@@ -17,7 +17,10 @@ class CardHistory extends StatelessWidget {
             return AlertDialog(
               title: const Text("Hapus Riwayat"),
               content: const Text(
-                  "Apakah anda yakin ingin menghapus riwayat scan tanaman ini?"),
+                "Apakah anda yakin ingin menghapus riwayat scan tanaman ini?",
+                overflow: TextOverflow.ellipsis,
+                maxLines: 1,
+              ),
               actions: [
                 TextButton(
                   child: const Text("Batal"),

@@ -1,6 +1,7 @@
 import 'package:agrolyn_web/service/detection_service.dart';
 import 'package:agrolyn_web/provider/detection_notifier.dart';
 import 'package:agrolyn_web/utils/assets_path.dart';
+import 'package:agrolyn_web/utils/responsive.dart';
 import 'package:agrolyn_web/view/detection/card_history.dart';
 import 'package:agrolyn_web/view/detection/detection_screen.dart';
 import 'package:agrolyn_web/widget/footer.dart';
@@ -71,8 +72,28 @@ class HistoryScanScreen extends StatelessWidget {
                               height: 20,
                             ),
                             value.resultHistories.isNotEmpty
-                                ? ListView.builder(
+                                ? GridView.builder(
                                     shrinkWrap: true,
+                                    gridDelegate:
+                                        SliverGridDelegateWithFixedCrossAxisCount(
+                                      crossAxisCount:
+                                          Responsive.isDesktop(context)
+                                              ? 3
+                                              : Responsive.isTablet(context)
+                                                  ? 2
+                                                  : 1, // Jumlah kolom
+                                      crossAxisSpacing: 8,
+                                      mainAxisSpacing: 8,
+                                      childAspectRatio:
+                                          Responsive.isDesktopLarge(context)
+                                              ? 4 / 2.3
+                                              : Responsive.isDesktop(context)
+                                                  ? 4 / 2
+                                                  : Responsive.isTablet(context)
+                                                      ? 3 / 2
+                                                      : 4 / 2.3,
+                                      // Rasio ukuran grid (lebar vs tinggi)
+                                    ),
                                     physics:
                                         const NeverScrollableScrollPhysics(),
                                     itemCount: value.resultHistories.length,
@@ -97,6 +118,7 @@ class HistoryScanScreen extends StatelessWidget {
                                       )),
                                     ],
                                   ),
+                            const SizedBox(height: 20),
                             const Footer()
                           ],
                         ),
