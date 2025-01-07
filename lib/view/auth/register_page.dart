@@ -23,7 +23,7 @@ class RegisterPage extends StatelessWidget {
               children: [
                 Positioned.fill(
                   child: IgnorePointer(
-                    child: Image.asset(ImageAssets.bgMalam,
+                    child: Image.asset(ImageAssets.bgPagi,
                         fit: BoxFit.cover, height: double.infinity),
                   ),
                 ),
