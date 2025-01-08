@@ -4,6 +4,7 @@ import 'package:agrolyn_web/utils/assets_path.dart';
 import 'package:agrolyn_web/utils/date.dart';
 import 'package:agrolyn_web/view/education/detail_article.dart';
 import 'package:agrolyn_web/widget/footer.dart';
+import 'package:agrolyn_web/widget/navbar/navbar_desktop.dart';
 import 'package:agrolyn_web/widget/no_found_custom.dart';
 import 'package:agrolyn_web/widget/video_player_screen.dart';
 import 'package:flutter/material.dart';
@@ -54,6 +55,7 @@ class EducationPage extends StatelessWidget {
             body: SingleChildScrollView(
               child: Column(
                 children: [
+                  NavbarDesktop(activePage: "Edukasi"),
                   ResponsiveRowColumn(
                     layout:
                         ResponsiveBreakpoints.of(context).smallerThan(DESKTOP)

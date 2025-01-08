@@ -12,11 +12,13 @@ import 'package:agrolyn_web/view/home/harvest_calculator_section.dart';
 import 'package:agrolyn_web/view/home/home_page.dart';
 import 'package:agrolyn_web/view/home/recipe_section.dart';
 import 'package:agrolyn_web/view/olahan/olahan_page.dart';
+import 'package:agrolyn_web/view/recipe/recipe_page.dart';
 import 'package:agrolyn_web/view/splash_screen.dart';
 import 'package:agrolyn_web/widget/block_wraper.dart';
 import 'package:agrolyn_web/widget/carousel.dart';
 import 'package:agrolyn_web/widget/footer.dart';
 import 'package:agrolyn_web/widget/navbar/navbar.dart';
+import 'package:agrolyn_web/widget/navbar/navbar_desktop.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
@@ -49,6 +51,7 @@ class MyApp extends StatelessWidget {
       ),
       debugShowCheckedModeBanner: false,
       initialRoute: '/splashScreen',
+      themeAnimationDuration: Duration.zero,
       routes: {
         '/navbar': (context) => Navbar(),
         '/login': (context) => LoginPage(context: context),
@@ -70,6 +73,7 @@ class MyApp extends StatelessWidget {
         '/olahan': (context) => const OlahanPage(
               idCat: 0, // Replace 'someId' with the appropriate value
             ),
+        '/recipe': (context) => const RecipePage(),
         '/education': (context) => const EducationPage(),
         'forgotPassword': (context) => ForgotPasswordPage(),
       },
@@ -78,6 +82,9 @@ class MyApp extends StatelessWidget {
 }
 
 List<Widget> blocks = [
+  NavbarDesktop(
+    activePage: "Beranda",
+  ),
   MaxWidthBox(
     maxWidth: 1200,
     child: FittedBox(

@@ -4,6 +4,7 @@ import 'package:agrolyn_web/utils/assets_path.dart';
 import 'package:agrolyn_web/view/community/add_question.dart';
 import 'package:agrolyn_web/view/community/card_community.dart';
 import 'package:agrolyn_web/widget/footer.dart';
+import 'package:agrolyn_web/widget/navbar/navbar_desktop.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -32,6 +33,7 @@ class CommunityPage extends StatelessWidget {
             body: SingleChildScrollView(
               child: Column(
                 children: [
+                  NavbarDesktop(activePage: "Komunitas"),
                   Container(
                     width: widthScreen,
                     height: 250,

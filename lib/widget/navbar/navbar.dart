@@ -8,7 +8,6 @@ import 'package:sidebarx/sidebarx.dart';
 import 'package:provider/provider.dart';
 import 'package:agrolyn_web/view/community/community_page.dart';
 import 'package:agrolyn_web/view/education/education_page.dart';
-import 'package:agrolyn_web/view/recipe/recipe_page.dart';
 import 'package:agrolyn_web/shared/constans.dart';
 import 'package:agrolyn_web/provider/menu_notifier.dart';
 

@@ -190,6 +190,7 @@ class AuthService {
         if (res.statusCode == 200) {
           SharedPreferences prefs = await SharedPreferences.getInstance();
           await prefs.remove('access_token');
+          await prefs.remove('isLogedin');
           Navigator.pushNamed(
               context, '/login'); // navigasi ke halaman login setelah logout
         }

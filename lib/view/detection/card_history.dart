@@ -92,19 +92,17 @@ class CardHistory extends StatelessWidget {
                 height: 10,
               ),
               Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    history['disease_indonesian_name'],
-                    style: const TextStyle(
-                        fontWeight: FontWeight.w500, fontSize: 16),
-                  ),
-                  const SizedBox(
-                    width: 8,
-                  ),
-                  Text(
-                    "(${history['disease_name']})",
-                    style: const TextStyle(
-                        fontWeight: FontWeight.w400, fontSize: 16),
+                  Expanded(
+                    child: Text(
+                      "${history['disease_indonesian_name']} (${history['disease_name']})",
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                          fontWeight: FontWeight.w500, fontSize: 16),
+                    ),
                   ),
                 ],
               ),
