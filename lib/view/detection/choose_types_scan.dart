@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:agrolyn_web/provider/detection_notifier.dart';
 import 'package:agrolyn_web/shared/constans.dart';
 import 'package:agrolyn_web/utils/assets_path.dart';
+import 'package:agrolyn_web/widget/navbar/navbar_desktop.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -23,6 +24,11 @@ class ChooseTypesScan extends StatelessWidget {
                 height: double.infinity, // Tinggi penuh
                 fit: BoxFit.cover, // Menyesuaikan animasi agar memenuhi area
               ),
+              Positioned(
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  child: NavbarDesktop(activePage: "")),
               Padding(
                 padding: const EdgeInsets.all(16),
                 child: Center(

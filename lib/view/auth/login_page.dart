@@ -47,7 +47,9 @@ class LoginPage extends StatelessWidget {
                         child: BackdropFilter(
                           filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
                           child: Container(
-                            height: MediaQuery.of(context).size.height - 190,
+                            height: Responsive.isMobile(context)
+                                ? MediaQuery.of(context).size.height - 190
+                                : MediaQuery.of(context).size.height - 100,
                             width: Responsive.isMobile(context)
                                 ? double.infinity
                                 : Responsive.isTablet(context)
@@ -209,7 +211,7 @@ class LoginPage extends StatelessWidget {
                                       children: [
                                         TextButton(
                                             onPressed: () {
-                                              Navigator.pushNamed(
+                                              Navigator.pushReplacementNamed(
                                                   context, '/forgot-password');
                                             },
                                             child: const Text(
@@ -272,7 +274,7 @@ class LoginPage extends StatelessWidget {
                                           ),
                                           TextButton(
                                             onPressed: () {
-                                              Navigator.pushNamed(
+                                              Navigator.pushReplacementNamed(
                                                   context, '/register');
                                             },
                                             child: const Text(

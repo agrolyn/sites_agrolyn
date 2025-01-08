@@ -98,7 +98,7 @@ class DetectionScreen extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.all(16.0),
                           child: Container(
-                              width: double.infinity,
+                              width: 300,
                               height: 55,
                               decoration: BoxDecoration(
                                 color: MyColors.secondaryColorDark,
@@ -106,7 +106,7 @@ class DetectionScreen extends StatelessWidget {
                               ),
                               child: InkWell(
                                   onTap: () {
-                                    Navigator.pushNamed(
+                                    Navigator.pushReplacementNamed(
                                         context, '/history-detection');
                                   },
                                   child: const Row(

@@ -54,7 +54,7 @@ class DetectionNotifier extends ChangeNotifier {
           await DetectionService()
               .fetchPredictCornDisease(disease, formData2)
               .whenComplete(() {
-            Navigator.pushNamed(
+            Navigator.pushReplacementNamed(
               context,
               '/result-detection',
             );

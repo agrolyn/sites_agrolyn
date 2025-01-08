@@ -244,7 +244,7 @@ class CommunityService {
               }));
       print(response);
       if (response.statusCode == 200) {
-        Navigator.pushNamed(context,
+        Navigator.pushReplacementNamed(context,
             '/community'); // Redirect ke halaman community setelah berhasil menghapus pertanyaan
         showCustomSnackbar(context, "Berhasil Dihapus",
             "Jawaban Anda Berhasil Dihapus!", ContentType.success);

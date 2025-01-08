@@ -46,7 +46,7 @@ class NavbarDesktopItem extends StatelessWidget {
                   : 20,
         ),
         onPressed: () {
-          Navigator.pushNamed(
+          Navigator.pushReplacementNamed(
             context,
             route,
           );

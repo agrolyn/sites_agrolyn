@@ -20,6 +20,7 @@ class CommunityNotifer extends ChangeNotifier {
   final BuildContext context;
   final CommunityService _communityService = CommunityService();
   final formKey = GlobalKey<FormState>();
+  final scaffoldKey = GlobalKey<ScaffoldState>();
 
   CommunityNotifer({required this.context}) {
     fetchAllQuestion();
@@ -104,7 +105,7 @@ class CommunityNotifer extends ChangeNotifier {
       print(formData.fields);
 
       await CommunityService().fetchAddQuestion(formData).whenComplete(() {
-        Navigator.pushNamed(context, '/community');
+        Navigator.pushReplacementNamed(context, '/community');
         showCustomSnackbar(context, "Berhasil Ditambahkan",
             "Pertanyaan Anda Berhasil Ditambahkan!", ContentType.success);
       });

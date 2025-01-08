@@ -57,7 +57,7 @@ class AuthService {
         await prefs.setBool('isLogedin', true);
 
         if (response.data['roles_id'] == 2) {
-          Navigator.pushReplacementNamed(context, '/navbar');
+          Navigator.pushReplacementNamed(context, '/home');
         }
 
         return true;
@@ -101,7 +101,7 @@ class AuthService {
           "Silakan cek email Anda untuk verifikasi akun",
           ContentType.success,
         );
-        Navigator.pushNamed(
+        Navigator.pushReplacementNamed(
           context,
           '/login',
         );
@@ -191,7 +191,7 @@ class AuthService {
           SharedPreferences prefs = await SharedPreferences.getInstance();
           await prefs.remove('access_token');
           await prefs.remove('isLogedin');
-          Navigator.pushNamed(
+          Navigator.pushReplacementNamed(
               context, '/login'); // navigasi ke halaman login setelah logout
         }
       } on DioException catch (e) {
@@ -217,7 +217,7 @@ class AuthService {
       );
       print(response);
       if (response.statusCode == 200) {
-        Navigator.pushNamed(context,
+        Navigator.pushReplacementNamed(context,
             '/login'); // navigasi ke halaman login setelah reset password
         showCustomSnackbar(
             context,

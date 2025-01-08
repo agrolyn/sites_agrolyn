@@ -180,7 +180,7 @@ class ForgotPasswordPage extends StatelessWidget {
                                           height: 56,
                                           child: ElevatedButton(
                                             onPressed: () {
-                                              Navigator.pushNamed(
+                                              Navigator.pushReplacementNamed(
                                                   context, '/login');
                                             },
                                             style: ElevatedButton.styleFrom(
