@@ -1,12 +1,11 @@
 import 'package:agrolyn_web/provider/community_notifer.dart';
 import 'package:agrolyn_web/shared/constans.dart';
 import 'package:agrolyn_web/utils/assets_path.dart';
-import 'package:agrolyn_web/utils/responsive.dart';
 import 'package:agrolyn_web/view/community/add_question.dart';
 import 'package:agrolyn_web/view/community/card_community.dart';
 import 'package:agrolyn_web/widget/footer.dart';
+import 'package:agrolyn_web/widget/navbar/nav_drawer.dart';
 import 'package:agrolyn_web/widget/navbar/navbar_desktop.dart';
-import 'package:agrolyn_web/widget/navbar/navbar_mobile_item.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -34,65 +33,7 @@ class CommunityPage extends StatelessWidget {
           return Scaffold(
             key: value.scaffoldKey,
             backgroundColor: Colors.white,
-            drawer: Responsive.isMobile(context)
-                ? Drawer(
-                    child: ListView(
-                      padding: EdgeInsets.zero,
-                      children: [
-                        DrawerHeader(
-                          decoration: const BoxDecoration(
-                            color: MyColors.primaryColorDark,
-                          ),
-                          child: Center(
-                            child: Column(children: [
-                              Image.asset(
-                                ImageAssets.logo,
-                                width: 85,
-                                height: 85,
-                              ),
-                              const SizedBox(
-                                height: 8,
-                              ),
-                              const Text(
-                                "Agrolyn",
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white,
-                                ),
-                              )
-                            ]),
-                          ),
-                        ),
-                        NavbarMobileItem(
-                          title: "Beranda",
-                          route: "/home",
-                          icon: Icons.home,
-                        ),
-                        NavbarMobileItem(
-                          title: "Komunitas",
-                          route: "/community",
-                          icon: Icons.forum,
-                        ),
-                        NavbarMobileItem(
-                          title: "Deteksi",
-                          route: "/detection",
-                          icon: Icons.camera_alt_rounded,
-                        ),
-                        NavbarMobileItem(
-                          title: "Olahan Makanan",
-                          route: "/olahan",
-                          icon: Icons.restaurant,
-                        ),
-                        NavbarMobileItem(
-                          title: "Edukasi",
-                          route: "/education",
-                          icon: Icons.article,
-                        ),
-                      ],
-                    ),
-                  )
-                : null,
+            drawer: const NavDrawer(),
             body: SingleChildScrollView(
               child: Column(
                 children: [

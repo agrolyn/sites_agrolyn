@@ -4,6 +4,7 @@ import 'package:agrolyn_web/utils/assets_path.dart';
 import 'package:agrolyn_web/utils/date.dart';
 import 'package:agrolyn_web/view/education/detail_article.dart';
 import 'package:agrolyn_web/widget/footer.dart';
+import 'package:agrolyn_web/widget/navbar/nav_drawer.dart';
 import 'package:agrolyn_web/widget/navbar/navbar_desktop.dart';
 import 'package:agrolyn_web/widget/no_found_custom.dart';
 import 'package:agrolyn_web/widget/video_player_screen.dart';
@@ -17,12 +18,17 @@ class EducationPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+
     return ChangeNotifierProvider(
       create: (_) => HomeNotifier(context: context),
       child: Consumer<HomeNotifier>(builder: (context, value, child) {
         return DefaultTabController(
           length: 2,
           child: Scaffold(
+            backgroundColor: Colors.white,
+            key: scaffoldKey,
+            drawer: const NavDrawer(),
             appBar: AppBar(
               bottom: const TabBar(
                 tabs: [

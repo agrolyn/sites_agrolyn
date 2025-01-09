@@ -23,7 +23,8 @@ class NavbarDesktop extends StatelessWidget {
                     height: 50,
                   ),
                   IconButton(
-                      style: TextButton.styleFrom(foregroundColor: Colors.red),
+                      style:
+                          TextButton.styleFrom(foregroundColor: Colors.green),
                       icon: const Icon(Icons.menu),
                       onPressed: () {
                         Scaffold.of(context).openDrawer();
