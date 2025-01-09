@@ -5,15 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class DetailHistoryScanScreen extends StatelessWidget {
-  List<String> list = [
-    "Penggunaan Varietas Tahan PenyakitPilih varietas padi yang memiliki ketahanan terhadap Hawar Daun Bakteri. Penggunaan varietas tahan adalah salah satu cara paling efektif untuk mengurangi risiko penyakit ini.",
-    "Pengaturan Irigasi dan Drainase yang Baik, Hindari genangan air yang dapat meningkatkan kelembapan dan memudahkan penyebaran bakteri. Pastikan saluran drainase berfungsi dengan baik untuk mencegah air tergenang.",
-    "Penggunaan Benih Sehat dan Bebas Penyakit Pilih benih yang sehat dan bebas dari kontaminasi penyakit. Benih yang terinfeksi dapat menjadi sumber utama penyebaran penyakit ini.",
-    "Sanitasi dan Pemangkasan Daun Terinfeksi. Potong daun yang terinfeksi untuk mengurangi sumber infeksi. Buang daun terinfeksi jauh dari lahan tanam agar tidak menyebar ke tanaman lain.",
-    "Penggunaan Bakterisida Sesuai Anjuran. Jika serangan sudah meluas, aplikasi bakterisida dapat digunakan"
-  ];
   final int id;
-  DetailHistoryScanScreen({super.key, required this.id});
+  const DetailHistoryScanScreen({super.key, required this.id});
 
   @override
   Widget build(BuildContext context) {

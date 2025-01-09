@@ -1,6 +1,7 @@
 import 'package:agrolyn_web/provider/community_notifer.dart';
 import 'package:agrolyn_web/shared/constans.dart';
 import 'package:agrolyn_web/utils/assets_path.dart';
+import 'package:agrolyn_web/utils/responsive.dart';
 import 'package:agrolyn_web/view/community/add_question.dart';
 import 'package:agrolyn_web/view/community/card_community.dart';
 import 'package:agrolyn_web/widget/footer.dart';
@@ -40,9 +41,9 @@ class CommunityPage extends StatelessWidget {
                   NavbarDesktop(activePage: "Komunitas"),
                   Container(
                     width: widthScreen,
-                    height: 250,
+                    height: Responsive.isMobile(context) ? 250 : 500,
                     decoration: const BoxDecoration(
-                      color: MyColors.primaryColor,
+                      color: MyColors.primaryColorDark,
                       boxShadow: [
                         BoxShadow(
                           color: Colors.grey,
@@ -51,8 +52,11 @@ class CommunityPage extends StatelessWidget {
                       ],
                     ),
                     child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Image.asset(ImageAssets.community),
+                      padding:
+                          EdgeInsets.all(Responsive.isMobile(context) ? 8 : 32),
+                      child: Image.asset(Responsive.isMobile(context)
+                          ? ImageAssets.community
+                          : ImageAssets.bgPKomunitas),
                     ),
                   ),
                   // mulai coding disini

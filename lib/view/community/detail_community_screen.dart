@@ -109,11 +109,8 @@ class DetailCommunityScreen extends StatelessWidget {
                                           InterPrefs.setPrefs(
                                               "filterBy", "semua");
                                           value.reNotifyListeners();
-                                          Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      Navbar()));
+                                          Navigator.pushReplacementNamed(
+                                              context, '/community');
                                         },
                                         child: Container(
                                             decoration: BoxDecoration(

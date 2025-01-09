@@ -16,11 +16,9 @@ class SplashScreen extends StatelessWidget {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     print(prefs.getBool('isLogedIn'));
     if (prefs.getBool('isLogedIn') == true) {
-      Navigator.pushReplacement(
+      Navigator.pushReplacementNamed(
         context,
-        MaterialPageRoute(
-          builder: (context) => Navbar(),
-        ),
+        '/home',
       );
     }
   }
