@@ -17,7 +17,10 @@ class CardHistory extends StatelessWidget {
             return AlertDialog(
               title: const Text("Hapus Riwayat"),
               content: const Text(
-                  "Apakah anda yakin ingin menghapus riwayat scan tanaman ini?"),
+                "Apakah anda yakin ingin menghapus riwayat scan tanaman ini?",
+                overflow: TextOverflow.ellipsis,
+                maxLines: 1,
+              ),
               actions: [
                 TextButton(
                   child: const Text("Batal"),
@@ -89,19 +92,17 @@ class CardHistory extends StatelessWidget {
                 height: 10,
               ),
               Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    history['disease_indonesian_name'],
-                    style: const TextStyle(
-                        fontWeight: FontWeight.w500, fontSize: 16),
-                  ),
-                  const SizedBox(
-                    width: 8,
-                  ),
-                  Text(
-                    "(${history['disease_name']})",
-                    style: const TextStyle(
-                        fontWeight: FontWeight.w400, fontSize: 16),
+                  Expanded(
+                    child: Text(
+                      "${history['disease_indonesian_name']} (${history['disease_name']})",
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                          fontWeight: FontWeight.w500, fontSize: 16),
+                    ),
                   ),
                 ],
               ),

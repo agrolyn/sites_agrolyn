@@ -53,11 +53,13 @@ class ImageAssets {
   static String forgot = "$root/forgot.webp";
   static String bgPagi = "$root/bg-p.webp";
   static String bgSore = "$root/bg-s.webp";
-  static String deviceFrame = "$root/device_frame.png";
+  static String deviceFrame = "$root/Untitled design (22).png";
   static String slideBg1 = "$root/Donna Jos Sia.jpg";
   static String slide1Layer1 = "$root/Untitled design (18).png";
   static String slide1Layer2 = "$root/Untitled design (19).png";
   static String slide2Bg1 =
       "$root/Paddy rice stock photo_ Image of cereal, leaves, plantation - 13682186.jpg";
   static String slide2Layer2 = "$root/Untitled design (21).png";
+  static String bgScan = "$root/bg_scan.webp";
+  static String bgMalam = "$root/bgMalam.webp";
 }

@@ -6,7 +6,7 @@ class DetectionExtService {
   final Dio _dio = Dio();
 
   DetectionExtService() {
-    _dio.options.baseUrl = "http://linggashop.my.id:3333/disease-predict/";
+    _dio.options.baseUrl = "https://linggashop.my.id/disease-predict/";
     _dio.options.headers = {
       'Accept': 'application/json',
     };
@@ -26,16 +26,16 @@ class DetectionExtService {
 
       // print(response);
       if (response.statusCode == 200) {
-        print("Prediksi Berhasil");
+        // print("Prediksi Berhasil");
         final disease = response.data['prediction'];
+        // print(disease);
         SharedPreferences prefs = await SharedPreferences.getInstance();
         prefs.setString('disease', disease);
-        print('=====');
-        print(formData.toString());
-        print('=====');
-        final res =
-            DetectionService().fetchPredictCornDisease(disease, formData);
-        print(response.data);
+        // print('=====');
+        // print(formData.toString());
+        // print('=====');
+        await DetectionService().fetchPredictCornDisease(disease, formData);
+        // print(response.data);
         return true;
       } else {
         return false;

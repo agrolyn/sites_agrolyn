@@ -1,15 +1,18 @@
+import 'dart:convert';
+import 'dart:typed_data';
+
 import 'package:agrolyn_web/service/community_service.dart';
 import 'package:agrolyn_web/shared/constans.dart';
 import 'package:agrolyn_web/view/community/community_page.dart';
 import 'package:agrolyn_web/view/community/detail_community_screen.dart';
 import 'package:agrolyn_web/view/community/item_filter.dart';
 import 'package:dio/dio.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker_web/image_picker_web.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:agrolyn_web/shared/custom_snackbar.dart';
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
-import 'dart:io';
-import 'package:image_picker/image_picker.dart';
 import 'package:agrolyn_web/utils/assets_path.dart';
 import 'package:agrolyn_web/utils/inter_prefs.dart';
 
@@ -17,6 +20,7 @@ class CommunityNotifer extends ChangeNotifier {
   final BuildContext context;
   final CommunityService _communityService = CommunityService();
   final formKey = GlobalKey<FormState>();
+  final scaffoldKey = GlobalKey<ScaffoldState>();
 
   CommunityNotifer({required this.context}) {
     fetchAllQuestion();
@@ -28,13 +32,19 @@ class CommunityNotifer extends ChangeNotifier {
 
   String _titleQuestion = '';
   String _descriptionQuestion = '';
-  File? _imageQuestion;
+  String? _imageQuestion;
   String? _imageQuestionDefault;
 
   // Getters
   String get titleQuestion => _titleQuestion;
   String get descriptionQuestion => _descriptionQuestion;
-  File? get imageQuestion => _imageQuestion;
+  String? get imageQuestion {
+    if (_imageQuestion == null) {
+      return null;
+    }
+    return _imageQuestion;
+  }
+
   String? get imageQuestionDefault => _imageQuestionDefault;
 
   // Setters
@@ -49,10 +59,16 @@ class CommunityNotifer extends ChangeNotifier {
   }
 
   void setImageQuestion() async {
-    final picker = ImagePicker();
-    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
-    if (pickedFile != null) {
-      _imageQuestion = File(pickedFile.path);
+    // Memilih file dari web
+    FilePickerResult? result = await FilePicker.platform.pickFiles(
+      type: FileType.image,
+      allowMultiple: false,
+      withData: true,
+    );
+
+    if (result != null && result.files.single.bytes != null) {
+      String base64Image = base64Encode(result.files.single.bytes!);
+      _imageQuestion = base64Image; // pickedFile adalah Uint8List
       _imageQuestionDefault = '';
     }
     notifyListeners();
@@ -82,15 +98,14 @@ class CommunityNotifer extends ChangeNotifier {
         'title_q': titleQuestion,
         'description': descriptionQuestion,
         'plant_types_id': prefs.getInt("category_id"),
-        'img_q': await MultipartFile.fromFile(imageQuestion!.path,
+        'img_q': MultipartFile.fromBytes(base64Decode(imageQuestion!),
             filename: 'img-question.jpg'),
       });
 
       print(formData.fields);
 
       await CommunityService().fetchAddQuestion(formData).whenComplete(() {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => const CommunityPage()));
+        Navigator.pushReplacementNamed(context, '/community');
         showCustomSnackbar(context, "Berhasil Ditambahkan",
             "Pertanyaan Anda Berhasil Ditambahkan!", ContentType.success);
       });
@@ -105,7 +120,7 @@ class CommunityNotifer extends ChangeNotifier {
         'description': descriptionQuestion,
         'plant_types_id': prefs.getInt("category_id"),
         if (imageQuestion != null)
-          'img_q': await MultipartFile.fromFile(imageQuestion!.path,
+          'img_q': MultipartFile.fromBytes(base64Decode(imageQuestion!),
               filename: 'img-question.jpg'),
       });
 
@@ -130,7 +145,7 @@ class CommunityNotifer extends ChangeNotifier {
     prefs.setInt('category_id', 0);
     _titleQuestion = '';
     _descriptionQuestion = '';
-    _imageQuestion = null;
+    _imageQuestion = '';
     _imageQuestionDefault = "";
     notifyListeners();
   }

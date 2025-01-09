@@ -3,6 +3,7 @@ import 'package:agrolyn_web/shared/constans.dart';
 import 'package:agrolyn_web/utils/assets_path.dart';
 import 'package:agrolyn_web/view/recipe/detail_recipe.dart';
 import 'package:agrolyn_web/widget/footer.dart';
+import 'package:agrolyn_web/widget/navbar/navbar_desktop.dart';
 import 'package:agrolyn_web/widget/no_found_custom.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
@@ -21,6 +22,7 @@ class RecipePage extends StatelessWidget {
           return SingleChildScrollView(
             child: Column(
               children: [
+                NavbarDesktop(activePage: "Resep"),
                 ResponsiveRowColumn(
                   layout: ResponsiveBreakpoints.of(context).smallerThan(DESKTOP)
                       ? ResponsiveRowColumnType.COLUMN

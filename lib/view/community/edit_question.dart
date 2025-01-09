@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:agrolyn_web/provider/community_notifer.dart';
 import 'package:agrolyn_web/shared/constans.dart';
 import 'package:agrolyn_web/utils/assets_path.dart';
@@ -99,8 +101,9 @@ class EditQuestion extends StatelessWidget {
                                             ? ClipRRect(
                                                 borderRadius:
                                                     BorderRadius.circular(16),
-                                                child: Image.file(
-                                                  value.imageQuestion!,
+                                                child: Image.memory(
+                                                  base64Decode(
+                                                      value.imageQuestion!),
                                                   height: 150,
                                                   width: double.infinity,
                                                   fit: BoxFit.cover,
@@ -146,8 +149,11 @@ class EditQuestion extends StatelessWidget {
                                                           color:
                                                               Colors.grey[300],
                                                         ),
-                                                        child: Image.file(
-                                                          value.imageQuestion!,
+                                                        child: Image.memory(
+                                                          base64Decode(
+                                                            value
+                                                                .imageQuestion!,
+                                                          ),
                                                           height: 150,
                                                           width:
                                                               double.infinity,

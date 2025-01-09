@@ -46,7 +46,8 @@ class _ItemFilterState extends State<ItemFilter> {
         child: Container(
           margin: const EdgeInsets.all(8),
           decoration: BoxDecoration(
-              color: widget.name.toLowerCase() == filterBy
+              color: widget.name.toLowerCase() == filterBy ||
+                      filterBy == "answerme"
                   ? MyColors.primaryColor
                   : Colors.white,
               border: Border.all(color: MyColors.primaryColorDark),

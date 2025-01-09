@@ -1,9 +1,9 @@
 import 'dart:ui';
 
 import 'package:agrolyn_web/provider/register_notifier.dart';
+import 'package:agrolyn_web/utils/responsive.dart';
 import 'package:agrolyn_web/service/auth_service.dart';
 import 'package:agrolyn_web/utils/assets_path.dart';
-import 'package:agrolyn_web/view/auth/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -22,7 +22,7 @@ class RegisterPage extends StatelessWidget {
               children: [
                 Positioned.fill(
                   child: IgnorePointer(
-                    child: Image.asset(ImageAssets.bgSore,
+                    child: Image.asset(ImageAssets.bgMalam,
                         fit: BoxFit.cover, height: double.infinity),
                   ),
                 ),
@@ -36,6 +36,11 @@ class RegisterPage extends StatelessWidget {
                           filter: ImageFilter.blur(sigmaX: 20.0, sigmaY: 20.0),
                           child: Container(
                             height: MediaQuery.of(context).size.height - 80,
+                            width: Responsive.isMobile(context)
+                                ? double.infinity
+                                : Responsive.isTablet(context)
+                                    ? 500
+                                    : 600,
                             decoration: BoxDecoration(
                               color: Colors.white
                                   .withOpacity(0.2), // Semi-transparent color
@@ -257,7 +262,7 @@ class RegisterPage extends StatelessWidget {
                                         const SizedBox(height: 8),
                                         TextFormField(
                                           controller: value.passwordController,
-                                          obscureText: true,
+                                          obscureText: value.isObscure,
                                           decoration: InputDecoration(
                                             labelText: 'Kata Sandi',
                                             labelStyle: const TextStyle(
@@ -276,6 +281,17 @@ class RegisterPage extends StatelessWidget {
                                               borderSide: const BorderSide(
                                                   color: Colors
                                                       .white), // Border saat fokus
+                                            ),
+                                            suffixIcon: IconButton(
+                                              onPressed: () {
+                                                value.toggleObscure();
+                                              },
+                                              icon: Icon(
+                                                value.isObscure
+                                                    ? Icons.visibility
+                                                    : Icons.visibility_off,
+                                                color: Colors.white,
+                                              ),
                                             ),
                                           ),
                                           style: const TextStyle(
@@ -311,8 +327,7 @@ class RegisterPage extends StatelessWidget {
                                           int roleId = int.parse(id ?? '2');
 
                                           print(
-                                              "${roleId} ${value.nameController.text} ${value.emailController.text} ${value.phoneController.text} ${value.addressController.text} ${value.passwordController.text}");
-
+                                              "$roleId ${value.nameController.text} ${value.emailController.text} ${value.phoneController.text} ${value.addressController.text} ${value.passwordController.text}");
                                           // Panggil fungsi register dengan roleId yang sudah ditentukan
                                           AuthService()
                                               .register(
@@ -358,12 +373,8 @@ class RegisterPage extends StatelessWidget {
                                           ),
                                           TextButton(
                                             onPressed: () {
-                                              Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        const LoginPage()),
-                                              );
+                                              Navigator.pushReplacementNamed(
+                                                  context, '/login');
                                             },
                                             child: const Text(
                                               'Masuk',

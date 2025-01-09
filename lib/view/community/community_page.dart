@@ -1,9 +1,11 @@
 import 'package:agrolyn_web/provider/community_notifer.dart';
-import 'package:agrolyn_web/provider/home_notifier.dart';
 import 'package:agrolyn_web/shared/constans.dart';
 import 'package:agrolyn_web/utils/assets_path.dart';
 import 'package:agrolyn_web/view/community/add_question.dart';
 import 'package:agrolyn_web/view/community/card_community.dart';
+import 'package:agrolyn_web/widget/footer.dart';
+import 'package:agrolyn_web/widget/navbar/nav_drawer.dart';
+import 'package:agrolyn_web/widget/navbar/navbar_desktop.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -29,9 +31,13 @@ class CommunityPage extends StatelessWidget {
       child: Consumer<CommunityNotifer>(
         builder: (context, value, child) {
           return Scaffold(
+            key: value.scaffoldKey,
+            backgroundColor: Colors.white,
+            drawer: const NavDrawer(),
             body: SingleChildScrollView(
               child: Column(
                 children: [
+                  NavbarDesktop(activePage: "Komunitas"),
                   Container(
                     width: widthScreen,
                     height: 250,
@@ -203,6 +209,7 @@ class CommunityPage extends StatelessWidget {
                           margin: const EdgeInsets.only(top: 20),
                           child: const Text('Belum ada topik diskusi'),
                         ),
+                  const Footer()
                 ],
               ),
             ),

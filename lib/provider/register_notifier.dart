@@ -8,6 +8,12 @@ class RegisterNotifier extends ChangeNotifier {
   final keyfrom = GlobalKey<FormState>();
   bool _isLoading = false;
   bool get isLoading => _isLoading;
+  bool isObscure = true;
+
+  void toggleObscure() {
+    isObscure = !isObscure;
+    notifyListeners();
+  }
 
   void setLoading(bool value) {
     _isLoading = value;

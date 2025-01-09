@@ -2,11 +2,13 @@ import 'package:agrolyn_web/service/article_service.dart';
 import 'package:agrolyn_web/service/recipe_service.dart';
 import 'package:agrolyn_web/service/video_service.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeNotifier extends ChangeNotifier {
   final BuildContext context;
 
   HomeNotifier({required this.context}) {
+    checkIsLogedIn();
     fetchArticles();
     fetchVideo();
     fetchRecipe();
@@ -15,6 +17,14 @@ class HomeNotifier extends ChangeNotifier {
   bool _isSecondPageVisible = false;
 
   bool get isSecondPageVisible => _isSecondPageVisible;
+
+  checkIsLogedIn() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool isLogedIn = prefs.getBool('isLogedin') ?? false;
+    if (!isLogedIn) {
+      Navigator.pushReplacementNamed(context, '/login');
+    }
+  }
 
   void toggleSecondPageVisibility() {
     _isSecondPageVisible = !_isSecondPageVisible;

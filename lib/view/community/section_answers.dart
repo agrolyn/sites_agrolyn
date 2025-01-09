@@ -14,7 +14,8 @@ class SectionAnswers extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return Container(
+      color: const Color.fromARGB(255, 244, 243, 243),
       padding: const EdgeInsets.all(16),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,

@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 class RecipeService {
   final Dio _dio = Dio();
 
+  // Method untuk mendapatkan data recipes
   Future<List> getRecipes() async {
     final token = await AuthService().getToken();
     try {
@@ -21,4 +22,6 @@ class RecipeService {
       return [];
     }
   }
+
+  // Method untuk mendapatkan data recommendations berdasarkan ID
 }

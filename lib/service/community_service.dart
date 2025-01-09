@@ -1,9 +1,9 @@
 import 'package:agrolyn_web/service/auth_service.dart';
 import 'package:agrolyn_web/shared/custom_snackbar.dart';
-import 'package:agrolyn_web/view/community/community_page.dart';
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class CommunityService {
   final Dio _dio = Dio();
@@ -46,6 +46,11 @@ class CommunityService {
       if (e is DioException) {
         print('DioError: ${e.response?.data}');
         print('Status code: ${e.response?.statusCode}');
+
+        if (e.response?.statusCode == 442) {
+          SharedPreferences prefs = await SharedPreferences.getInstance();
+          prefs.setBool('isLogedin', false);
+        }
       }
       throw Exception('Error fetching question details: $e');
     }
@@ -239,8 +244,8 @@ class CommunityService {
               }));
       print(response);
       if (response.statusCode == 200) {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => const CommunityPage()));
+        Navigator.pushReplacementNamed(context,
+            '/community'); // Redirect ke halaman community setelah berhasil menghapus pertanyaan
         showCustomSnackbar(context, "Berhasil Dihapus",
             "Jawaban Anda Berhasil Dihapus!", ContentType.success);
         print("Pertanyaan Berhasil dihapus");
@@ -292,7 +297,6 @@ class CommunityService {
               }));
       // print(response);
       if (response.statusCode == 200) {
-        // print(response.data['message']);
         return response.data['data'];
       } else {
         print("Pertanyaan gagal dicari");
@@ -313,8 +317,7 @@ class CommunityService {
           }));
       // print(response);
       if (response.statusCode == 200) {
-        print("= hasil filter : ${response.data['data'].length}");
-        print(response.data['message']);
+        // print(response.data['message']);
         return response.data['data'];
       } else {
         print("Pertanyaan gagal difilter");

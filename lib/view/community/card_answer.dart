@@ -1,4 +1,3 @@
-import 'package:agrolyn_web/service/community_service.dart';
 import 'package:agrolyn_web/provider/community_notifer.dart';
 import 'package:agrolyn_web/shared/constans.dart';
 import 'package:agrolyn_web/utils/inter_prefs.dart';

@@ -44,25 +44,30 @@ class _DetectionScanScreenState extends State<DetectionScanScreen>
   }
 
   Future<void> _initializeCamera() async {
-    // Meminta izin akses kamera
-    if (await Permission.camera.request().isGranted) {
-      _cameras = await availableCameras();
-      if (_cameras != null && _cameras!.isNotEmpty) {
-        _cameraController = CameraController(
-          _cameras![0],
-          ResolutionPreset.high,
-        );
+    try {
+      // Meminta izin akses kamera
+      if (await Permission.camera.request().isGranted) {
+        _cameras = await availableCameras();
+        if (_cameras != null && _cameras!.isNotEmpty) {
+          _cameraController = CameraController(
+            _cameras![0],
+            ResolutionPreset.high,
+          );
 
-        await _cameraController!.initialize();
-        setState(() {
-          _isCameraInitialized = true;
-        });
+          await _cameraController!.initialize();
+          setState(() {
+            _isCameraInitialized = true;
+          });
+        }
+      } else {
+        // Tangani jika izin tidak diberikan
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Izin kamera ditolak')),
+        );
+        print('Izin kamera ditolak');
       }
-    } else {
-      // Tangani jika izin tidak diberikan
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Izin kamera ditolak')),
-      );
+    } catch (e) {
+      print('Error: $e');
     }
   }
 
@@ -147,28 +152,31 @@ class _DetectionScanScreenState extends State<DetectionScanScreen>
                         ],
                       )),
                 ),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: MyColors.primaryColor,
-                    foregroundColor: Colors.white,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
+                SizedBox(
+                  height: 56,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: MyColors.primaryColor,
+                      foregroundColor: Colors.white,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
                     ),
-                  ),
-                  onPressed: loading ? null : _takePicture,
-                  child: loading
-                      ? const Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: CircularProgressIndicator(
-                            color: Colors.green,
-                            semanticsLabel: "Sedang Mengidentifikasi Tanaman",
-                            semanticsValue: "Sedang Mengidentifikasi Tanaman",
+                    onPressed: loading ? null : _takePicture,
+                    child: loading
+                        ? const Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: CircularProgressIndicator(
+                              color: Colors.green,
+                              semanticsLabel: "Sedang Mengidentifikasi Tanaman",
+                              semanticsValue: "Sedang Mengidentifikasi Tanaman",
+                            ),
+                          )
+                        : const Text(
+                            'Ambil Foto',
+                            style: TextStyle(fontWeight: FontWeight.bold),
                           ),
-                        )
-                      : const Text(
-                          'Ambil Foto',
-                          style: TextStyle(fontWeight: FontWeight.bold),
-                        ),
+                  ),
                 ),
               ],
             )

@@ -3,6 +3,9 @@ import 'package:agrolyn_web/shared/constans.dart';
 import 'package:agrolyn_web/utils/assets_path.dart';
 import 'package:agrolyn_web/view/detection/card_scan_type.dart';
 import 'package:agrolyn_web/view/detection/history_scan_screen.dart';
+import 'package:agrolyn_web/widget/footer.dart';
+import 'package:agrolyn_web/widget/navbar/nav_drawer.dart';
+import 'package:agrolyn_web/widget/navbar/navbar_desktop.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -12,16 +15,23 @@ class DetectionScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final widthScreen = MediaQuery.of(context).size.width;
+    final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
     return ChangeNotifierProvider(
       create: (_) => DetectionNotifier(context: context),
       child: Consumer<DetectionNotifier>(
         builder: (context, value, child) => Scaffold(
+          backgroundColor: Colors.white,
+          key: scaffoldKey,
+          drawer: const NavDrawer(),
           body: SafeArea(
               bottom: false,
               child: SingleChildScrollView(
                 padding: const EdgeInsets.only(bottom: 70),
                 child: Column(children: [
+                  NavbarDesktop(
+                    activePage: "Deteksi",
+                  ),
                   Container(
                       width: widthScreen,
                       height: 250,
@@ -53,14 +63,33 @@ class DetectionScreen extends StatelessWidget {
                         const SizedBox(
                           height: 20,
                         ),
-                        const CardScanType(
-                          title: "Jagung",
-                          image: ImageAssets.logoJagung,
-                        ),
-                        const CardScanType(
-                          title: "Padi",
-                          image: ImageAssets.logoPadi,
-                        ),
+                        widthScreen > 850
+                            ? const Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  CardScanType(
+                                    title: "Padi",
+                                    image: ImageAssets.logoPadi,
+                                  ),
+                                  SizedBox(width: 16),
+                                  CardScanType(
+                                    title: "Jagung",
+                                    image: ImageAssets.logoJagung,
+                                  ),
+                                ],
+                              )
+                            : const Column(
+                                children: [
+                                  CardScanType(
+                                    title: "Jagung",
+                                    image: ImageAssets.logoJagung,
+                                  ),
+                                  CardScanType(
+                                    title: "Padi",
+                                    image: ImageAssets.logoPadi,
+                                  ),
+                                ],
+                              ),
                         const SizedBox(
                           height: 20,
                         ),
@@ -74,7 +103,7 @@ class DetectionScreen extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.all(16.0),
                           child: Container(
-                              width: double.maxFinite - 50,
+                              width: double.infinity,
                               height: 55,
                               decoration: BoxDecoration(
                                 color: MyColors.secondaryColorDark,
@@ -82,11 +111,8 @@ class DetectionScreen extends StatelessWidget {
                               ),
                               child: InkWell(
                                   onTap: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                const HistoryScanScreen()));
+                                    Navigator.pushNamed(
+                                        context, '/history-detection');
                                   },
                                   child: const Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
@@ -103,7 +129,8 @@ class DetectionScreen extends StatelessWidget {
                         )
                       ],
                     ),
-                  )
+                  ),
+                  const Footer()
                 ]),
               )),
         ),
