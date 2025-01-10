@@ -267,12 +267,22 @@ class CommunityPage extends StatelessWidget {
                           shrinkWrap: true,
                           gridDelegate:
                               SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount:
-                                widthScreen > 850 ? 3 : 1, // Jumlah kolom
+                            crossAxisCount: Responsive.isMobile(context)
+                                ? 1
+                                : Responsive.isTablet(context)
+                                    ? 2
+                                    : Responsive.isDesktop(context)
+                                        ? 3
+                                        : 4, // Jumlah kolom
                             crossAxisSpacing: 8,
                             mainAxisSpacing: 8,
-                            childAspectRatio:
-                                3 / 3, // Rasio ukuran grid (lebar vs tinggi)
+                            childAspectRatio: Responsive.isMobile(context)
+                                ? 4 / 3
+                                : Responsive.isTablet(context)
+                                    ? 4 / 3
+                                    : Responsive.isDesktop(context)
+                                        ? 4 / 4
+                                        : 1, // Rasio ukuran grid (lebar vs tinggi)
                           ),
                           physics: const NeverScrollableScrollPhysics(),
                           itemCount: value.questions.length,

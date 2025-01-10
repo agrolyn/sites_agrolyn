@@ -104,6 +104,7 @@ class DetectionNotifier extends ChangeNotifier {
   // ==================================
 
   bool historyIsLoading = false;
+  bool detailHistoryIsLoading = true;
   var resultHistories = [];
   var detailHistoryResult = {};
 
@@ -123,6 +124,7 @@ class DetectionNotifier extends ChangeNotifier {
     var result = await DetectionService().fetchDetailHistory(id);
     print(result);
     detailHistoryResult = result;
+    detailHistoryIsLoading = false;
     notifyListeners();
     return result;
   }

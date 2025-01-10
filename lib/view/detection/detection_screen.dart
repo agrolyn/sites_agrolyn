@@ -30,7 +30,6 @@ class DetectionScreen extends StatelessWidget {
           body: SafeArea(
               bottom: false,
               child: SingleChildScrollView(
-                padding: const EdgeInsets.only(bottom: 70),
                 child: Column(children: [
                   NavbarDesktop(
                     activePage: "Deteksi",
@@ -190,7 +189,9 @@ class DetectionScreen extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.all(16.0),
                           child: Container(
-                              width: double.infinity,
+                              width: Responsive.isMobile(context)
+                                  ? double.infinity
+                                  : widthScreen * 0.5,
                               height: 55,
                               decoration: BoxDecoration(
                                 color: MyColors.secondaryColorDark,
@@ -206,7 +207,7 @@ class DetectionScreen extends StatelessWidget {
                                     children: [
                                       Icon(Icons.history, color: Colors.white),
                                       SizedBox(width: 12),
-                                      Text("Lihat Riwayat Scan Tanaman",
+                                      Text("Lihat Riwayat Deteksi",
                                           style: TextStyle(
                                               fontSize: 16,
                                               fontWeight: FontWeight.w600,

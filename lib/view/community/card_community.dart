@@ -1,5 +1,6 @@
 import 'package:agrolyn_web/provider/community_notifer.dart';
 import 'package:agrolyn_web/utils/inter_prefs.dart';
+import 'package:agrolyn_web/utils/responsive.dart';
 import 'package:agrolyn_web/view/community/detail_community_screen.dart';
 import 'package:agrolyn_web/view/education/detail_article.dart';
 import 'package:flutter/material.dart';
@@ -79,7 +80,11 @@ class CardCommunity extends StatelessWidget {
                                   thumbnail,
                                   fit: BoxFit.cover,
                                   width: double.infinity,
-                                  height: 210,
+                                  height: Responsive.isMobile(context)
+                                      ? 200
+                                      : Responsive.isTablet(context)
+                                          ? 200
+                                          : 300,
                                   errorBuilder: (context, error, stackTrace) {
                                     return Text('Error loading image: $error');
                                   },

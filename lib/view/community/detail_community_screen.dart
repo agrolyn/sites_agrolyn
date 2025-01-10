@@ -53,6 +53,31 @@ class DetailCommunityScreen extends StatelessWidget {
                     NavbarDesktop(
                       activePage: "",
                     ),
+                    InkWell(
+                      onTap: () =>
+                          Navigator.pushReplacementNamed(context, "/community"),
+                      child: Container(
+                        margin: EdgeInsets.only(
+                          top: Responsive.isMobile(context) ? 8 : 16,
+                        ),
+                        width: Responsive.widthScreen(context),
+                        padding: const EdgeInsets.all(8),
+                        child: Row(children: [
+                          const Icon(Icons.arrow_back),
+                          const SizedBox(
+                            width: 16,
+                          ),
+                          Text(
+                            "Detail Diskusi",
+                            style: TextStyle(
+                              fontSize: Responsive.isMobile(context) ? 15 : 17,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black,
+                            ),
+                          ),
+                        ]),
+                      ),
+                    ),
                     ResponsiveRowColumn(
                       layout:
                           ResponsiveBreakpoints.of(context).smallerThan(DESKTOP)
@@ -62,9 +87,9 @@ class DetailCommunityScreen extends StatelessWidget {
                       columnCrossAxisAlignment: CrossAxisAlignment.center,
                       columnMainAxisSize: MainAxisSize.min,
                       rowPadding: const EdgeInsets.symmetric(
-                          horizontal: 0, vertical: 0),
+                          horizontal: 10, vertical: 10),
                       columnPadding: const EdgeInsets.symmetric(
-                          horizontal: 0, vertical: 0),
+                          horizontal: 10, vertical: 10),
                       children: [
                         ResponsiveRowColumnItem(
                           rowFlex: 1,
