@@ -3,7 +3,9 @@ import 'package:agrolyn_web/utils/inter_prefs.dart';
 import 'package:agrolyn_web/view/community/content_question_detail.dart';
 import 'package:agrolyn_web/view/community/input_answer.dart';
 import 'package:agrolyn_web/view/community/section_answers.dart';
+import 'package:agrolyn_web/widget/navbar/nav_drawer.dart';
 import 'package:agrolyn_web/widget/navbar/navbar.dart';
+import 'package:agrolyn_web/widget/navbar/navbar_desktop.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -22,6 +24,8 @@ class DetailCommunityScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+
     return ChangeNotifierProvider(
       create: (_) => CommunityNotifer(context: context),
       child: Consumer<CommunityNotifer>(
@@ -39,13 +43,16 @@ class DetailCommunityScreen extends StatelessWidget {
                 likeNum = dataQuestion["like_num"];
 
             return Scaffold(
+                key: scaffoldKey,
                 backgroundColor: Colors.white,
+                drawer: const NavDrawer(),
                 body: SafeArea(
                   child: Stack(fit: StackFit.expand, children: [
                     SingleChildScrollView(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
+                          NavbarDesktop(activePage: ""),
                           Stack(
                             children: [
                               Container(

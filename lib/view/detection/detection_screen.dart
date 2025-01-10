@@ -1,6 +1,9 @@
+import 'dart:ui';
+
 import 'package:agrolyn_web/provider/detection_notifier.dart';
 import 'package:agrolyn_web/shared/constans.dart';
 import 'package:agrolyn_web/utils/assets_path.dart';
+import 'package:agrolyn_web/utils/responsive.dart';
 import 'package:agrolyn_web/view/detection/card_scan_type.dart';
 import 'package:agrolyn_web/view/detection/history_scan_screen.dart';
 import 'package:agrolyn_web/widget/footer.dart';
@@ -33,21 +36,105 @@ class DetectionScreen extends StatelessWidget {
                     activePage: "Deteksi",
                   ),
                   Container(
-                      width: widthScreen,
-                      height: 250,
-                      decoration: const BoxDecoration(
-                        color: MyColors.primaryColor,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey,
-                            blurRadius: 5.0,
+                    width: widthScreen,
+                    height: Responsive.isMobile(context)
+                        ? 350
+                        : Responsive.heightScreen(context) * 0.92,
+                    decoration: const BoxDecoration(
+                      color: MyColors.primaryColorDark,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey,
+                          blurRadius: 5.0,
+                        ),
+                      ],
+                    ),
+                    child: Stack(
+                      children: [
+                        Image.asset(
+                          ImageAssets.bgDetect,
+                          width: double.infinity,
+                          height: double.infinity,
+                          fit: BoxFit.cover,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(16),
+                          child: Center(
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(20),
+                              child: BackdropFilter(
+                                filter:
+                                    ImageFilter.blur(sigmaX: 20, sigmaY: 20),
+                                child: Container(
+                                  width: Responsive.isMobile(context)
+                                      ? widthScreen * 0.7
+                                      : widthScreen * 0.5,
+                                  decoration: BoxDecoration(
+                                    color: Colors.white.withOpacity(
+                                        0.5), // Semi-transparent color
+                                    borderRadius: BorderRadius.circular(20.0),
+                                    border: Border.all(
+                                      color: Colors.white
+                                          .withOpacity(0.4), // Border color
+                                      width: 1.5,
+                                    ),
+                                  ),
+                                  child: SingleChildScrollView(
+                                    child: Padding(
+                                      padding: EdgeInsets.symmetric(
+                                          vertical: Responsive.isMobile(context)
+                                              ? 20
+                                              : 28,
+                                          horizontal:
+                                              Responsive.isMobile(context)
+                                                  ? 20
+                                                  : 28),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Image.asset(
+                                            ImageAssets.logo,
+                                            width: 100,
+                                          ),
+                                          const SizedBox(height: 16),
+                                          Text(
+                                            "Deteksi Penyakit Tanaman",
+                                            style: TextStyle(
+                                              fontSize:
+                                                  Responsive.isMobile(context)
+                                                      ? 18
+                                                      : 24,
+                                              fontWeight: FontWeight.bold,
+                                              color: MyColors.primaryColorDark,
+                                            ),
+                                          ),
+                                          const SizedBox(height: 8),
+                                          Text(
+                                            "Memprediksi jenis penyakit tanaman dan memberi panduan agar petani dapat bertindak tepat dan menjaga hasil panen lebih optimal",
+                                            textAlign: TextAlign.center,
+                                            maxLines: 4,
+                                            style: TextStyle(
+                                              fontSize:
+                                                  Responsive.isMobile(context)
+                                                      ? 16
+                                                      : 20,
+                                              color: Colors.black87,
+                                            ),
+                                          ),
+                                          const SizedBox(height: 16),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
                           ),
-                        ],
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Image.asset(ImageAssets.bannerScan),
-                      )),
+                        ),
+                      ],
+                    ),
+                  ),
                   Padding(
                     padding: const EdgeInsets.all(16.0),
                     child: Column(

@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:agrolyn_web/provider/community_notifer.dart';
 import 'package:agrolyn_web/shared/constans.dart';
 import 'package:agrolyn_web/utils/assets_path.dart';
@@ -41,7 +43,9 @@ class CommunityPage extends StatelessWidget {
                   NavbarDesktop(activePage: "Komunitas"),
                   Container(
                     width: widthScreen,
-                    height: Responsive.isMobile(context) ? 250 : 500,
+                    height: Responsive.isMobile(context)
+                        ? 350
+                        : Responsive.heightScreen(context) * 0.92,
                     decoration: const BoxDecoration(
                       color: MyColors.primaryColorDark,
                       boxShadow: [
@@ -51,12 +55,90 @@ class CommunityPage extends StatelessWidget {
                         ),
                       ],
                     ),
-                    child: Padding(
-                      padding:
-                          EdgeInsets.all(Responsive.isMobile(context) ? 8 : 32),
-                      child: Image.asset(Responsive.isMobile(context)
-                          ? ImageAssets.community
-                          : ImageAssets.bgPKomunitas),
+                    child: Stack(
+                      children: [
+                        Image.asset(
+                          ImageAssets.bgComm,
+                          width: double.infinity,
+                          height: double.infinity,
+                          fit: BoxFit.cover,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(16),
+                          child: Center(
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(20),
+                              child: BackdropFilter(
+                                filter:
+                                    ImageFilter.blur(sigmaX: 20, sigmaY: 20),
+                                child: Container(
+                                  width: Responsive.isMobile(context)
+                                      ? widthScreen * 0.7
+                                      : widthScreen * 0.5,
+                                  decoration: BoxDecoration(
+                                    color: Colors.white.withOpacity(
+                                        0.5), // Semi-transparent color
+                                    borderRadius: BorderRadius.circular(20.0),
+                                    border: Border.all(
+                                      color: Colors.white
+                                          .withOpacity(0.4), // Border color
+                                      width: 1.5,
+                                    ),
+                                  ),
+                                  child: SingleChildScrollView(
+                                    child: Padding(
+                                      padding: EdgeInsets.symmetric(
+                                          vertical: Responsive.isMobile(context)
+                                              ? 20
+                                              : 28,
+                                          horizontal:
+                                              Responsive.isMobile(context)
+                                                  ? 20
+                                                  : 28),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Image.asset(
+                                            ImageAssets.logo,
+                                            width: 100,
+                                          ),
+                                          const SizedBox(height: 16),
+                                          Text(
+                                            "Komunitas Agrolyn",
+                                            style: TextStyle(
+                                              fontSize:
+                                                  Responsive.isMobile(context)
+                                                      ? 18
+                                                      : 24,
+                                              fontWeight: FontWeight.bold,
+                                              color: MyColors.primaryColorDark,
+                                            ),
+                                          ),
+                                          const SizedBox(height: 8),
+                                          Text(
+                                            "Temukan jawaban, inspirasi, dan jejaring dengan petani lainnya untuk bersama-sama memajukan pertanian di indonesia",
+                                            textAlign: TextAlign.center,
+                                            maxLines: 4,
+                                            style: TextStyle(
+                                              fontSize:
+                                                  Responsive.isMobile(context)
+                                                      ? 16
+                                                      : 20,
+                                              color: Colors.black87,
+                                            ),
+                                          ),
+                                          const SizedBox(height: 16),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                   // mulai coding disini
