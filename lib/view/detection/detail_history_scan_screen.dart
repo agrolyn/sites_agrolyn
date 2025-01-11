@@ -2,7 +2,6 @@ import 'package:agrolyn_web/provider/detection_notifier.dart';
 import 'package:agrolyn_web/shared/constans.dart';
 import 'package:agrolyn_web/utils/responsive.dart';
 import 'package:agrolyn_web/widget/navbar/nav_drawer.dart';
-import 'package:agrolyn_web/widget/navbar/navbar.dart';
 import 'package:agrolyn_web/widget/navbar/navbar_desktop.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -217,11 +216,10 @@ class DetailHistoryScanScreen extends StatelessWidget {
                                                           Colors.white),
                                                 ),
                                                 onPressed: () {
-                                                  Navigator.pushReplacement(
-                                                      context,
-                                                      MaterialPageRoute(
-                                                          builder: (context) =>
-                                                              Navbar()));
+                                                  Navigator
+                                                      .pushReplacementNamed(
+                                                          context,
+                                                          '/community');
                                                 },
                                                 child: const Text(
                                                     "Diskusikan Lebih lanjut di Komunitas",
@@ -253,11 +251,9 @@ class DetailHistoryScanScreen extends StatelessWidget {
                                                               .primaryColorDark)),
                                                 ),
                                                 onPressed: () {
-                                                  Navigator.pushReplacement(
-                                                      context,
-                                                      MaterialPageRoute(
-                                                          builder: (context) =>
-                                                              Navbar()));
+                                                  Navigator
+                                                      .pushReplacementNamed(
+                                                          context, "/home");
                                                 },
                                                 child: const Text(
                                                     "Kembali Ke Beranda",

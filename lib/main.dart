@@ -20,7 +20,6 @@ import 'package:agrolyn_web/view/splash_screen.dart';
 import 'package:agrolyn_web/widget/block_wraper.dart';
 import 'package:agrolyn_web/widget/carousel.dart';
 import 'package:agrolyn_web/widget/footer.dart';
-import 'package:agrolyn_web/widget/navbar/navbar.dart';
 import 'package:agrolyn_web/widget/navbar/navbar_desktop.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_framework/responsive_framework.dart';
@@ -56,19 +55,13 @@ class MyApp extends StatelessWidget {
       initialRoute: '/splashScreen',
       themeAnimationDuration: Duration.zero,
       routes: {
-        // '/navbar': (context) => Navbar(),
         '/login': (context) => LoginPage(context: context),
         '/register': (context) => const RegisterPage(),
         '/forgot-password': (context) => ForgotPasswordPage(),
         '/splashScreen': (context) => SplashScreen(
               context: context,
             ),
-        '/home': (context) => HomePage(),
-        // ListView.builder(
-        //     itemCount: blocks.length,
-        //     itemBuilder: (context, index) {
-        //       return blocks[index];
-        //     }),
+        '/home': (context) => const HomePage(),
         '/detection': (context) => const DetectionScreen(),
         '/upload-detection': (context) => const ChooseTypesScan(),
         '/result-detection': (context) => const DetectionResultScreen(),

@@ -99,7 +99,7 @@ class EducationPage extends StatelessWidget {
                                           ),
                                           const SizedBox(height: 16),
                                           Text(
-                                            "Olahan Masakan",
+                                            "Edukasi Pertanian",
                                             style: TextStyle(
                                               fontSize:
                                                   Responsive.isMobile(context)
@@ -111,7 +111,7 @@ class EducationPage extends StatelessWidget {
                                           ),
                                           const SizedBox(height: 8),
                                           Text(
-                                            "Temukan Referensi Olahan Masakan Yang Cocok Untukmu",
+                                            "Tingkatkan pengetahuanmu tentang pertanian berkelanjutan.",
                                             textAlign: TextAlign.center,
                                             maxLines: 4,
                                             style: TextStyle(
@@ -527,7 +527,7 @@ class EducationPage extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 20,
                             ),
                             value.articles.isNotEmpty
