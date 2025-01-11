@@ -39,14 +39,8 @@ class DetectionSection extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.fromLTRB(0, 0, 0, 16),
                     child: ClipRRect(
-                      borderRadius: BorderRadius.circular(16),
-                      child: Lottie.asset(
-                        ImageAssets.backgorundAnimation,
-                        width: double.infinity,
-                        height: 300, // Adjust height if needed
-                        fit: BoxFit.cover,
-                      ),
-                    ),
+                        borderRadius: BorderRadius.circular(16),
+                        child: Image.asset(ImageAssets.bgDetection)),
                   ),
                 ),
                 ResponsiveRowColumnItem(
@@ -57,7 +51,7 @@ class DetectionSection extends StatelessWidget {
                     children: [
                       const Padding(
                         padding:
-                            EdgeInsets.only(bottom: 16, left: 16, right: 8),
+                            EdgeInsets.only(bottom: 16, left: 32, right: 8),
                         child: Text(
                           "Deteksi Penyakit Tanaman Kamu",
                           style: TextStyle(
@@ -70,7 +64,7 @@ class DetectionSection extends StatelessWidget {
                       ),
                       const Padding(
                         padding:
-                            EdgeInsets.only(bottom: 16, left: 16, right: 8),
+                            EdgeInsets.only(bottom: 16, left: 32, right: 8),
                         child: Text(
                           "Agrolyn menggunakan teknologi AI untuk mendeteksi penyakit tanaman kamu. Dengan teknologi ini, kamu bisa mendeteksi penyakit tanaman kamu dengan mudah dan cepat.",
                           style: TextStyle(
@@ -82,7 +76,7 @@ class DetectionSection extends StatelessWidget {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(left: 16, right: 8),
+                        padding: const EdgeInsets.only(left: 32, right: 8),
                         child: TextButton(
                           onPressed: () {
                             Navigator.pushReplacementNamed(

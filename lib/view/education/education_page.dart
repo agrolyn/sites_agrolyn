@@ -89,98 +89,80 @@ class EducationPage extends StatelessWidget {
                                 textAlign: TextAlign.center,
                               ),
                             ),
-                            Padding(
-                              padding: const EdgeInsets.only(bottom: 8, top: 0),
-                              child: ResponsiveRowColumn(
-                                layout: ResponsiveBreakpoints.of(context)
-                                        .smallerThan(DESKTOP)
-                                    ? ResponsiveRowColumnType.COLUMN
-                                    : ResponsiveRowColumnType.ROW,
-                                rowMainAxisAlignment: MainAxisAlignment.center,
-                                rowCrossAxisAlignment:
-                                    CrossAxisAlignment.center,
-                                children: [
-                                  ResponsiveRowColumnItem(
-                                    child: TextButton(
-                                      onPressed: () {
-                                        Navigator.pushReplacementNamed(
-                                            context, '/article');
-                                      },
-                                      style: ButtonStyle(
-                                          backgroundColor:
-                                              WidgetStateProperty.all<Color>(
-                                                  MyColors.primaryColorDark),
-                                          overlayColor:
-                                              WidgetStateProperty.resolveWith<Color>(
-                                                  (Set<WidgetState> states) {
-                                            if (states.contains(
-                                                WidgetState.hovered)) {
-                                              return MyColors.primaryColor;
-                                            }
-                                            if (states.contains(
-                                                    WidgetState.focused) ||
-                                                states.contains(
-                                                    WidgetState.pressed)) {
-                                              return MyColors.primaryColor;
-                                            }
-                                            return MyColors.primaryColorDark;
-                                          }),
-                                          shape: WidgetStateProperty.resolveWith<OutlinedBorder>(
-                                              (Set<WidgetState> states) {
-                                            if (states.contains(
-                                                    WidgetState.focused) ||
-                                                states.contains(
-                                                    WidgetState.pressed)) {
-                                              return const RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                          Radius.circular(16)));
-                                            }
-                                            return const RoundedRectangleBorder(
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(16)));
-                                          }),
-                                          padding:
-                                              WidgetStateProperty.all<EdgeInsetsGeometry>(
-                                                  const EdgeInsets.symmetric(
-                                                      vertical: 16,
-                                                      horizontal: 64)),
-                                          side: WidgetStateProperty.resolveWith<
-                                              BorderSide>((Set<WidgetState> states) {
-                                            if (states.contains(
-                                                    WidgetState.focused) ||
-                                                states.contains(
-                                                    WidgetState.pressed)) {
-                                              return const BorderSide(
-                                                  width: 3,
-                                                  color:
-                                                      buttonPrimaryPressedOutline);
-                                            }
-                                            return const BorderSide(
-                                                width: 3, color: Colors.white);
-                                          })),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: [
-                                          const Icon(
-                                            Icons.article,
-                                            size: 24,
-                                            color: Colors.white,
-                                          ),
-                                          const SizedBox(width: 8),
-                                          Text(
-                                            "Lihat Selengkapnya",
-                                            style: buttonTextStyle.copyWith(
-                                                fontSize: 18),
-                                          ),
-                                        ],
+                            ResponsiveRowColumnItem(
+                              child: TextButton(
+                                onPressed: () {
+                                  Navigator.pushReplacementNamed(
+                                      context, '/article');
+                                },
+                                style: ButtonStyle(
+                                    backgroundColor:
+                                        WidgetStateProperty.all<Color>(
+                                            MyColors.primaryColorDark),
+                                    overlayColor:
+                                        WidgetStateProperty.resolveWith<Color>(
+                                            (Set<WidgetState> states) {
+                                      if (states
+                                          .contains(WidgetState.hovered)) {
+                                        return MyColors.primaryColor;
+                                      }
+                                      if (states
+                                              .contains(WidgetState.focused) ||
+                                          states
+                                              .contains(WidgetState.pressed)) {
+                                        return MyColors.primaryColor;
+                                      }
+                                      return MyColors.primaryColorDark;
+                                    }),
+                                    shape: WidgetStateProperty.resolveWith<OutlinedBorder>(
+                                        (Set<WidgetState> states) {
+                                      if (states
+                                              .contains(WidgetState.focused) ||
+                                          states
+                                              .contains(WidgetState.pressed)) {
+                                        return const RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(16)));
+                                      }
+                                      return const RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(16)));
+                                    }),
+                                    padding:
+                                        WidgetStateProperty.all<EdgeInsetsGeometry>(
+                                            const EdgeInsets.symmetric(
+                                                vertical: 32, horizontal: 84)),
+                                    side: WidgetStateProperty.resolveWith<
+                                        BorderSide>((Set<WidgetState> states) {
+                                      if (states
+                                              .contains(WidgetState.focused) ||
+                                          states
+                                              .contains(WidgetState.pressed)) {
+                                        return const BorderSide(
+                                            width: 3,
+                                            color: buttonPrimaryPressedOutline);
+                                      }
+                                      return const BorderSide(
+                                          width: 3, color: Colors.white);
+                                    })),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    const Padding(
+                                      padding: EdgeInsets.only(right: 8),
+                                      child: Icon(
+                                        Icons.article_rounded,
+                                        size: 16,
+                                        color: Colors.white,
                                       ),
                                     ),
-                                  ),
-                                ],
+                                    Text(
+                                      "Artikel Selengkapnya",
+                                      style: buttonTextStyle.copyWith(
+                                          fontSize: 16, color: Colors.white),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                             value.articles.isNotEmpty
@@ -190,7 +172,11 @@ class EducationPage extends StatelessWidget {
                                       shrinkWrap: true,
                                       physics:
                                           const NeverScrollableScrollPhysics(),
-                                      itemCount: 3,
+                                      itemCount: Responsive.isDesktop(context)
+                                          ? 3
+                                          : Responsive.isTablet(context)
+                                              ? 4
+                                              : 2, // Jumlah kolom,
                                       gridDelegate:
                                           SliverGridDelegateWithFixedCrossAxisCount(
                                         crossAxisCount:
@@ -363,99 +349,84 @@ class EducationPage extends StatelessWidget {
                                 textAlign: TextAlign.center,
                               ),
                             ),
-                            Padding(
-                              padding: const EdgeInsets.only(bottom: 8, top: 0),
-                              child: ResponsiveRowColumn(
-                                layout: ResponsiveBreakpoints.of(context)
-                                        .smallerThan(DESKTOP)
-                                    ? ResponsiveRowColumnType.COLUMN
-                                    : ResponsiveRowColumnType.ROW,
-                                rowMainAxisAlignment: MainAxisAlignment.center,
-                                rowCrossAxisAlignment:
-                                    CrossAxisAlignment.center,
-                                children: [
-                                  ResponsiveRowColumnItem(
-                                    child: TextButton(
-                                      onPressed: () {
-                                        Navigator.pushReplacementNamed(
-                                            context, '/video');
-                                      },
-                                      style: ButtonStyle(
-                                          backgroundColor:
-                                              WidgetStateProperty.all<Color>(
-                                                  MyColors.primaryColorDark),
-                                          overlayColor:
-                                              WidgetStateProperty.resolveWith<Color>(
-                                                  (Set<WidgetState> states) {
-                                            if (states.contains(
-                                                WidgetState.hovered)) {
-                                              return MyColors.primaryColor;
-                                            }
-                                            if (states.contains(
-                                                    WidgetState.focused) ||
-                                                states.contains(
-                                                    WidgetState.pressed)) {
-                                              return MyColors.primaryColor;
-                                            }
-                                            return MyColors.primaryColorDark;
-                                          }),
-                                          shape: WidgetStateProperty.resolveWith<OutlinedBorder>(
-                                              (Set<WidgetState> states) {
-                                            if (states.contains(
-                                                    WidgetState.focused) ||
-                                                states.contains(
-                                                    WidgetState.pressed)) {
-                                              return const RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                          Radius.circular(16)));
-                                            }
-                                            return const RoundedRectangleBorder(
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(16)));
-                                          }),
-                                          padding:
-                                              WidgetStateProperty.all<EdgeInsetsGeometry>(
-                                                  const EdgeInsets.symmetric(
-                                                      vertical: 16,
-                                                      horizontal: 64)),
-                                          side: WidgetStateProperty.resolveWith<
-                                              BorderSide>((Set<WidgetState> states) {
-                                            if (states.contains(
-                                                    WidgetState.focused) ||
-                                                states.contains(
-                                                    WidgetState.pressed)) {
-                                              return const BorderSide(
-                                                  width: 3,
-                                                  color:
-                                                      buttonPrimaryPressedOutline);
-                                            }
-                                            return const BorderSide(
-                                                width: 3, color: Colors.white);
-                                          })),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: [
-                                          const Icon(
-                                            Icons.article,
-                                            size: 24,
-                                            color: Colors.white,
-                                          ),
-                                          const SizedBox(width: 8),
-                                          Text(
-                                            "Lihat Selengkapnya",
-                                            style: buttonTextStyle.copyWith(
-                                                fontSize: 18),
-                                          ),
-                                        ],
+                            ResponsiveRowColumnItem(
+                              child: TextButton(
+                                onPressed: () {
+                                  Navigator.pushReplacementNamed(
+                                      context, '/video');
+                                },
+                                style: ButtonStyle(
+                                    backgroundColor:
+                                        WidgetStateProperty.all<Color>(
+                                            MyColors.primaryColorDark),
+                                    overlayColor:
+                                        WidgetStateProperty.resolveWith<Color>(
+                                            (Set<WidgetState> states) {
+                                      if (states
+                                          .contains(WidgetState.hovered)) {
+                                        return MyColors.primaryColor;
+                                      }
+                                      if (states
+                                              .contains(WidgetState.focused) ||
+                                          states
+                                              .contains(WidgetState.pressed)) {
+                                        return MyColors.primaryColor;
+                                      }
+                                      return MyColors.primaryColorDark;
+                                    }),
+                                    shape: WidgetStateProperty.resolveWith<OutlinedBorder>(
+                                        (Set<WidgetState> states) {
+                                      if (states
+                                              .contains(WidgetState.focused) ||
+                                          states
+                                              .contains(WidgetState.pressed)) {
+                                        return const RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(16)));
+                                      }
+                                      return const RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(16)));
+                                    }),
+                                    padding:
+                                        WidgetStateProperty.all<EdgeInsetsGeometry>(
+                                            const EdgeInsets.symmetric(
+                                                vertical: 32, horizontal: 84)),
+                                    side: WidgetStateProperty.resolveWith<
+                                        BorderSide>((Set<WidgetState> states) {
+                                      if (states
+                                              .contains(WidgetState.focused) ||
+                                          states
+                                              .contains(WidgetState.pressed)) {
+                                        return const BorderSide(
+                                            width: 3,
+                                            color: buttonPrimaryPressedOutline);
+                                      }
+                                      return const BorderSide(
+                                          width: 3, color: Colors.white);
+                                    })),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    const Padding(
+                                      padding: EdgeInsets.only(right: 8),
+                                      child: Icon(
+                                        Icons.camera_alt_rounded,
+                                        size: 16,
+                                        color: Colors.white,
                                       ),
                                     ),
-                                  ),
-                                ],
+                                    Text(
+                                      "Video Selengkapnya",
+                                      style: buttonTextStyle.copyWith(
+                                          fontSize: 16, color: Colors.white),
+                                    ),
+                                  ],
+                                ),
                               ),
+                            ),
+                            SizedBox(
+                              height: 20,
                             ),
                             value.articles.isNotEmpty
                                 ? Padding(
@@ -465,7 +436,11 @@ class EducationPage extends StatelessWidget {
                                       shrinkWrap: true,
                                       physics:
                                           const NeverScrollableScrollPhysics(),
-                                      itemCount: 3,
+                                      itemCount: Responsive.isDesktop(context)
+                                          ? 3
+                                          : Responsive.isTablet(context)
+                                              ? 4
+                                              : 2, // Jumlah kolom,
                                       gridDelegate:
                                           SliverGridDelegateWithFixedCrossAxisCount(
                                         crossAxisCount:
@@ -477,7 +452,7 @@ class EducationPage extends StatelessWidget {
                                         crossAxisSpacing: 8,
                                         mainAxisExtent:
                                             Responsive.isMobile(context)
-                                                ? 230
+                                                ? 305
                                                 : 305,
                                         childAspectRatio: Responsive
                                                 .isDesktopLarge(context)

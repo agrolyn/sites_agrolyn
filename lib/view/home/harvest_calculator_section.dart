@@ -53,7 +53,7 @@ class HarvestCalculatorSection extends StatelessWidget {
                           padding: const EdgeInsets.all(8.0),
                           child: Center(
                             child: Text(
-                              'Kalkulator Panen',
+                              'Kalkulator Panen dan Penghasilan',
                               style: TextStyle(
                                 color: MyColors.primaryColorDark,
                                 fontSize: 24,
@@ -85,11 +85,20 @@ class HarvestCalculatorSection extends StatelessWidget {
                                     items: <String>['corn', 'rice']
                                         .map<DropdownMenuItem<String>>(
                                             (String value) {
+                                      String displayText;
+                                      switch (value) {
+                                        case 'corn':
+                                          displayText = 'Jagung';
+                                          break;
+                                        case 'rice':
+                                          displayText = 'Beras';
+                                          break;
+                                        default:
+                                          displayText = value;
+                                      }
                                       return DropdownMenuItem<String>(
                                         value: value,
-                                        child: Text(
-                                          value,
-                                        ),
+                                        child: Text(displayText),
                                       );
                                     }).toList(),
                                   ),
@@ -264,7 +273,7 @@ class HarvestCalculatorSection extends StatelessWidget {
                       children: [
                         Center(
                           child: Text(
-                            'Hasil Perhitungan Panen',
+                            'Hasil Perhitungan',
                             style: TextStyle(
                               fontSize: 24,
                               fontWeight: FontWeight.bold,
@@ -272,60 +281,28 @@ class HarvestCalculatorSection extends StatelessWidget {
                             ),
                           ),
                         ),
+                        const SizedBox(height: 16),
                         value.harvestData.isNotEmpty
                             ? Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  // Displaying result data
-                                  Text(
-                                    'Harga Per Kg: ${value.hargaPerKg}',
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                  Text(
-                                    'Luas Sawah: ${value.luasSawah} m²',
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                  Text(
-                                    'Tanggal Tanam: ${DateFormat('yyyy-MM-dd').format(value.tanggalTanam)}',
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                  // Displaying more details for each harvest data
-                                  for (var data in value.harvestData)
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          'Sisa Hari: ${data['sisa_hari']}',
-                                          style: TextStyle(color: Colors.white),
-                                        ),
-                                        Text(
-                                          'Tanggal Panen: ${data['tanggal_panen']}',
-                                          style: TextStyle(color: Colors.white),
-                                        ),
-                                        Text(
-                                          'Total Harga Rupiah: ${data['total_harga_rupiah']}',
-                                          style: TextStyle(color: Colors.white),
-                                        ),
-                                        Text(
-                                          'Total Hasil (Kg): ${data['total_hasil_kilogram']}',
-                                          style: TextStyle(color: Colors.white),
-                                        ),
-                                        Text(
-                                          'Total Hasil (Ton): ${data['total_hasil_ton']}',
-                                          style: TextStyle(color: Colors.white),
-                                        ),
-                                      ],
-                                    ),
+                                  _buildResultRow(
+                                      'Jenis Tanaman:',
+                                      value.selectedPlant == 'corn'
+                                          ? 'Jagung'
+                                          : 'Beras'),
+                                  _buildResultRow('Harga Per Kg:',
+                                      'Rp. ${value.hargaPerKg} /Kg'),
+                                  _buildResultRow(
+                                      'Luas Sawah:', '${value.luasSawah} m²'),
+                                  _buildResultRow(
+                                      'Tanggal Tanam:',
+                                      DateFormat('yyyy-MM-dd')
+                                          .format(value.tanggalTanam)),
+                                  const SizedBox(height: 16),
+                                  ...value.harvestData
+                                      .map((data) => _buildHarvestData(data))
+                                      .toList(),
                                 ],
                               )
                             : NoFoundCustomWhite(
@@ -344,4 +321,40 @@ class HarvestCalculatorSection extends StatelessWidget {
       ),
     );
   }
+}
+
+Widget _buildResultRow(String label, String value) {
+  return Padding(
+    padding: const EdgeInsets.symmetric(vertical: 4),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(
+          label,
+          style: TextStyle(fontSize: 16, color: Colors.white),
+        ),
+        Text(
+          value,
+          style: TextStyle(
+              fontSize: 16, color: Colors.white, fontWeight: FontWeight.bold),
+        ),
+      ],
+    ),
+  );
+}
+
+Widget _buildHarvestData(Map<String, dynamic> data) {
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      const Divider(color: Colors.white54),
+      _buildResultRow('Sisa Hari:', '${data['sisa_hari']} Hari'),
+      _buildResultRow('Tanggal Panen:', '${data['tanggal_panen']}'),
+      _buildResultRow(
+          'Total Harga Rupiah:', 'Rp.${data['total_harga_rupiah']}'),
+      _buildResultRow(
+          'Total Hasil (Kg):', '${data['total_hasil_kilogram']} Kg'),
+      _buildResultRow('Total Hasil (Ton):', '${data['total_hasil_ton']} Ton'),
+    ],
+  );
 }

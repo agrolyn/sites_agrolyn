@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:youtube_player_flutter/youtube_player_flutter.dart';
+import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
 class VideoPlayerScreen extends StatefulWidget {
   final String videoUrl;
@@ -16,40 +16,51 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
   @override
   void initState() {
     super.initState();
-    // Membuat controller Youtube dengan ID video dari URL
-    _controller = YoutubePlayerController(
-      initialVideoId: YoutubePlayer.convertUrlToId(widget.videoUrl) ?? '',
-      flags: const YoutubePlayerFlags(
-        autoPlay: true, // Menentukan apakah video langsung diputar
-        mute: false, // Tidak di-mute
-      ),
-    );
+    final videoId = extractYoutubeId(widget.videoUrl);
+    if (videoId != null) {
+      _controller = YoutubePlayerController.fromVideoId(
+        videoId: videoId,
+        params: const YoutubePlayerParams(
+          showControls: true,
+          showFullscreenButton: true,
+          mute: false,
+        ),
+      );
+    }
   }
 
   @override
   void dispose() {
-    _controller.dispose(); // Jangan lupa untuk dispose controller
+    _controller.close();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return YoutubePlayerBuilder(
-      player: YoutubePlayer(controller: _controller),
+    return YoutubePlayerScaffold(
+      controller: _controller,
       builder: (context, player) {
-        return Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            player,
-            // Kamu bisa menambahkan widget lain di sini
-          ],
+        return LayoutBuilder(
+          builder: (context, constraints) {
+            return player;
+          },
         );
       },
     );
   }
 }
 
-// Fungsi untuk menampilkan popup dengan video player
+String? extractYoutubeId(String url) {
+  final Uri? uri = Uri.tryParse(url);
+  if (uri == null) return null;
+  if (uri.host.contains('youtube.com') && uri.queryParameters['v'] != null) {
+    return uri.queryParameters['v'];
+  } else if (uri.host.contains('youtu.be')) {
+    return uri.pathSegments.isNotEmpty ? uri.pathSegments.first : null;
+  }
+  return null;
+}
+
 void showVideoDialog(BuildContext context, String videoUrl) {
   showDialog(
     context: context,
@@ -58,7 +69,10 @@ void showVideoDialog(BuildContext context, String videoUrl) {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),
         ),
-        child: VideoPlayerScreen(videoUrl: videoUrl),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: VideoPlayerScreen(videoUrl: videoUrl),
+        ),
       );
     },
   );
