@@ -1,5 +1,6 @@
 import 'package:agrolyn_web/shared/constans.dart';
 import 'package:agrolyn_web/utils/assets_path.dart';
+import 'package:agrolyn_web/utils/responsive.dart';
 import 'package:agrolyn_web/widget/typography.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +20,8 @@ class Footer extends StatelessWidget {
             ? ResponsiveRowColumnType.COLUMN
             : ResponsiveRowColumnType.ROW,
         columnMainAxisSize: MainAxisSize.min,
+        rowCrossAxisAlignment: CrossAxisAlignment.center,
+        rowMainAxisAlignment: MainAxisAlignment.center,
         children: [
           ResponsiveRowColumnItem(
             child: Padding(
@@ -42,49 +45,60 @@ class Footer extends StatelessWidget {
                       TextSpan(
                           recognizer: TapGestureRecognizer()
                             ..onTap = () {
-                              // openUrl(
-                              //     "https://groups.google.com/forum/#!forum/flutter-dev");
+                              Navigator.pushReplacementNamed(context, '/home');
                             },
-                          text: "flutter-dev@"),
+                          text: "Beranda",
+                          style: bodyTextStyle.copyWith(
+                              fontSize: Responsive.isMobile(context) ? 16 : 18,
+                              color: Colors.white)),
                       const TextSpan(text: "  •  "),
                       TextSpan(
                           recognizer: TapGestureRecognizer()
                             ..onTap = () {
-                              // openUrl("https://flutter.dev/tos");
+                              Navigator.pushReplacementNamed(
+                                  context, '/community');
                             },
-                          text: "terms"),
+                          text: "Komunitas",
+                          style: bodyTextStyle.copyWith(
+                              fontSize: Responsive.isMobile(context) ? 16 : 18,
+                              color: Colors.white)),
                       const TextSpan(text: "  •  "),
                       TextSpan(
                           recognizer: TapGestureRecognizer()
                             ..onTap = () {
-                              // openUrl("https://flutter.dev/security");
+                              Navigator.pushReplacementNamed(
+                                  context, '/detection');
                             },
-                          text: "security"),
+                          text: "Deteksi",
+                          style: bodyTextStyle.copyWith(
+                              fontSize: Responsive.isMobile(context) ? 16 : 18,
+                              color: Colors.white)),
                       const TextSpan(text: "  •  "),
                       TextSpan(
                           recognizer: TapGestureRecognizer()
                             ..onTap = () {
-                              // openUrl(
-                              //     "https://www.google.com/intl/en/policies/privacy");
+                              Navigator.pushReplacementNamed(
+                                  context, '/olahan');
                             },
-                          text: "privacy"),
+                          text: "Olahan Makanan",
+                          style: bodyTextStyle.copyWith(
+                              fontSize: Responsive.isMobile(context) ? 16 : 18,
+                              color: Colors.white)),
                       const TextSpan(text: "  •  "),
                       TextSpan(
                           recognizer: TapGestureRecognizer()
                             ..onTap = () {
-                              // openUrl("https://flutter-es.io/");
+                              Navigator.pushReplacementNamed(
+                                  context, '/education');
                             },
-                          text: "español"),
-                      const TextSpan(text: "  •  "),
-                      TextSpan(
-                          recognizer: TapGestureRecognizer()
-                            ..onTap = () {
-                              // openUrl("https://flutter.cn/");
-                            },
-                          text: "社区中文资源"),
+                          text: "Edukasi",
+                          style: bodyTextStyle.copyWith(
+                              fontSize: Responsive.isMobile(context) ? 16 : 18,
+                              color: Colors.white)),
                     ],
                   ),
                 ),
+                const Divider(),
                 RichText(
                   textAlign: TextAlign.left,
                   text: TextSpan(
@@ -94,12 +108,11 @@ class Footer extends StatelessWidget {
                         const TextSpan(text: '\n'),
                         TextSpan(
                             text:
-                                "Except as otherwise noted, this work is licensed under a Creative Commons Attribution 4.0 International License, and code samples are licensed under the BSD License.",
+                                "Agrolyn © 2025. All rights reserved - Web Dev ITC 2025 - CtrlADelete",
                             style: bodyTextStyle.copyWith(
-                                fontSize: 10, color: Colors.white)),
-                        const TextSpan(text: '\n'),
-                        const TextSpan(text: '\n'),
-                        const TextSpan(text: '\n'),
+                                fontSize:
+                                    Responsive.isMobile(context) ? 14 : 16,
+                                color: Colors.white)),
                       ]),
                 )
               ],

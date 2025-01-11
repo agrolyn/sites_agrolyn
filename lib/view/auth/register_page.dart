@@ -6,6 +6,7 @@ import 'package:agrolyn_web/service/auth_service.dart';
 import 'package:agrolyn_web/utils/assets_path.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class RegisterPage extends StatelessWidget {
@@ -35,7 +36,6 @@ class RegisterPage extends StatelessWidget {
                         child: BackdropFilter(
                           filter: ImageFilter.blur(sigmaX: 20.0, sigmaY: 20.0),
                           child: Container(
-                            height: MediaQuery.of(context).size.height - 80,
                             width: Responsive.isMobile(context)
                                 ? double.infinity
                                 : Responsive.isTablet(context)
@@ -85,226 +85,274 @@ class RegisterPage extends StatelessWidget {
                                       ),
                                     ),
                                     const SizedBox(height: 32),
-
-                                    // Section: Name Field
-                                    Column(
-                                      crossAxisAlignment:
+                                    ResponsiveRowColumn(
+                                      layout: ResponsiveBreakpoints.of(context)
+                                              .smallerThan(DESKTOP)
+                                          ? ResponsiveRowColumnType.COLUMN
+                                          : ResponsiveRowColumnType.ROW,
+                                      rowCrossAxisAlignment:
                                           CrossAxisAlignment.start,
+                                      rowSpacing:
+                                          Responsive.isMobile(context) ? 8 : 12,
+                                      columnCrossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      columnMainAxisSize: MainAxisSize.min,
                                       children: [
-                                        const SizedBox(height: 8),
-                                        TextFormField(
-                                          controller: value.nameController,
-                                          decoration: InputDecoration(
-                                            labelText: 'Nama',
-                                            labelStyle: const TextStyle(
-                                                color: Colors
-                                                    .white), // Warna teks label
-                                            enabledBorder: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(16),
-                                              borderSide: const BorderSide(
-                                                  color: Colors
-                                                      .white), // Border saat tidak fokus
-                                            ),
-                                            focusedBorder: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(16),
-                                              borderSide: const BorderSide(
-                                                  color: Colors
-                                                      .white), // Border saat fokus
-                                            ),
-                                          ),
-                                          style: const TextStyle(
-                                              color: Colors.white),
-                                          validator: (e) {
-                                            if (e!.isEmpty) {
-                                              return "Nama Tidak boleh kosong";
-                                            }
-                                            return null;
-                                          },
-                                        ),
-                                      ],
-                                    ),
-                                    const SizedBox(height: 16),
-
-                                    // Section: Email Field
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        const SizedBox(height: 8),
-                                        TextFormField(
-                                          controller: value.emailController,
-                                          decoration: InputDecoration(
-                                            labelText: 'Email',
-                                            labelStyle: const TextStyle(
-                                                color: Colors
-                                                    .white), // Warna teks label
-                                            enabledBorder: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(16),
-                                              borderSide: const BorderSide(
-                                                  color: Colors
-                                                      .white), // Border saat tidak fokus
-                                            ),
-                                            focusedBorder: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(16),
-                                              borderSide: const BorderSide(
-                                                  color: Colors
-                                                      .white), // Border saat fokus
-                                            ),
-                                          ),
-                                          style: const TextStyle(
-                                              color: Colors.white),
-                                          validator: (e) {
-                                            if (e!.isEmpty) {
-                                              return "Email Tidak boleh kosong";
-                                            }
-                                            return null;
-                                          },
-                                        ),
-                                      ],
-                                    ),
-
-                                    const SizedBox(height: 16),
-                                    // Section: Phone Number Field
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        const SizedBox(height: 8),
-                                        TextFormField(
-                                          controller: value.phoneController,
-                                          decoration: InputDecoration(
-                                            labelText: 'Nomor Hp',
-                                            prefix: const Text(
-                                              '+62 ',
-                                              style: TextStyle(
-                                                  color: Colors.white),
-                                            ),
-                                            labelStyle: const TextStyle(
-                                                color: Colors
-                                                    .white), // Warna teks label
-                                            enabledBorder: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(16),
-                                              borderSide: const BorderSide(
-                                                  color: Colors
-                                                      .white), // Border saat tidak fokus
-                                            ),
-                                            focusedBorder: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(16),
-                                              borderSide: const BorderSide(
-                                                  color: Colors
-                                                      .white), // Border saat fokus
-                                            ),
-                                          ),
-                                          style: const TextStyle(
-                                              color: Colors.white),
-                                          validator: (e) {
-                                            if (e!.isEmpty) {
-                                              return "Nomor HP Tidak boleh kosong";
-                                            }
-                                            return null;
-                                          },
-                                        ),
-                                      ],
-                                    ),
-                                    const SizedBox(height: 8),
-
-                                    // Section: Address Field
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        const SizedBox(height: 8),
-                                        TextFormField(
-                                          controller: value.addressController,
-                                          decoration: InputDecoration(
-                                            labelText: 'Alamat',
-                                            labelStyle: const TextStyle(
-                                                color: Colors
-                                                    .white), // Warna teks label
-                                            enabledBorder: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(16),
-                                              borderSide: const BorderSide(
-                                                  color: Colors
-                                                      .white), // Border saat tidak fokus
-                                            ),
-                                            focusedBorder: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(16),
-                                              borderSide: const BorderSide(
-                                                  color: Colors
-                                                      .white), // Border saat fokus
-                                            ),
-                                          ),
-                                          style: const TextStyle(
-                                              color: Colors.white),
-                                          validator: (e) {
-                                            if (e!.isEmpty) {
-                                              return "Alamat Tidak boleh kosong";
-                                            }
-                                            return null;
-                                          },
-                                        ),
-                                      ],
-                                    ),
-                                    const SizedBox(height: 16),
-
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        const SizedBox(height: 8),
-                                        TextFormField(
-                                          controller: value.passwordController,
-                                          obscureText: value.isObscure,
-                                          decoration: InputDecoration(
-                                            labelText: 'Kata Sandi',
-                                            labelStyle: const TextStyle(
-                                                color: Colors
-                                                    .white), // Warna teks label
-                                            enabledBorder: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(16),
-                                              borderSide: const BorderSide(
-                                                  color: Colors
-                                                      .white), // Border saat tidak fokus
-                                            ),
-                                            focusedBorder: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(16),
-                                              borderSide: const BorderSide(
-                                                  color: Colors
-                                                      .white), // Border saat fokus
-                                            ),
-                                            suffixIcon: IconButton(
-                                              onPressed: () {
-                                                value.toggleObscure();
-                                              },
-                                              icon: Icon(
-                                                value.isObscure
-                                                    ? Icons.visibility
-                                                    : Icons.visibility_off,
-                                                color: Colors.white,
+                                        ResponsiveRowColumnItem(
+                                          rowFlex: 1,
+                                          rowFit: FlexFit.tight,
+                                          child: Column(
+                                            children: [
+                                              // Section: Name Field
+                                              TextFormField(
+                                                controller:
+                                                    value.nameController,
+                                                decoration: InputDecoration(
+                                                  labelText: 'Nama',
+                                                  labelStyle: const TextStyle(
+                                                      color: Colors
+                                                          .white), // Warna teks label
+                                                  enabledBorder:
+                                                      OutlineInputBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            16),
+                                                    borderSide: const BorderSide(
+                                                        color: Colors
+                                                            .white), // Border saat tidak fokus
+                                                  ),
+                                                  focusedBorder:
+                                                      OutlineInputBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            16),
+                                                    borderSide: const BorderSide(
+                                                        color: Colors
+                                                            .white), // Border saat fokus
+                                                  ),
+                                                ),
+                                                style: const TextStyle(
+                                                    color: Colors.white),
+                                                validator: (e) {
+                                                  if (e!.isEmpty) {
+                                                    return "Nama Tidak boleh kosong";
+                                                  }
+                                                  return null;
+                                                },
                                               ),
-                                            ),
+                                            ],
                                           ),
-                                          style: const TextStyle(
-                                              color: Colors
-                                                  .white), // Warna teks input
-                                          validator: (e) {
-                                            if (e!.isEmpty) {
-                                              return "Kata Sandi Tidak boleh kosong";
-                                            }
-                                            return null;
-                                          },
                                         ),
+                                        ResponsiveRowColumnItem(
+                                          rowFlex: 1,
+                                          rowFit: FlexFit.tight,
+                                          child: Column(
+                                            children: [
+                                              // Section: Email Field
+                                              TextFormField(
+                                                controller:
+                                                    value.emailController,
+                                                decoration: InputDecoration(
+                                                  labelText: 'Email',
+                                                  labelStyle: const TextStyle(
+                                                      color: Colors
+                                                          .white), // Warna teks label
+                                                  enabledBorder:
+                                                      OutlineInputBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            16),
+                                                    borderSide: const BorderSide(
+                                                        color: Colors
+                                                            .white), // Border saat tidak fokus
+                                                  ),
+                                                  focusedBorder:
+                                                      OutlineInputBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            16),
+                                                    borderSide: const BorderSide(
+                                                        color: Colors
+                                                            .white), // Border saat fokus
+                                                  ),
+                                                ),
+                                                style: const TextStyle(
+                                                    color: Colors.white),
+                                                validator: (e) {
+                                                  if (e!.isEmpty) {
+                                                    return "Email Tidak boleh kosong";
+                                                  }
+                                                  return null;
+                                                },
+                                              ),
+                                            ],
+                                          ),
+                                        )
                                       ],
+                                    ),
+
+                                    // Section: Phone Number Field
+                                    SizedBox(
+                                        height: Responsive.isMobile(context)
+                                            ? 8
+                                            : 16),
+
+                                    ResponsiveRowColumn(
+                                      layout: ResponsiveBreakpoints.of(context)
+                                              .smallerThan(DESKTOP)
+                                          ? ResponsiveRowColumnType.COLUMN
+                                          : ResponsiveRowColumnType.ROW,
+                                      rowCrossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      rowSpacing:
+                                          Responsive.isMobile(context) ? 8 : 12,
+                                      columnCrossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      columnMainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        ResponsiveRowColumnItem(
+                                          rowFlex: 1,
+                                          rowFit: FlexFit.tight,
+                                          child: Column(
+                                            children: [
+                                              TextFormField(
+                                                controller:
+                                                    value.phoneController,
+                                                decoration: InputDecoration(
+                                                  labelText: 'Nomor Hp',
+                                                  prefix: const Text(
+                                                    '+62 ',
+                                                    style: TextStyle(
+                                                        color: Colors.white),
+                                                  ),
+                                                  labelStyle: const TextStyle(
+                                                      color: Colors
+                                                          .white), // Warna teks label
+                                                  enabledBorder:
+                                                      OutlineInputBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            16),
+                                                    borderSide: const BorderSide(
+                                                        color: Colors
+                                                            .white), // Border saat tidak fokus
+                                                  ),
+                                                  focusedBorder:
+                                                      OutlineInputBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            16),
+                                                    borderSide: const BorderSide(
+                                                        color: Colors
+                                                            .white), // Border saat fokus
+                                                  ),
+                                                ),
+                                                style: const TextStyle(
+                                                    color: Colors.white),
+                                                validator: (e) {
+                                                  if (e!.isEmpty) {
+                                                    return "Nomor HP Tidak boleh kosong";
+                                                  }
+                                                  return null;
+                                                },
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        ResponsiveRowColumnItem(
+                                          rowFlex: 1,
+                                          rowFit: FlexFit.tight,
+                                          child: Column(
+                                            children: [
+                                              TextFormField(
+                                                controller:
+                                                    value.addressController,
+                                                decoration: InputDecoration(
+                                                  labelText: 'Alamat',
+                                                  labelStyle: const TextStyle(
+                                                      color: Colors
+                                                          .white), // Warna teks label
+                                                  enabledBorder:
+                                                      OutlineInputBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            16),
+                                                    borderSide: const BorderSide(
+                                                        color: Colors
+                                                            .white), // Border saat tidak fokus
+                                                  ),
+                                                  focusedBorder:
+                                                      OutlineInputBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            16),
+                                                    borderSide: const BorderSide(
+                                                        color: Colors
+                                                            .white), // Border saat fokus
+                                                  ),
+                                                ),
+                                                style: const TextStyle(
+                                                    color: Colors.white),
+                                                validator: (e) {
+                                                  if (e!.isEmpty) {
+                                                    return "Alamat Tidak boleh kosong";
+                                                  }
+                                                  return null;
+                                                },
+                                              ),
+                                            ],
+                                          ),
+                                        )
+                                      ],
+                                    ),
+
+                                    SizedBox(
+                                        height: Responsive.isMobile(context)
+                                            ? 8
+                                            : 16),
+                                    TextFormField(
+                                      controller: value.passwordController,
+                                      obscureText: value.isObscure,
+                                      decoration: InputDecoration(
+                                        labelText: 'Kata Sandi',
+                                        labelStyle: const TextStyle(
+                                            color: Colors
+                                                .white), // Warna teks label
+                                        enabledBorder: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(16),
+                                          borderSide: const BorderSide(
+                                              color: Colors
+                                                  .white), // Border saat tidak fokus
+                                        ),
+                                        focusedBorder: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(16),
+                                          borderSide: const BorderSide(
+                                              color: Colors
+                                                  .white), // Border saat fokus
+                                        ),
+                                        suffixIcon: IconButton(
+                                          onPressed: () {
+                                            value.toggleObscure();
+                                          },
+                                          icon: Icon(
+                                            value.isObscure
+                                                ? Icons.visibility_off
+                                                : Icons.visibility,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ),
+                                      style: const TextStyle(
+                                          color:
+                                              Colors.white), // Warna teks input
+                                      validator: (e) {
+                                        if (e!.isEmpty) {
+                                          return "Kata Sandi Tidak boleh kosong";
+                                        }
+                                        return null;
+                                      },
                                     ),
                                     const SizedBox(height: 16),
 

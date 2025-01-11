@@ -206,7 +206,17 @@ class AddQuestion extends StatelessWidget {
                                                         minimumSize:
                                                             const WidgetStatePropertyAll(
                                                                 Size(180, 40))),
-                                                    child: const Text('submit'),
+                                                    child: value.isLoading ==
+                                                            true
+                                                        ? const SizedBox(
+                                                            height: 15,
+                                                            width: 15,
+                                                            child:
+                                                                CircularProgressIndicator(
+                                                              color:
+                                                                  Colors.white,
+                                                            ))
+                                                        : const Text('submit'),
                                                   ),
                                                 ],
                                               )

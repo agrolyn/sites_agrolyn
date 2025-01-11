@@ -1,15 +1,12 @@
 import 'dart:convert';
-import 'dart:typed_data';
 
 import 'package:agrolyn_web/service/community_service.dart';
 import 'package:agrolyn_web/shared/constans.dart';
-import 'package:agrolyn_web/view/community/community_page.dart';
 import 'package:agrolyn_web/view/community/detail_community_screen.dart';
 import 'package:agrolyn_web/view/community/item_filter.dart';
 import 'package:dio/dio.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker_web/image_picker_web.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:agrolyn_web/shared/custom_snackbar.dart';
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
@@ -92,6 +89,8 @@ class CommunityNotifer extends ChangeNotifier {
   }
 
   Future<void> submitAddQuestion() async {
+    isLoading = true;
+    notifyListeners();
     SharedPreferences prefs = await SharedPreferences.getInstance();
     if (formKey.currentState!.validate() && imageQuestion != null) {
       final formData = FormData.fromMap({
@@ -110,6 +109,8 @@ class CommunityNotifer extends ChangeNotifier {
             "Pertanyaan Anda Berhasil Ditambahkan!", ContentType.success);
       });
     }
+    isLoading = false;
+    notifyListeners();
   }
 
   Future<void> submitEditQuestion(int id) async {
@@ -172,7 +173,10 @@ class CommunityNotifer extends ChangeNotifier {
 
   void fetchAllQuestion() async {
     isLoading = true;
+    notifyListeners();
+
     questions = await _communityService.getQuestions();
+    isLoading = false;
     notifyListeners();
   }
 

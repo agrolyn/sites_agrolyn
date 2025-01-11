@@ -46,6 +46,7 @@ class ContentQuestionDetail extends StatelessWidget {
           return ChangeNotifierProvider(
               create: (_) => CommunityNotifer(context: context),
               builder: (context, child) {
+                print(dataQuestion);
                 return EditQuestion(
                   id: dataQuestion["id"],
                   titleQuestion: dataQuestion["title_question"],

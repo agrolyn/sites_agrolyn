@@ -47,9 +47,6 @@ class LoginPage extends StatelessWidget {
                         child: BackdropFilter(
                           filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
                           child: Container(
-                            height: Responsive.isMobile(context)
-                                ? MediaQuery.of(context).size.height - 190
-                                : MediaQuery.of(context).size.height - 100,
                             width: Responsive.isMobile(context)
                                 ? double.infinity
                                 : Responsive.isTablet(context)
@@ -186,8 +183,8 @@ class LoginPage extends StatelessWidget {
                                               },
                                               icon: Icon(
                                                 value.isObscure
-                                                    ? Icons.visibility
-                                                    : Icons.visibility_off,
+                                                    ? Icons.visibility_off
+                                                    : Icons.visibility,
                                                 color: Colors.white,
                                               ),
                                             ),

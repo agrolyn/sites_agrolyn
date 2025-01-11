@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:agrolyn_web/provider/olahan_notifier.dart';
 import 'package:agrolyn_web/utils/assets_path.dart';
 import 'package:agrolyn_web/utils/responsive.dart';
@@ -30,6 +32,104 @@ class OlahanPage extends StatelessWidget {
             child: Column(
               children: [
                 NavbarDesktop(activePage: "Olahan Makanan"),
+                Container(
+                  width: Responsive.widthScreen(context),
+                  height: Responsive.isMobile(context)
+                      ? 350
+                      : Responsive.heightScreen(context) * 0.92,
+                  decoration: const BoxDecoration(
+                    color: MyColors.primaryColorDark,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey,
+                        blurRadius: 5.0,
+                      ),
+                    ],
+                  ),
+                  child: Stack(
+                    children: [
+                      Image.asset(
+                        ImageAssets.bgCock,
+                        width: double.infinity,
+                        height: double.infinity,
+                        fit: BoxFit.cover,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(16),
+                        child: Center(
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(20),
+                            child: BackdropFilter(
+                              filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
+                              child: Container(
+                                width: Responsive.isMobile(context)
+                                    ? Responsive.widthScreen(context) * 0.7
+                                    : Responsive.widthScreen(context) * 0.5,
+                                decoration: BoxDecoration(
+                                  color: Colors.white.withOpacity(
+                                      0.5), // Semi-transparent color
+                                  borderRadius: BorderRadius.circular(20.0),
+                                  border: Border.all(
+                                    color: Colors.white
+                                        .withOpacity(0.4), // Border color
+                                    width: 1.5,
+                                  ),
+                                ),
+                                child: SingleChildScrollView(
+                                  child: Padding(
+                                    padding: EdgeInsets.symmetric(
+                                        vertical: Responsive.isMobile(context)
+                                            ? 20
+                                            : 28,
+                                        horizontal: Responsive.isMobile(context)
+                                            ? 20
+                                            : 28),
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Image.asset(
+                                          ImageAssets.logo,
+                                          width: 100,
+                                        ),
+                                        const SizedBox(height: 16),
+                                        Text(
+                                          "Olahan Masakan",
+                                          style: TextStyle(
+                                            fontSize:
+                                                Responsive.isMobile(context)
+                                                    ? 18
+                                                    : 24,
+                                            fontWeight: FontWeight.bold,
+                                            color: MyColors.primaryColorDark,
+                                          ),
+                                        ),
+                                        const SizedBox(height: 8),
+                                        Text(
+                                          "Temukan Referensi Olahan Masakan Yang Cocok Untukmu",
+                                          textAlign: TextAlign.center,
+                                          maxLines: 4,
+                                          style: TextStyle(
+                                            fontSize:
+                                                Responsive.isMobile(context)
+                                                    ? 16
+                                                    : 20,
+                                            color: Colors.black87,
+                                          ),
+                                        ),
+                                        const SizedBox(height: 16),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
                 ResponsiveRowColumn(
                   layout: ResponsiveBreakpoints.of(context).smallerThan(DESKTOP)
                       ? ResponsiveRowColumnType.COLUMN
