@@ -1,6 +1,9 @@
+import 'dart:ui';
+
 import 'package:agrolyn_web/provider/community_notifer.dart';
 import 'package:agrolyn_web/shared/constans.dart';
 import 'package:agrolyn_web/utils/assets_path.dart';
+import 'package:agrolyn_web/utils/responsive.dart';
 import 'package:agrolyn_web/view/community/add_question.dart';
 import 'package:agrolyn_web/view/community/card_community.dart';
 import 'package:agrolyn_web/widget/footer.dart';
@@ -40,9 +43,11 @@ class CommunityPage extends StatelessWidget {
                   NavbarDesktop(activePage: "Komunitas"),
                   Container(
                     width: widthScreen,
-                    height: 250,
+                    height: Responsive.isMobile(context)
+                        ? 350
+                        : Responsive.heightScreen(context) * 0.92,
                     decoration: const BoxDecoration(
-                      color: MyColors.primaryColor,
+                      color: MyColors.primaryColorDark,
                       boxShadow: [
                         BoxShadow(
                           color: Colors.grey,
@@ -50,9 +55,90 @@ class CommunityPage extends StatelessWidget {
                         ),
                       ],
                     ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Image.asset(ImageAssets.community),
+                    child: Stack(
+                      children: [
+                        Image.asset(
+                          ImageAssets.bgComm,
+                          width: double.infinity,
+                          height: double.infinity,
+                          fit: BoxFit.cover,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(16),
+                          child: Center(
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(20),
+                              child: BackdropFilter(
+                                filter:
+                                    ImageFilter.blur(sigmaX: 20, sigmaY: 20),
+                                child: Container(
+                                  width: Responsive.isMobile(context)
+                                      ? widthScreen * 0.7
+                                      : widthScreen * 0.5,
+                                  decoration: BoxDecoration(
+                                    color: Colors.white.withOpacity(
+                                        0.5), // Semi-transparent color
+                                    borderRadius: BorderRadius.circular(20.0),
+                                    border: Border.all(
+                                      color: Colors.white
+                                          .withOpacity(0.4), // Border color
+                                      width: 1.5,
+                                    ),
+                                  ),
+                                  child: SingleChildScrollView(
+                                    child: Padding(
+                                      padding: EdgeInsets.symmetric(
+                                          vertical: Responsive.isMobile(context)
+                                              ? 20
+                                              : 28,
+                                          horizontal:
+                                              Responsive.isMobile(context)
+                                                  ? 20
+                                                  : 28),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Image.asset(
+                                            ImageAssets.logo,
+                                            width: 100,
+                                          ),
+                                          const SizedBox(height: 16),
+                                          Text(
+                                            "Komunitas Agrolyn",
+                                            style: TextStyle(
+                                              fontSize:
+                                                  Responsive.isMobile(context)
+                                                      ? 18
+                                                      : 24,
+                                              fontWeight: FontWeight.bold,
+                                              color: MyColors.primaryColorDark,
+                                            ),
+                                          ),
+                                          const SizedBox(height: 8),
+                                          Text(
+                                            "Temukan jawaban, inspirasi, dan jejaring dengan petani lainnya untuk bersama-sama memajukan pertanian di indonesia",
+                                            textAlign: TextAlign.center,
+                                            maxLines: 4,
+                                            style: TextStyle(
+                                              fontSize:
+                                                  Responsive.isMobile(context)
+                                                      ? 16
+                                                      : 20,
+                                              color: Colors.black87,
+                                            ),
+                                          ),
+                                          const SizedBox(height: 16),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                   // mulai coding disini
@@ -181,12 +267,22 @@ class CommunityPage extends StatelessWidget {
                           shrinkWrap: true,
                           gridDelegate:
                               SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount:
-                                widthScreen > 850 ? 3 : 1, // Jumlah kolom
+                            crossAxisCount: Responsive.isMobile(context)
+                                ? 1
+                                : Responsive.isTablet(context)
+                                    ? 2
+                                    : Responsive.isDesktop(context)
+                                        ? 3
+                                        : 4, // Jumlah kolom
                             crossAxisSpacing: 8,
                             mainAxisSpacing: 8,
-                            childAspectRatio:
-                                3 / 3, // Rasio ukuran grid (lebar vs tinggi)
+                            childAspectRatio: Responsive.isMobile(context)
+                                ? 4 / 3
+                                : Responsive.isTablet(context)
+                                    ? 4 / 3
+                                    : Responsive.isDesktop(context)
+                                        ? 4 / 4
+                                        : 1, // Rasio ukuran grid (lebar vs tinggi)
                           ),
                           physics: const NeverScrollableScrollPhysics(),
                           itemCount: value.questions.length,

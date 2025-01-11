@@ -18,7 +18,11 @@ class Responsive {
     return MediaQuery.of(context).size.width >= 1440;
   }
 
-  static num widthScreen(BuildContext context) {
+  static double widthScreen(BuildContext context) {
     return MediaQuery.of(context).size.width;
+  }
+
+  static double heightScreen(BuildContext context) {
+    return MediaQuery.of(context).size.height;
   }
 }

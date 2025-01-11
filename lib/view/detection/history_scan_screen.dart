@@ -21,7 +21,7 @@ class HistoryScanScreen extends StatelessWidget {
             return AlertDialog(
               title: const Text("Hapus Semua Riwayat"),
               content: const Text(
-                  "Apakah anda yakin ingin menghapus semua riwayat scan tanaman?"),
+                  "Apakah anda yakin ingin menghapus semua riwayat deteksi penyakit tanaman?"),
               actions: [
                 TextButton(
                   child: const Text("Batal"),

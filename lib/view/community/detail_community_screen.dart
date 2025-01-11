@@ -1,11 +1,15 @@
 import 'package:agrolyn_web/provider/community_notifer.dart';
 import 'package:agrolyn_web/utils/inter_prefs.dart';
+import 'package:agrolyn_web/utils/responsive.dart';
 import 'package:agrolyn_web/view/community/content_question_detail.dart';
 import 'package:agrolyn_web/view/community/input_answer.dart';
 import 'package:agrolyn_web/view/community/section_answers.dart';
+import 'package:agrolyn_web/widget/navbar/nav_drawer.dart';
 import 'package:agrolyn_web/widget/navbar/navbar.dart';
+import 'package:agrolyn_web/widget/navbar/navbar_desktop.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class DetailCommunityScreen extends StatelessWidget {
@@ -22,6 +26,8 @@ class DetailCommunityScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+
     return ChangeNotifierProvider(
       create: (_) => CommunityNotifer(context: context),
       child: Consumer<CommunityNotifer>(
@@ -39,130 +45,117 @@ class DetailCommunityScreen extends StatelessWidget {
                 likeNum = dataQuestion["like_num"];
 
             return Scaffold(
+                key: scaffoldKey,
                 backgroundColor: Colors.white,
-                body: SafeArea(
-                  child: Stack(fit: StackFit.expand, children: [
-                    SingleChildScrollView(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Stack(
-                            children: [
-                              Container(
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.black.withOpacity(0.1),
-                                      blurRadius: 5,
-                                      spreadRadius: 2,
-                                      offset: const Offset(0, 2),
-                                    ),
-                                  ],
-                                ),
-                                child: Column(
-                                  children: [
-                                    // Bagian gambar
-                                    Stack(children: [
-                                      Image.network(
-                                        dataQuestion["question_thumbnail"],
-                                        fit: BoxFit.cover,
-                                        width: double.infinity,
-                                        height: 256,
-                                      ),
-                                    ]),
-                                    // main content
-                                    Padding(
-                                      padding: const EdgeInsets.all(16.0),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          // Konten Detail Pertanyaan + interaksi
-                                          ContentQuestionDetail(
-                                              dataQuestion: dataQuestion,
-                                              likeQuestion: value.likeQuestion,
-                                              dislikeQuestion:
-                                                  value.dislikeQuestion,
-                                              likeNum: likeNum,
-                                              nameUser: name),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              // Tombol "Kembali Ke Halaman Utama Komunitas"
-                              Positioned(
-                                top: 20,
-                                left: 0,
-                                right: 0,
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 16),
-                                  child: SizedBox(
-                                      width: 44,
-                                      height: 44,
-                                      child: InkWell(
-                                        onTap: () async {
-                                          await InterPrefs.init();
-                                          InterPrefs.setPrefs(
-                                              "filterBy", "semua");
-                                          value.reNotifyListeners();
-                                          Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      Navbar()));
-                                        },
-                                        child: Container(
-                                            decoration: BoxDecoration(
-                                              color: Colors.black38,
-                                              borderRadius:
-                                                  BorderRadius.circular(40),
-                                              border: Border.all(
-                                                  color: Colors.grey),
-                                            ),
-                                            child: const Row(
-                                              children: [
-                                                SizedBox(
-                                                  width: 15,
-                                                ),
-                                                Icon(
-                                                  Icons.arrow_back_ios,
-                                                  color: Colors.white,
-                                                ),
-                                                Text(
-                                                  "Kembali Ke Halaman Utama Komunitas",
-                                                  style: TextStyle(
-                                                      color: Colors.white,
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                )
-                                              ],
-                                            )),
-                                      )),
-                                ),
-                              )
-                            ],
+                drawer: const NavDrawer(),
+                body: SingleChildScrollView(
+                  child: Column(children: [
+                    NavbarDesktop(
+                      activePage: "",
+                    ),
+                    InkWell(
+                      onTap: () =>
+                          Navigator.pushReplacementNamed(context, "/community"),
+                      child: Container(
+                        margin: EdgeInsets.only(
+                          top: Responsive.isMobile(context) ? 8 : 16,
+                        ),
+                        width: Responsive.widthScreen(context),
+                        padding: const EdgeInsets.all(8),
+                        child: Row(children: [
+                          const Icon(Icons.arrow_back),
+                          const SizedBox(
+                            width: 16,
                           ),
-                          // bagian jawaban
-                          SectionAnswers(
-                            dataQuestion: dataQuestion,
-                            dataAnswer: dataAnswer,
-                            name: name,
-                          )
-                        ],
+                          Text(
+                            "Detail Diskusi",
+                            style: TextStyle(
+                              fontSize: Responsive.isMobile(context) ? 15 : 17,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black,
+                            ),
+                          ),
+                        ]),
                       ),
                     ),
-                    const Spacer(),
-                    InputAnswer(
-                      questionId: id,
-                      type: dataQuestion["question_type"] == "jagung"
-                          ? 1
-                          : dataQuestion["question_type"] == "padi"
-                              ? 2
-                              : 3,
+                    ResponsiveRowColumn(
+                      layout:
+                          ResponsiveBreakpoints.of(context).smallerThan(DESKTOP)
+                              ? ResponsiveRowColumnType.COLUMN
+                              : ResponsiveRowColumnType.ROW,
+                      rowCrossAxisAlignment: CrossAxisAlignment.start,
+                      columnCrossAxisAlignment: CrossAxisAlignment.center,
+                      columnMainAxisSize: MainAxisSize.min,
+                      rowPadding: const EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 10),
+                      columnPadding: const EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 10),
+                      children: [
+                        ResponsiveRowColumnItem(
+                          rowFlex: 1,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.1),
+                                  blurRadius: 5,
+                                  spreadRadius: 2,
+                                  offset: const Offset(0, 2),
+                                ),
+                              ],
+                            ),
+                            child: Column(
+                              children: [
+                                Image.network(
+                                  dataQuestion["question_thumbnail"],
+                                  fit: BoxFit.cover,
+                                  width: double.infinity,
+                                  height: Responsive.isMobile(context)
+                                      ? 256
+                                      : Responsive.heightScreen(context) * 0.69,
+                                ),
+                                // main content
+                                Padding(
+                                  padding: const EdgeInsets.all(16.0),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      // Konten Detail Pertanyaan + interaksi
+                                      ContentQuestionDetail(
+                                          dataQuestion: dataQuestion,
+                                          likeQuestion: value.likeQuestion,
+                                          dislikeQuestion:
+                                              value.dislikeQuestion,
+                                          likeNum: likeNum,
+                                          nameUser: name),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        ResponsiveRowColumnItem(
+                          rowFlex: 1,
+                          child: Stack(children: [
+                            SectionAnswers(
+                              dataQuestion: dataQuestion,
+                              dataAnswer: dataAnswer,
+                              name: name,
+                            ),
+                            InputAnswer(
+                              questionId: id,
+                              type: dataQuestion["question_type"] == "jagung"
+                                  ? 1
+                                  : dataQuestion["question_type"] == "padi"
+                                      ? 2
+                                      : 3,
+                            )
+                          ]),
+                        )
+                      ],
                     )
                   ]),
                 ));

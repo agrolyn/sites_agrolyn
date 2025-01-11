@@ -12,8 +12,18 @@ class NavbarDesktop extends StatelessWidget {
   Widget build(BuildContext context) {
     return Responsive.isMobile(context)
         ? Container(
-            color: Colors.white,
             padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.5),
+                  spreadRadius: 5,
+                  blurRadius: 7,
+                  offset: const Offset(0, 3), // changes position of shadow
+                ),
+              ],
+            ),
             child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -31,8 +41,18 @@ class NavbarDesktop extends StatelessWidget {
                       })
                 ]))
         : Container(
-            color: Colors.white,
             height: 70,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.5),
+                  spreadRadius: 3,
+                  blurRadius: 5,
+                  offset: const Offset(0, 2), // changes position of shadow
+                ),
+              ],
+            ),
             padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 10),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

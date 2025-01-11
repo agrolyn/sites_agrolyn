@@ -56,7 +56,7 @@ class MyApp extends StatelessWidget {
       initialRoute: '/splashScreen',
       themeAnimationDuration: Duration.zero,
       routes: {
-        '/navbar': (context) => Navbar(),
+        // '/navbar': (context) => Navbar(),
         '/login': (context) => LoginPage(context: context),
         '/register': (context) => const RegisterPage(),
         '/forgot-password': (context) => ForgotPasswordPage(),

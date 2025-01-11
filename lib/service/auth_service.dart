@@ -184,17 +184,15 @@ class AuthService {
           }),
         );
 
-        if (res.statusCode == 200) {
-          SharedPreferences prefs = await SharedPreferences.getInstance();
-          await prefs.remove('access_token');
-          await prefs.remove('isLogedin');
-          Navigator.pushReplacementNamed(
-              context, '/login'); // navigasi ke halaman login setelah logout
-        }
+        if (res.statusCode == 200) {}
       } on DioException catch (e) {
         print("Register error: ${e.response?.data['message']}");
-        showCustomSnackbar(context, "Gagal Logout",
-            "Logout gagal, silahkan dicoba lagi", ContentType.failure);
+      } finally {
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        await prefs.remove('access_token');
+        await prefs.remove('isLogedin');
+        Navigator.pushReplacementNamed(
+            context, '/login'); // navigasi ke halaman login setelah logout
       }
     }
   }

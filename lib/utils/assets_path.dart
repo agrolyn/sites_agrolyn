@@ -62,4 +62,7 @@ class ImageAssets {
   static String slide2Layer2 = "$root/Untitled design (21).png";
   static String bgScan = "$root/bg_scan.webp";
   static String bgMalam = "$root/bgMalam.webp";
+  static String bgPKomunitas = "$root/banner-community.webp";
+  static String bgDetect = "$root/bg-detect.webp";
+  static String bgComm = "$root/bgCom.webp";
 }

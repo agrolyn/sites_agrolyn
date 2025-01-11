@@ -18,7 +18,7 @@ class LoginPage extends StatelessWidget {
   void init() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     if (prefs.getBool('isLogedin') != null) {
-      Navigator.pushReplacementNamed(context, '/navbar');
+      Navigator.pushReplacementNamed(context, '/home');
     }
   }
 

@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:agrolyn_web/provider/detection_notifier.dart';
 import 'package:agrolyn_web/shared/constans.dart';
 import 'package:agrolyn_web/utils/assets_path.dart';
+import 'package:agrolyn_web/widget/navbar/nav_drawer.dart';
 import 'package:agrolyn_web/widget/navbar/navbar_desktop.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -12,10 +13,15 @@ class ChooseTypesScan extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+
     return ChangeNotifierProvider(
       create: (_) => DetectionNotifier(context: context),
       child: Consumer<DetectionNotifier>(builder: (context, value, child) {
         return Scaffold(
+          backgroundColor: Colors.white,
+          drawer: const NavDrawer(),
+          key: scaffoldKey,
           body: Stack(
             children: [
               Image.asset(
