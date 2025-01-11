@@ -65,6 +65,9 @@ class ImageAssets {
   static String bgPKomunitas = "$root/banner-community.webp";
   static String bgDetect = "$root/bg-detect.webp";
   static String bgComm = "$root/bgCom.webp";
+
   static String bgCock = "$root/bgCook.webp";
   static String bgEdu = "$root/bgEducation.webp";
+
+  static String bgDetection = "$root/file-AQZiGRQZm2E8LExJfzCYmi.webp";
 }

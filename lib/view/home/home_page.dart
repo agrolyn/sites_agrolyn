@@ -1,6 +1,8 @@
 import 'package:agrolyn_web/provider/home_notifier.dart';
 import 'package:agrolyn_web/provider/menu_notifier.dart';
 import 'package:agrolyn_web/shared/constans.dart';
+import 'package:agrolyn_web/utils/responsive.dart';
+import 'package:agrolyn_web/view/chatbot/chatbot.dart';
 import 'package:agrolyn_web/view/community/community_page.dart';
 import 'package:agrolyn_web/view/detection/detection_screen.dart';
 import 'package:agrolyn_web/view/home/detection_section.dart';
@@ -23,11 +25,63 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+    void _showPopup(BuildContext context) {
+      showDialog(
+        context: context,
+        barrierColor: Colors.black54, // Latar belakang semi-transparan
+        builder: (context) {
+          final isMobile =
+              MediaQuery.of(context).size.width < 600; // Deteksi mobile
+          return Stack(
+            children: [
+              Align(
+                alignment: Alignment.bottomRight, // Posisi di bawah kanan
+                child: Container(
+                  width: isMobile
+                      ? MediaQuery.of(context).size.width *
+                          0.9 // Hampir penuh pada mobile
+                      : 400, // Lebar tetap untuk desktop/tablet
+                  height: isMobile
+                      ? MediaQuery.of(context).size.height *
+                          0.8 // Hampir penuh pada mobile
+                      : 550, // Tinggi tetap untuk desktop/tablet
+                  margin: const EdgeInsets.only(
+                    bottom: 80, // Jarak dari bawah (di atas FAB)
+                    right: 16, // Jarak dari tepi kanan
+                  ),
+                  decoration: BoxDecoration(
+                    color: Colors.white, // Warna latar popup
+                    borderRadius:
+                        BorderRadius.circular(12), // Membulatkan sudut
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black26, // Warna bayangan
+                        blurRadius: 10, // Intensitas blur bayangan
+                        offset: Offset(0, 4), // Posisi bayangan
+                      ),
+                    ],
+                  ),
+                  child: Chatbot(),
+                ),
+              ),
+            ],
+          );
+        },
+      );
+    }
 
     return ChangeNotifierProvider(
       create: (_) => HomeNotifier(context: context),
       child: Consumer<HomeNotifier>(builder: (context, value, child) {
         return Scaffold(
+          floatingActionButton: FloatingActionButton(
+            onPressed: () => _showPopup(context), // Memanggil popup
+            child: Icon(
+              Icons.chat_rounded,
+              color: Colors.white,
+            ),
+            backgroundColor: MyColors.primaryColorDark,
+          ),
           backgroundColor: Colors.white,
           key: scaffoldKey,
           drawer: const NavDrawer(),
@@ -189,42 +243,84 @@ class HomePage extends StatelessWidget {
                                 ),
                               ),
                               ResponsiveRowColumnItem(
-                                child: Padding(
-                                  padding:
-                                      const EdgeInsets.symmetric(horizontal: 8),
-                                  child: TextButton(
-                                    onPressed: () => {
-                                      context.read<MenuNotifier>().gantiPage(2)
-                                    },
-                                    style: TextButton.styleFrom(
-                                      shape: const RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(16))),
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 20, horizontal: 20),
-                                    ),
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        const Padding(
-                                          padding: EdgeInsets.only(right: 8),
-                                          child: Icon(
-                                            Icons.camera_alt_rounded,
-                                            size: 24,
-                                            color: MyColors.primaryColorDark,
-                                          ),
+                                child: TextButton(
+                                  onPressed: () {
+                                    Navigator.pushReplacementNamed(
+                                        context, '/detection');
+                                  },
+                                  style: ButtonStyle(
+                                      backgroundColor:
+                                          WidgetStateProperty.all<Color>(
+                                              Colors.white),
+                                      overlayColor:
+                                          WidgetStateProperty.resolveWith<Color>(
+                                              (Set<WidgetState> states) {
+                                        if (states
+                                            .contains(WidgetState.hovered)) {
+                                          return Colors.white30;
+                                        }
+                                        if (states.contains(
+                                                WidgetState.focused) ||
+                                            states.contains(
+                                                WidgetState.pressed)) {
+                                          return Colors.white30;
+                                        }
+                                        return Colors.white;
+                                      }),
+                                      shape: WidgetStateProperty.resolveWith<OutlinedBorder>(
+                                          (Set<WidgetState> states) {
+                                        if (states.contains(
+                                                WidgetState.focused) ||
+                                            states.contains(
+                                                WidgetState.pressed)) {
+                                          return const RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(16)));
+                                        }
+                                        return const RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(16)));
+                                      }),
+                                      padding:
+                                          WidgetStateProperty.all<EdgeInsetsGeometry>(
+                                              const EdgeInsets.symmetric(
+                                                  vertical: 32,
+                                                  horizontal: 84)),
+                                      side: WidgetStateProperty.resolveWith<
+                                          BorderSide>((Set<WidgetState> states) {
+                                        if (states.contains(
+                                                WidgetState.focused) ||
+                                            states.contains(
+                                                WidgetState.pressed)) {
+                                          return const BorderSide(
+                                              width: 3,
+                                              color:
+                                                  buttonPrimaryPressedOutline);
+                                        }
+                                        return const BorderSide(
+                                            width: 3, color: Colors.white);
+                                      })),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      const Padding(
+                                        padding: EdgeInsets.only(right: 8),
+                                        child: Icon(
+                                          Icons.camera_alt_rounded,
+                                          size: 16,
+                                          color: MyColors.primaryColorDark,
                                         ),
-                                        Text(
-                                          "Deteksi Penyakit",
-                                          style: buttonTextStyle.copyWith(
-                                              fontSize: 16,
-                                              color: MyColors.primaryColorDark),
-                                        ),
-                                      ],
-                                    ),
+                                      ),
+                                      Text(
+                                        "Deteksi",
+                                        style: buttonTextStyle.copyWith(
+                                            fontSize: 16,
+                                            color: MyColors.primaryColorDark),
+                                      ),
+                                    ],
                                   ),
                                 ),
-                              )
+                              ),
                             ],
                           ),
                         ),

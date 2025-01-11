@@ -81,11 +81,8 @@ class RecipeSection extends StatelessWidget {
                         ResponsiveRowColumnItem(
                           child: TextButton(
                             onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const RecipePage()),
-                              );
+                              Navigator.pushReplacementNamed(
+                                  context, '/olahan');
                             },
                             style: ButtonStyle(
                                 backgroundColor: WidgetStateProperty.all<Color>(
@@ -117,7 +114,7 @@ class RecipeSection extends StatelessWidget {
                                 padding:
                                     WidgetStateProperty.all<EdgeInsetsGeometry>(
                                         const EdgeInsets.symmetric(
-                                            vertical: 16, horizontal: 64)),
+                                            vertical: 32, horizontal: 84)),
                                 side:
                                     WidgetStateProperty.resolveWith<BorderSide>(
                                         (Set<WidgetState> states) {
@@ -130,21 +127,9 @@ class RecipeSection extends StatelessWidget {
                                   return const BorderSide(
                                       width: 3, color: Colors.white);
                                 })),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                const Icon(
-                                  Icons.restaurant,
-                                  size: 24,
-                                  color: Colors.white,
-                                ),
-                                const SizedBox(width: 8),
-                                Text(
-                                  "Lihat Selengkapnya",
-                                  style: buttonTextStyle.copyWith(fontSize: 18),
-                                ),
-                              ],
+                            child: Text(
+                              "Selengkapya",
+                              style: buttonTextStyle.copyWith(fontSize: 18),
                             ),
                           ),
                         ),

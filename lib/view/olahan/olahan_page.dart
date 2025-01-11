@@ -216,6 +216,7 @@ class OlahanPage extends StatelessWidget {
                                       ],
                                     ),
                                   ),
+
                                   const SizedBox(height: 8),
                                   // Chef Animation
                                   Padding(
@@ -229,11 +230,57 @@ class OlahanPage extends StatelessWidget {
                                           color: MyColors.primaryColorDark),
                                       child: Row(
                                         children: [
-                                          SizedBox(
-                                              height: 256,
-                                              width: 256,
-                                              child: Lottie.asset(
-                                                  ImageAssets.chef)),
+                                          Row(
+                                            children: [
+                                              Responsive.isDesktop(context)
+                                                  ? Row(
+                                                      children: [
+                                                        SizedBox(
+                                                            height: 256,
+                                                            width: 256,
+                                                            child: Lottie.asset(
+                                                                ImageAssets
+                                                                    .chef)),
+                                                        Center(
+                                                          child: Text(
+                                                            "Mulai Olah Bahan Masak Kamu Jadi Aneka Masakan Nusantara Terpopuler",
+                                                            maxLines: 2,
+                                                            style: TextStyle(
+                                                                fontSize: 16,
+                                                                color: Colors
+                                                                    .white,
+                                                                decorationThickness:
+                                                                    2,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    )
+                                                  : Responsive.isTablet(context)
+                                                      ? Row(
+                                                          children: [
+                                                            SizedBox(
+                                                                height: 256,
+                                                                width: 256,
+                                                                child: Lottie.asset(
+                                                                    ImageAssets
+                                                                        .chef)),
+                                                          ],
+                                                        )
+                                                      : Row(
+                                                          children: [
+                                                            SizedBox(
+                                                                height: 256,
+                                                                width: 256,
+                                                                child: Lottie.asset(
+                                                                    ImageAssets
+                                                                        .chef)),
+                                                          ],
+                                                        )
+                                            ],
+                                          ),
                                         ],
                                       ),
                                     ),
