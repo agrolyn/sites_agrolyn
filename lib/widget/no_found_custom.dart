@@ -97,7 +97,7 @@ class NoFoundCustomWhite extends StatelessWidget {
                 // Pesan Utama
                 Text(
                   message,
-                  style: TextStyle(
+                  style: const TextStyle(
                       fontSize: 24,
                       color: Colors.white,
                       height: 1.2,
@@ -107,7 +107,7 @@ class NoFoundCustomWhite extends StatelessWidget {
                 // Sub Pesan
                 Text(
                   subMessage,
-                  style: TextStyle(
+                  style: const TextStyle(
                       fontSize: 16,
                       color: Colors.white,
                       height: 1.5,
