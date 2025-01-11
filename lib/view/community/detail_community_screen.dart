@@ -1,11 +1,9 @@
 import 'package:agrolyn_web/provider/community_notifer.dart';
-import 'package:agrolyn_web/utils/inter_prefs.dart';
 import 'package:agrolyn_web/utils/responsive.dart';
 import 'package:agrolyn_web/view/community/content_question_detail.dart';
 import 'package:agrolyn_web/view/community/input_answer.dart';
 import 'package:agrolyn_web/view/community/section_answers.dart';
 import 'package:agrolyn_web/widget/navbar/nav_drawer.dart';
-import 'package:agrolyn_web/widget/navbar/navbar.dart';
 import 'package:agrolyn_web/widget/navbar/navbar_desktop.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
