@@ -1,12 +1,14 @@
 import 'package:agrolyn_web/provider/home_notifier.dart';
 import 'package:agrolyn_web/shared/constans.dart';
 import 'package:agrolyn_web/utils/assets_path.dart';
-import 'package:agrolyn_web/utils/date.dart';
+import 'package:agrolyn_web/utils/responsive.dart';
 import 'package:agrolyn_web/view/education/detail_article.dart';
+import 'package:agrolyn_web/view/recipe/recipe_page.dart';
 import 'package:agrolyn_web/widget/footer.dart';
 import 'package:agrolyn_web/widget/navbar/nav_drawer.dart';
 import 'package:agrolyn_web/widget/navbar/navbar_desktop.dart';
 import 'package:agrolyn_web/widget/no_found_custom.dart';
+import 'package:agrolyn_web/widget/typography.dart';
 import 'package:agrolyn_web/widget/video_player_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
@@ -23,41 +25,10 @@ class EducationPage extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (_) => HomeNotifier(context: context),
       child: Consumer<HomeNotifier>(builder: (context, value, child) {
-        return DefaultTabController(
-          length: 2,
-          child: Scaffold(
+        return Scaffold(
             backgroundColor: Colors.white,
             key: scaffoldKey,
             drawer: const NavDrawer(),
-            appBar: AppBar(
-              bottom: const TabBar(
-                tabs: [
-                  Tab(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(Icons.article_outlined),
-                        SizedBox(width: 5),
-                        Text('Artikel'),
-                      ],
-                    ),
-                  ),
-                  Tab(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(Icons.video_library_outlined),
-                        SizedBox(width: 5),
-                        Text('Video'),
-                      ],
-                    ),
-                  ),
-                ],
-                indicatorColor: MyColors.primaryColorDark,
-                labelColor: MyColors.primaryColorDark,
-                unselectedLabelColor: Colors.grey,
-              ),
-            ),
             body: SingleChildScrollView(
               child: Column(
                 children: [
@@ -69,477 +40,588 @@ class EducationPage extends StatelessWidget {
                             : ResponsiveRowColumnType.ROW,
                     rowCrossAxisAlignment: CrossAxisAlignment.start,
                     columnCrossAxisAlignment: CrossAxisAlignment.center,
+                    columnMainAxisSize: MainAxisSize.min,
+                    rowPadding: const EdgeInsets.symmetric(
+                        horizontal: 20, vertical: 40),
+                    columnPadding: const EdgeInsets.symmetric(
+                        horizontal: 20, vertical: 40),
+                    columnSpacing: 50,
+                    rowSpacing: 50,
                     children: [
                       ResponsiveRowColumnItem(
                         rowFlex: 1,
                         rowFit: FlexFit.tight,
-                        child: SizedBox(
-                          height: MediaQuery.of(context).size.height * 1,
-                          child: TabBarView(
-                            children: [
-                              // Artikel Section (GridView)
-                              SingleChildScrollView(
-                                child: Column(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Padding(
+                              padding:
+                                  const EdgeInsets.only(top: 32, bottom: 16),
+                              child: RichText(
+                                text: TextSpan(
                                   children: [
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 16, vertical: 8),
-                                      child: Row(
-                                        children: [
-                                          Expanded(
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Row(
-                                                  children: [
-                                                    Image.asset(
-                                                      ImageAssets.logo,
-                                                      height: 24,
-                                                      width: 24,
-                                                    ),
-                                                    const SizedBox(width: 4),
-                                                    const Text(
-                                                      'Agrolyn',
-                                                      style: TextStyle(
-                                                          fontSize: 16,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          color: MyColors
-                                                              .primaryColorDark),
-                                                    ),
-                                                  ],
-                                                ),
-                                                const SizedBox(height: 16),
-                                                const Text(
-                                                  "Berita, Artikel, dan Bacaan Menarik",
-                                                  maxLines: 3,
-                                                  style: TextStyle(
-                                                    color: Colors.black,
-                                                    fontSize: 20,
-                                                    fontWeight: FontWeight.bold,
-                                                  ),
-                                                ),
-                                                const SizedBox(height: 8),
-                                                const Text(
-                                                  "Baca berbagai bacaan menarik tentang pertanian di Agrolyn Artikel",
-                                                  maxLines: 3,
-                                                  style: TextStyle(
-                                                    color: Colors.black,
-                                                    fontSize: 16,
-                                                    fontWeight:
-                                                        FontWeight.normal,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                          SizedBox(
-                                            height: 200,
-                                            width: 200,
-                                            child: Lottie.asset(
-                                                ImageAssets.article),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    value.articles.isNotEmpty
-                                        ? Padding(
-                                            padding: const EdgeInsets.all(16.0),
-                                            child: GridView.builder(
-                                              shrinkWrap: true,
-                                              physics:
-                                                  const NeverScrollableScrollPhysics(),
-                                              itemCount: value.articles.length,
-                                              gridDelegate:
-                                                  SliverGridDelegateWithFixedCrossAxisCount(
-                                                crossAxisCount:
-                                                    ResponsiveBreakpoints.of(
-                                                                context)
-                                                            .smallerThan(
-                                                                DESKTOP)
-                                                        ? 1
-                                                        : 2,
-                                                crossAxisSpacing: 10,
-                                                mainAxisSpacing: 10,
-                                                childAspectRatio:
-                                                    2, // Bisa diganti jika perlu rasio tinggi:lebar tertentu
-                                              ),
-                                              itemBuilder: (context, index) {
-                                                var article =
-                                                    value.articles[index];
-                                                return InkWell(
-                                                  key: ValueKey(
-                                                      article['title']),
-                                                  onTap: () {
-                                                    Navigator.push(
-                                                      context,
-                                                      MaterialPageRoute(
-                                                        builder: (context) =>
-                                                            DetailArticle(
-                                                          article: article,
-                                                        ),
-                                                      ),
-                                                    );
-                                                  },
-                                                  child: Container(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            12.0),
-                                                    margin:
-                                                        const EdgeInsets.only(
-                                                            bottom: 8),
-                                                    decoration: BoxDecoration(
-                                                      color: Colors.white,
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              8),
-                                                      boxShadow: [
-                                                        BoxShadow(
-                                                          color: Colors.black
-                                                              .withOpacity(0.1),
-                                                          blurRadius: 6,
-                                                          spreadRadius: 2,
-                                                          offset: const Offset(
-                                                              0, 2),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    child: Column(
-                                                      children: [
-                                                        ClipRRect(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(8),
-                                                          child: Image.network(
-                                                            article[
-                                                                'thumbnail'],
-                                                            height: 100,
-                                                            width:
-                                                                double.infinity,
-                                                            fit: BoxFit.cover,
-                                                          ),
-                                                        ),
-                                                        const SizedBox(
-                                                            height: 12),
-                                                        Expanded(
-                                                          child: Column(
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .start,
-                                                            children: [
-                                                              Row(
-                                                                children: [
-                                                                  const Icon(
-                                                                    Icons
-                                                                        .location_on_outlined,
-                                                                    size: 11,
-                                                                    color: Colors
-                                                                        .grey,
-                                                                  ),
-                                                                  const SizedBox(
-                                                                      width: 4),
-                                                                  Text(
-                                                                    article[
-                                                                        'location'],
-                                                                    style:
-                                                                        const TextStyle(
-                                                                      fontSize:
-                                                                          12,
-                                                                      color: Colors
-                                                                          .grey,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .bold,
-                                                                    ),
-                                                                  ),
-                                                                ],
-                                                              ),
-                                                              const SizedBox(
-                                                                  height: 2),
-                                                              Text(
-                                                                article[
-                                                                    'title'],
-                                                                style:
-                                                                    const TextStyle(
-                                                                  fontSize: 16,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold,
-                                                                ),
-                                                                maxLines: 2,
-                                                                overflow:
-                                                                    TextOverflow
-                                                                        .ellipsis,
-                                                              ),
-                                                              Text(
-                                                                article[
-                                                                    'description'],
-                                                                style:
-                                                                    const TextStyle(
-                                                                  fontSize: 14,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .normal,
-                                                                ),
-                                                                maxLines: 2,
-                                                                overflow:
-                                                                    TextOverflow
-                                                                        .ellipsis,
-                                                              ),
-                                                            ],
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                );
-                                              },
-                                            ))
-                                        : const Center(
-                                            child: NoFoundCustom(
-                                            message: "No Articles Available",
-                                            subMessage:
-                                                "We can't find any articles for you",
-                                          )),
+                                    const TextSpan(
+                                        text: "Temukan",
+                                        style: headlineSecondaryTextStyle),
+                                    TextSpan(
+                                        text: " Artikel dan Video ",
+                                        style:
+                                            headlineSecondaryTextStyle.copyWith(
+                                                color:
+                                                    MyColors.primaryColorDark)),
+                                    const TextSpan(
+                                        text:
+                                            "yang cocok untuk kamu yang ingin belajar lebih banyak tentang pertanian.",
+                                        style: headlineSecondaryTextStyle),
+                                    TextSpan(
+                                        text: " Agrolyn Edukasi ",
+                                        style:
+                                            headlineSecondaryTextStyle.copyWith(
+                                                color:
+                                                    MyColors.primaryColorDark)),
+                                    const TextSpan(
+                                        text:
+                                            " siap memberikan informasi yang kamu butuhkan.",
+                                        style: headlineSecondaryTextStyle),
                                   ],
                                 ),
+                                textAlign: TextAlign.center,
                               ),
-                              // Video Section (GridView)
-                              SingleChildScrollView(
-                                child: Column(
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 16, vertical: 8),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(bottom: 8, top: 0),
+                              child: ResponsiveRowColumn(
+                                layout: ResponsiveBreakpoints.of(context)
+                                        .smallerThan(DESKTOP)
+                                    ? ResponsiveRowColumnType.COLUMN
+                                    : ResponsiveRowColumnType.ROW,
+                                rowMainAxisAlignment: MainAxisAlignment.center,
+                                rowCrossAxisAlignment:
+                                    CrossAxisAlignment.center,
+                                children: [
+                                  ResponsiveRowColumnItem(
+                                    child: TextButton(
+                                      onPressed: () {
+                                        Navigator.pushReplacementNamed(
+                                            context, '/article');
+                                      },
+                                      style: ButtonStyle(
+                                          backgroundColor:
+                                              WidgetStateProperty.all<Color>(
+                                                  MyColors.primaryColorDark),
+                                          overlayColor:
+                                              WidgetStateProperty.resolveWith<Color>(
+                                                  (Set<WidgetState> states) {
+                                            if (states.contains(
+                                                WidgetState.hovered)) {
+                                              return MyColors.primaryColor;
+                                            }
+                                            if (states.contains(
+                                                    WidgetState.focused) ||
+                                                states.contains(
+                                                    WidgetState.pressed)) {
+                                              return MyColors.primaryColor;
+                                            }
+                                            return MyColors.primaryColorDark;
+                                          }),
+                                          shape: WidgetStateProperty.resolveWith<OutlinedBorder>(
+                                              (Set<WidgetState> states) {
+                                            if (states.contains(
+                                                    WidgetState.focused) ||
+                                                states.contains(
+                                                    WidgetState.pressed)) {
+                                              return const RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.all(
+                                                          Radius.circular(16)));
+                                            }
+                                            return const RoundedRectangleBorder(
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(16)));
+                                          }),
+                                          padding:
+                                              WidgetStateProperty.all<EdgeInsetsGeometry>(
+                                                  const EdgeInsets.symmetric(
+                                                      vertical: 16,
+                                                      horizontal: 64)),
+                                          side: WidgetStateProperty.resolveWith<
+                                              BorderSide>((Set<WidgetState> states) {
+                                            if (states.contains(
+                                                    WidgetState.focused) ||
+                                                states.contains(
+                                                    WidgetState.pressed)) {
+                                              return const BorderSide(
+                                                  width: 3,
+                                                  color:
+                                                      buttonPrimaryPressedOutline);
+                                            }
+                                            return const BorderSide(
+                                                width: 3, color: Colors.white);
+                                          })),
                                       child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
                                         children: [
-                                          SizedBox(
-                                            height: 200,
-                                            width: 200,
-                                            child: Lottie.asset(
-                                                ImageAssets.videos),
+                                          const Icon(
+                                            Icons.article,
+                                            size: 24,
+                                            color: Colors.white,
                                           ),
                                           const SizedBox(width: 8),
-                                          Expanded(
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.end,
-                                              children: [
-                                                Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.end,
-                                                  children: [
-                                                    Image.asset(
-                                                      ImageAssets.logo,
-                                                      height: 24,
-                                                      width: 24,
-                                                    ),
-                                                    const SizedBox(width: 4),
-                                                    const Text(
-                                                      'Agrolyn',
-                                                      style: TextStyle(
-                                                          fontSize: 16,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          color: MyColors
-                                                              .primaryColorDark),
-                                                    ),
-                                                  ],
-                                                ),
-                                                const SizedBox(height: 16),
-                                                const Text(
-                                                  "Tontoan Edukasi Pertanian Terbaik",
-                                                  maxLines: 3,
-                                                  style: TextStyle(
-                                                    color: Colors.black,
-                                                    fontSize: 20,
-                                                    fontWeight: FontWeight.bold,
-                                                  ),
-                                                ),
-                                                const SizedBox(height: 8),
-                                                const Text(
-                                                  "Tonton berbagai tontonan edukasi menarik tentang pertanian di Agrolyn Video Edukasi",
-                                                  maxLines: 3,
-                                                  style: TextStyle(
-                                                    color: Colors.black,
-                                                    fontSize: 16,
-                                                    fontWeight:
-                                                        FontWeight.normal,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
+                                          Text(
+                                            "Lihat Selengkapnya",
+                                            style: buttonTextStyle.copyWith(
+                                                fontSize: 18),
                                           ),
                                         ],
                                       ),
                                     ),
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 8),
-                                      child: GridView.builder(
-                                        shrinkWrap: true,
-                                        physics:
-                                            const NeverScrollableScrollPhysics(),
-                                        itemCount: value.videos.length,
-                                        gridDelegate:
-                                            SliverGridDelegateWithFixedCrossAxisCount(
-                                                crossAxisCount:
-                                                    ResponsiveBreakpoints.of(
-                                                                context)
-                                                            .smallerThan(
-                                                                DESKTOP)
-                                                        ? 1
-                                                        : 2,
-                                                crossAxisSpacing: 10,
-                                                mainAxisSpacing: 10,
-                                                childAspectRatio:
-                                                    ResponsiveBreakpoints.of(
-                                                                context)
-                                                            .smallerThan(
-                                                                DESKTOP)
-                                                        ? 1.55
-                                                        : 1.63),
-                                        itemBuilder: (context, index) {
-                                          final video = value.videos[index];
-                                          return Container(
+                                  ),
+                                ],
+                              ),
+                            ),
+                            value.articles.isNotEmpty
+                                ? Padding(
+                                    padding: const EdgeInsets.all(16.0),
+                                    child: GridView.builder(
+                                      shrinkWrap: true,
+                                      physics:
+                                          const NeverScrollableScrollPhysics(),
+                                      itemCount: 3,
+                                      gridDelegate:
+                                          SliverGridDelegateWithFixedCrossAxisCount(
+                                        crossAxisCount:
+                                            Responsive.isDesktop(context)
+                                                ? 3
+                                                : Responsive.isTablet(context)
+                                                    ? 2
+                                                    : 1, // Jumlah kolom
+                                        crossAxisSpacing: 8,
+                                        mainAxisExtent:
+                                            Responsive.isMobile(context)
+                                                ? 230
+                                                : 232,
+                                        childAspectRatio: Responsive
+                                                .isDesktopLarge(context)
+                                            ? 4 / 2.5
+                                            : Responsive.isDesktop(context)
+                                                ? 4 / 2.3
+                                                : Responsive.isTablet(context)
+                                                    ? 3 / 4
+                                                    : 2 /
+                                                        3, // Rasio ukuran grid (lebar vs tinggi)
+                                      ),
+                                      itemBuilder: (context, index) {
+                                        var article = value.articles[index];
+
+                                        return InkWell(
+                                          key: ValueKey(article['title']),
+                                          onTap: () {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    DetailArticle(
+                                                  article: article,
+                                                ),
+                                              ),
+                                            );
+                                          },
+                                          child: Container(
+                                            padding: const EdgeInsets.all(12.0),
                                             margin: const EdgeInsets.only(
                                                 bottom: 8),
                                             decoration: BoxDecoration(
                                               color: Colors.white,
                                               borderRadius:
-                                                  BorderRadius.circular(16),
+                                                  BorderRadius.circular(8),
                                               boxShadow: [
                                                 BoxShadow(
                                                   color: Colors.black
                                                       .withOpacity(0.1),
-                                                  blurRadius: 5,
+                                                  blurRadius: 6,
                                                   spreadRadius: 2,
                                                   offset: const Offset(0, 2),
                                                 ),
                                               ],
                                             ),
                                             child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
                                               children: [
                                                 ClipRRect(
                                                   borderRadius:
-                                                      const BorderRadius.only(
-                                                    topLeft:
-                                                        Radius.circular(16),
-                                                    topRight:
-                                                        Radius.circular(16),
-                                                  ),
+                                                      BorderRadius.circular(8),
                                                   child: Image.network(
-                                                    video['thumbnail'],
-                                                    fit: BoxFit.cover,
+                                                    article['thumbnail'],
+                                                    height: 100,
                                                     width: double.infinity,
-                                                    height: 150,
+                                                    fit: BoxFit.cover,
                                                   ),
                                                 ),
-                                                Padding(
-                                                  padding: const EdgeInsets.all(
-                                                      16.0),
+                                                const SizedBox(height: 12),
+                                                Expanded(
                                                   child: Column(
                                                     crossAxisAlignment:
                                                         CrossAxisAlignment
                                                             .start,
                                                     children: [
+                                                      Row(
+                                                        children: [
+                                                          const Icon(
+                                                            Icons
+                                                                .location_on_outlined,
+                                                            size: 11,
+                                                            color: Colors.grey,
+                                                          ),
+                                                          const SizedBox(
+                                                              width: 4),
+                                                          Text(
+                                                            article['location'],
+                                                            style:
+                                                                const TextStyle(
+                                                              fontSize: 12,
+                                                              color:
+                                                                  Colors.grey,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      const SizedBox(height: 2),
                                                       Text(
-                                                        video['title'],
-                                                        maxLines: 1,
-                                                        overflow: TextOverflow
-                                                            .ellipsis,
+                                                        article['title'],
                                                         style: const TextStyle(
                                                           fontSize: 16,
                                                           fontWeight:
                                                               FontWeight.bold,
                                                         ),
+                                                        maxLines: 1,
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
                                                       ),
-                                                      const SizedBox(height: 4),
                                                       Text(
-                                                        video['description'],
+                                                        article['description'],
+                                                        style: const TextStyle(
+                                                          fontSize: 14,
+                                                          fontWeight:
+                                                              FontWeight.normal,
+                                                        ),
                                                         maxLines: 2,
                                                         overflow: TextOverflow
                                                             .ellipsis,
-                                                        style: const TextStyle(
-                                                          fontSize: 14,
-                                                          color: Colors.grey,
-                                                        ),
-                                                      ),
-                                                      const SizedBox(height: 8),
-                                                      InkWell(
-                                                        onTap: () {
-                                                          showVideoDialog(
-                                                            context,
-                                                            video['link_yt'],
-                                                          );
-                                                        },
-                                                        child: Container(
-                                                          height: 40,
-                                                          width:
-                                                              double.infinity,
-                                                          alignment:
-                                                              Alignment.center,
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            color: MyColors
-                                                                .primaryColorDark,
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        8),
-                                                            boxShadow: [
-                                                              BoxShadow(
-                                                                color: Colors
-                                                                    .black
-                                                                    .withOpacity(
-                                                                        0.2),
-                                                                offset:
-                                                                    const Offset(
-                                                                        0, 4),
-                                                                blurRadius: 8,
-                                                              ),
-                                                            ],
-                                                          ),
-                                                          child: const Text(
-                                                            "Lihat",
-                                                            style: TextStyle(
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold,
-                                                              color:
-                                                                  Colors.white,
-                                                              fontSize: 14,
-                                                            ),
-                                                          ),
-                                                        ),
                                                       ),
                                                     ],
                                                   ),
                                                 ),
                                               ],
                                             ),
-                                          );
-                                        },
-                                      ),
-                                    ),
-                                    const Footer()
+                                          ),
+                                        );
+                                      },
+                                    ))
+                                : const Center(
+                                    child: NoFoundCustom(
+                                    message: "No Articles Available",
+                                    subMessage:
+                                        "We can't find any articles for you",
+                                  )),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.only(top: 32, bottom: 16),
+                              child: RichText(
+                                text: TextSpan(
+                                  children: [
+                                    const TextSpan(
+                                        text: "Temukan",
+                                        style: headlineSecondaryTextStyle),
+                                    TextSpan(
+                                        text: " Artikel dan Video ",
+                                        style:
+                                            headlineSecondaryTextStyle.copyWith(
+                                                color:
+                                                    MyColors.primaryColorDark)),
+                                    const TextSpan(
+                                        text:
+                                            "yang cocok untuk kamu yang ingin belajar lebih banyak tentang pertanian.",
+                                        style: headlineSecondaryTextStyle),
+                                    TextSpan(
+                                        text: " Agrolyn Edukasi ",
+                                        style:
+                                            headlineSecondaryTextStyle.copyWith(
+                                                color:
+                                                    MyColors.primaryColorDark)),
+                                    const TextSpan(
+                                        text:
+                                            " siap memberikan informasi yang kamu butuhkan.",
+                                        style: headlineSecondaryTextStyle),
                                   ],
                                 ),
+                                textAlign: TextAlign.center,
                               ),
-                            ],
-                          ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(bottom: 8, top: 0),
+                              child: ResponsiveRowColumn(
+                                layout: ResponsiveBreakpoints.of(context)
+                                        .smallerThan(DESKTOP)
+                                    ? ResponsiveRowColumnType.COLUMN
+                                    : ResponsiveRowColumnType.ROW,
+                                rowMainAxisAlignment: MainAxisAlignment.center,
+                                rowCrossAxisAlignment:
+                                    CrossAxisAlignment.center,
+                                children: [
+                                  ResponsiveRowColumnItem(
+                                    child: TextButton(
+                                      onPressed: () {
+                                        Navigator.pushReplacementNamed(
+                                            context, '/video');
+                                      },
+                                      style: ButtonStyle(
+                                          backgroundColor:
+                                              WidgetStateProperty.all<Color>(
+                                                  MyColors.primaryColorDark),
+                                          overlayColor:
+                                              WidgetStateProperty.resolveWith<Color>(
+                                                  (Set<WidgetState> states) {
+                                            if (states.contains(
+                                                WidgetState.hovered)) {
+                                              return MyColors.primaryColor;
+                                            }
+                                            if (states.contains(
+                                                    WidgetState.focused) ||
+                                                states.contains(
+                                                    WidgetState.pressed)) {
+                                              return MyColors.primaryColor;
+                                            }
+                                            return MyColors.primaryColorDark;
+                                          }),
+                                          shape: WidgetStateProperty.resolveWith<OutlinedBorder>(
+                                              (Set<WidgetState> states) {
+                                            if (states.contains(
+                                                    WidgetState.focused) ||
+                                                states.contains(
+                                                    WidgetState.pressed)) {
+                                              return const RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.all(
+                                                          Radius.circular(16)));
+                                            }
+                                            return const RoundedRectangleBorder(
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(16)));
+                                          }),
+                                          padding:
+                                              WidgetStateProperty.all<EdgeInsetsGeometry>(
+                                                  const EdgeInsets.symmetric(
+                                                      vertical: 16,
+                                                      horizontal: 64)),
+                                          side: WidgetStateProperty.resolveWith<
+                                              BorderSide>((Set<WidgetState> states) {
+                                            if (states.contains(
+                                                    WidgetState.focused) ||
+                                                states.contains(
+                                                    WidgetState.pressed)) {
+                                              return const BorderSide(
+                                                  width: 3,
+                                                  color:
+                                                      buttonPrimaryPressedOutline);
+                                            }
+                                            return const BorderSide(
+                                                width: 3, color: Colors.white);
+                                          })),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          const Icon(
+                                            Icons.article,
+                                            size: 24,
+                                            color: Colors.white,
+                                          ),
+                                          const SizedBox(width: 8),
+                                          Text(
+                                            "Lihat Selengkapnya",
+                                            style: buttonTextStyle.copyWith(
+                                                fontSize: 18),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            value.articles.isNotEmpty
+                                ? Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 8),
+                                    child: GridView.builder(
+                                      shrinkWrap: true,
+                                      physics:
+                                          const NeverScrollableScrollPhysics(),
+                                      itemCount: 3,
+                                      gridDelegate:
+                                          SliverGridDelegateWithFixedCrossAxisCount(
+                                        crossAxisCount:
+                                            Responsive.isDesktop(context)
+                                                ? 3
+                                                : Responsive.isTablet(context)
+                                                    ? 2
+                                                    : 1, // Jumlah kolom
+                                        crossAxisSpacing: 8,
+                                        mainAxisExtent:
+                                            Responsive.isMobile(context)
+                                                ? 230
+                                                : 305,
+                                        childAspectRatio: Responsive
+                                                .isDesktopLarge(context)
+                                            ? 4 / 2.5
+                                            : Responsive.isDesktop(context)
+                                                ? 4 / 2.3
+                                                : Responsive.isTablet(context)
+                                                    ? 3 / 4
+                                                    : 2 /
+                                                        3, // Rasio ukuran grid (lebar vs tinggi)
+                                      ),
+                                      itemBuilder: (context, index) {
+                                        final video = value.videos[index];
+                                        return Container(
+                                          margin:
+                                              const EdgeInsets.only(bottom: 8),
+                                          decoration: BoxDecoration(
+                                            color: Colors.white,
+                                            borderRadius:
+                                                BorderRadius.circular(16),
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: Colors.black
+                                                    .withOpacity(0.1),
+                                                blurRadius: 5,
+                                                spreadRadius: 2,
+                                                offset: const Offset(0, 2),
+                                              ),
+                                            ],
+                                          ),
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              ClipRRect(
+                                                borderRadius:
+                                                    const BorderRadius.only(
+                                                  topLeft: Radius.circular(16),
+                                                  topRight: Radius.circular(16),
+                                                ),
+                                                child: Image.network(
+                                                  video['thumbnail'],
+                                                  fit: BoxFit.cover,
+                                                  width: double.infinity,
+                                                  height: 150,
+                                                ),
+                                              ),
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.all(16.0),
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      video['title'],
+                                                      maxLines: 1,
+                                                      overflow:
+                                                          TextOverflow.ellipsis,
+                                                      style: const TextStyle(
+                                                        fontSize: 16,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                      ),
+                                                    ),
+                                                    const SizedBox(height: 4),
+                                                    Text(
+                                                      video['description'],
+                                                      maxLines: 2,
+                                                      overflow:
+                                                          TextOverflow.ellipsis,
+                                                      style: const TextStyle(
+                                                        fontSize: 14,
+                                                        color: Colors.grey,
+                                                      ),
+                                                    ),
+                                                    const SizedBox(height: 8),
+                                                    InkWell(
+                                                      onTap: () {
+                                                        showVideoDialog(
+                                                          context,
+                                                          video['link_yt'],
+                                                        );
+                                                      },
+                                                      child: Container(
+                                                        height: 40,
+                                                        width: double.infinity,
+                                                        alignment:
+                                                            Alignment.center,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          color: MyColors
+                                                              .primaryColorDark,
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(8),
+                                                          boxShadow: [
+                                                            BoxShadow(
+                                                              color: Colors
+                                                                  .black
+                                                                  .withOpacity(
+                                                                      0.2),
+                                                              offset:
+                                                                  const Offset(
+                                                                      0, 4),
+                                                              blurRadius: 8,
+                                                            ),
+                                                          ],
+                                                        ),
+                                                        child: const Text(
+                                                          "Lihat",
+                                                          style: TextStyle(
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            color: Colors.white,
+                                                            fontSize: 14,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                  )
+                                : const Center(
+                                    child: NoFoundCustom(
+                                    message: "No Video Available",
+                                    subMessage:
+                                        "We can't find any videos for you",
+                                  )),
+                          ],
                         ),
                       ),
                     ],
                   ),
+                  Footer()
                 ],
               ),
-            ),
-          ),
-        );
+            ));
       }),
     );
   }

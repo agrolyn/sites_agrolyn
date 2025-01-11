@@ -1,5 +1,6 @@
 import 'package:agrolyn_web/provider/splash_notiier.dart';
 import 'package:agrolyn_web/utils/assets_path.dart';
+import 'package:agrolyn_web/view/home/home_page.dart';
 import 'package:agrolyn_web/widget/navbar/navbar.dart';
 import 'package:another_flutter_splash_screen/another_flutter_splash_screen.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +20,7 @@ class SplashScreen extends StatelessWidget {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => Navbar(),
+          builder: (context) => HomePage(),
         ),
       );
     }

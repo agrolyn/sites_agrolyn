@@ -1,5 +1,6 @@
 import 'package:agrolyn_web/provider/olahan_notifier.dart';
 import 'package:agrolyn_web/utils/assets_path.dart';
+import 'package:agrolyn_web/utils/responsive.dart';
 import 'package:agrolyn_web/widget/footer.dart';
 import 'package:agrolyn_web/widget/navbar/nav_drawer.dart';
 import 'package:agrolyn_web/widget/navbar/navbar_desktop.dart';
@@ -170,18 +171,26 @@ class OlahanPage extends StatelessWidget {
                                               const NeverScrollableScrollPhysics(),
                                           gridDelegate:
                                               SliverGridDelegateWithFixedCrossAxisCount(
-                                            crossAxisCount:
-                                                ResponsiveBreakpoints.of(
-                                                            context)
-                                                        .largerThan(TABLET)
+                                            crossAxisCount: Responsive
+                                                    .isDesktop(context)
+                                                ? 3
+                                                : Responsive.isTablet(context)
                                                     ? 2
-                                                    : 1,
+                                                    : 1, // Jumlah kolom
                                             crossAxisSpacing: 8,
                                             mainAxisSpacing: 8,
                                             mainAxisExtent:
                                                 200, // Set the height for each grid item (adjust this value)
-                                            childAspectRatio: 2 /
-                                                2, // Adjust width-to-height ratio if needed
+                                            childAspectRatio: Responsive
+                                                    .isDesktopLarge(context)
+                                                ? 4 / 2.3
+                                                : Responsive.isDesktop(context)
+                                                    ? 4 / 2
+                                                    : Responsive.isTablet(
+                                                            context)
+                                                        ? 3 / 2
+                                                        : 4 / 2.3,
+                                            // Rasio ukuran grid (lebar vs tinggi)
                                           ),
                                           itemCount: value.olahans.length,
                                           itemBuilder: (BuildContext context,
@@ -256,19 +265,37 @@ class OlahanPage extends StatelessWidget {
                                                             const SizedBox(
                                                                 height: 8),
                                                             InkWell(
+                                                              // onTap: () {
+                                                              //   int idCat =
+                                                              //       int.tryParse(
+                                                              //               olahan['id'].toString()) ??
+                                                              //           0;
+                                                              //   // Navigator.push(
+                                                              //   //   context,
+                                                              //   //   MaterialPageRoute(
+                                                              //   //     builder: (context) =>
+                                                              //   //         CategoryOlahanPage(
+                                                              //   //             idCat:
+                                                              //   //                 idCat),
+                                                              //   //   ),
+                                                              //   // );
+                                                              //   Navigator.pushNamed(
+                                                              //       context,
+                                                              //       '/olahan-category',
+                                                              //       arguments:
+                                                              //           idCat);
+                                                              // },
                                                               onTap: () {
                                                                 int idCat =
                                                                     int.tryParse(
                                                                             olahan['id'].toString()) ??
                                                                         0;
-                                                                Navigator.push(
+                                                                Navigator
+                                                                    .pushNamed(
                                                                   context,
-                                                                  MaterialPageRoute(
-                                                                    builder: (context) =>
-                                                                        CategoryOlahanPage(
-                                                                            idCat:
-                                                                                idCat),
-                                                                  ),
+                                                                  '/category-olahan', // Corrected route name
+                                                                  arguments:
+                                                                      idCat,
                                                                 );
                                                               },
                                                               child: Container(

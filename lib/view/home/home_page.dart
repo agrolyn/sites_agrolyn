@@ -3,6 +3,11 @@ import 'package:agrolyn_web/provider/menu_notifier.dart';
 import 'package:agrolyn_web/shared/constans.dart';
 import 'package:agrolyn_web/view/community/community_page.dart';
 import 'package:agrolyn_web/view/detection/detection_screen.dart';
+import 'package:agrolyn_web/view/home/detection_section.dart';
+import 'package:agrolyn_web/view/home/harvest_calculator_section.dart';
+import 'package:agrolyn_web/view/home/recipe_section.dart';
+import 'package:agrolyn_web/widget/carousel.dart';
+import 'package:agrolyn_web/widget/footer.dart';
 import 'package:agrolyn_web/widget/navbar/nav_drawer.dart';
 import 'package:agrolyn_web/widget/navbar/navbar_desktop.dart';
 import 'package:agrolyn_web/widget/spacing.dart';
@@ -28,6 +33,23 @@ class HomePage extends StatelessWidget {
           drawer: const NavDrawer(),
           body: SingleChildScrollView(
             child: Column(children: [
+              NavbarDesktop(
+                activePage: "Beranda",
+              ),
+              MaxWidthBox(
+                maxWidth: 1200,
+                child: FittedBox(
+                  fit: BoxFit.fitWidth,
+                  alignment: Alignment.topCenter,
+                  child: Container(
+                    width: 1200,
+                    height: 640,
+                    alignment: Alignment.center,
+                    child: Carousel(),
+                  ),
+                ),
+              ),
+              HarvestCalculatorSection(),
               Container(
                 decoration: BoxDecoration(
                     color: Colors.white,
@@ -211,6 +233,9 @@ class HomePage extends StatelessWidget {
                   ),
                 ),
               ),
+              DetectionSection(),
+              RecipeSection(idCat: 0),
+              Footer()
             ]),
           ),
         );

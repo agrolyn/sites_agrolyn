@@ -6,11 +6,14 @@ import 'package:agrolyn_web/view/detection/choose_types_scan.dart';
 import 'package:agrolyn_web/view/detection/detection_result_screen.dart';
 import 'package:agrolyn_web/view/detection/detection_screen.dart';
 import 'package:agrolyn_web/view/detection/history_scan_screen.dart';
+import 'package:agrolyn_web/view/education/article_page.dart';
 import 'package:agrolyn_web/view/education/education_page.dart';
+import 'package:agrolyn_web/view/education/video_page.dart';
 import 'package:agrolyn_web/view/home/detection_section.dart';
 import 'package:agrolyn_web/view/home/harvest_calculator_section.dart';
 import 'package:agrolyn_web/view/home/home_page.dart';
 import 'package:agrolyn_web/view/home/recipe_section.dart';
+import 'package:agrolyn_web/view/olahan/category_olahan_page.dart';
 import 'package:agrolyn_web/view/olahan/olahan_page.dart';
 import 'package:agrolyn_web/view/recipe/recipe_page.dart';
 import 'package:agrolyn_web/view/splash_screen.dart';
@@ -60,11 +63,12 @@ class MyApp extends StatelessWidget {
         '/splashScreen': (context) => SplashScreen(
               context: context,
             ),
-        '/home': (context) => ListView.builder(
-            itemCount: blocks.length,
-            itemBuilder: (context, index) {
-              return blocks[index];
-            }),
+        '/home': (context) => HomePage(),
+        // ListView.builder(
+        //     itemCount: blocks.length,
+        //     itemBuilder: (context, index) {
+        //       return blocks[index];
+        //     }),
         '/detection': (context) => const DetectionScreen(),
         '/upload-detection': (context) => const ChooseTypesScan(),
         '/result-detection': (context) => const DetectionResultScreen(),
@@ -73,8 +77,13 @@ class MyApp extends StatelessWidget {
         '/olahan': (context) => const OlahanPage(
               idCat: 0, // Replace 'someId' with the appropriate value
             ),
+        '/category-olahan': (context) => CategoryOlahanPage(
+              idCat: ModalRoute.of(context)!.settings.arguments as int,
+            ),
         '/recipe': (context) => const RecipePage(),
         '/education': (context) => const EducationPage(),
+        '/video': (context) => const VideoPage(),
+        '/article': (context) => const ArticlePage(),
         'forgotPassword': (context) => ForgotPasswordPage(),
       },
     );
