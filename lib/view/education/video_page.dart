@@ -83,7 +83,7 @@ class VideoPage extends StatelessWidget {
                                               height: 24,
                                               width: 24,
                                             ),
-                                            const SizedBox(width: 4),
+                                            const SizedBox(width: 5),
                                             const Text(
                                               'Agrolyn',
                                               style: TextStyle(
