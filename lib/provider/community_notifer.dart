@@ -16,11 +16,17 @@ import 'package:agrolyn_web/utils/inter_prefs.dart';
 class CommunityNotifer extends ChangeNotifier {
   final BuildContext context;
   final CommunityService _communityService = CommunityService();
+  bool? isDetailPage = false;
+  int? id;
   final formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
-  CommunityNotifer({required this.context}) {
-    fetchAllQuestion();
+  CommunityNotifer({required this.context, isDetailPage, id}) {
+    if (isDetailPage == true) {
+      fetchDetailQuestion(id);
+    } else {
+      fetchAllQuestion();
+    }
   }
 
   // ==================================
@@ -192,10 +198,9 @@ class CommunityNotifer extends ChangeNotifier {
     } catch (e) {
       print("Error fetching details: $e");
       detailQuestion = null; // Fallback jika terjadi kesalahan
-    } finally {
-      isLoading = false;
-      notifyListeners();
     }
+    isLoading = false;
+    notifyListeners();
   }
 
   // ==================================

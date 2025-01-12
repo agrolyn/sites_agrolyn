@@ -27,11 +27,11 @@ class DetailCommunityScreen extends StatelessWidget {
     final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
     return ChangeNotifierProvider(
-      create: (_) => CommunityNotifer(context: context),
+      create: (_) =>
+          CommunityNotifer(context: context, isDetailPage: true, id: id),
       child: Consumer<CommunityNotifer>(
         builder: (context, value, child) {
           if (value.detailQuestion == null) {
-            value.fetchDetailQuestion(id);
             return const Scaffold(
               body: Center(
                 child: CircularProgressIndicator(),
