@@ -10,7 +10,6 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:agrolyn_web/shared/constans.dart';
 import 'package:agrolyn_web/widget/no_found_custom.dart';
-import 'package:agrolyn_web/view/olahan/category_olahan_page.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
@@ -31,7 +30,7 @@ class OlahanPage extends StatelessWidget {
           body: SingleChildScrollView(
             child: Column(
               children: [
-                NavbarDesktop(activePage: "Olahan Makanan"),
+                NavbarDesktop(activePage: "Olahan Pertanian"),
                 Container(
                   width: Responsive.widthScreen(context),
                   height: Responsive.isMobile(context)
@@ -94,7 +93,7 @@ class OlahanPage extends StatelessWidget {
                                         ),
                                         const SizedBox(height: 16),
                                         Text(
-                                          "Olahan Masakan",
+                                          "Olahan Pertanian",
                                           style: TextStyle(
                                             fontSize:
                                                 Responsive.isMobile(context)
@@ -106,7 +105,7 @@ class OlahanPage extends StatelessWidget {
                                         ),
                                         const SizedBox(height: 8),
                                         Text(
-                                          "Temukan Referensi Olahan Masakan Yang Cocok Untukmu",
+                                          "Temukan olahan Pertanian yang bernilai jual",
                                           textAlign: TextAlign.center,
                                           maxLines: 4,
                                           style: TextStyle(
@@ -175,9 +174,9 @@ class OlahanPage extends StatelessWidget {
                                                 children: [
                                                   TextSpan(
                                                       text:
-                                                          "Mau Masak Apa Hari Ini "),
+                                                          "Mau kami rekomendasikan olahan apa"),
                                                   TextSpan(
-                                                    text: "Chef?",
+                                                    text: "hari ini?",
                                                     style: TextStyle(
                                                         color: Colors.green,
                                                         decorationColor:
@@ -207,7 +206,7 @@ class OlahanPage extends StatelessWidget {
                                                               FontWeight.bold)),
                                                   TextSpan(
                                                       text:
-                                                          "Resep Siap Membantu Kamu!"),
+                                                          "Siap memberikan rekomendasi olahan Pertanian untukmu"),
                                                 ],
                                               ),
                                             ),
@@ -241,9 +240,9 @@ class OlahanPage extends StatelessWidget {
                                                             child: Lottie.asset(
                                                                 ImageAssets
                                                                     .chef)),
-                                                        Center(
+                                                        const Center(
                                                           child: Text(
-                                                            "Mulai Olah Bahan Masak Kamu Jadi Aneka Masakan Nusantara Terpopuler",
+                                                            "Mulai Olah Bahan Pertanian Menjadi Produk Yang Bernilai Jual",
                                                             maxLines: 2,
                                                             style: TextStyle(
                                                                 fontSize: 16,
@@ -296,7 +295,8 @@ class OlahanPage extends StatelessWidget {
                                             fontWeight: FontWeight.normal,
                                             color: Colors.black),
                                         children: [
-                                          TextSpan(text: "Aneka Masakan"),
+                                          TextSpan(
+                                              text: "Aneka Olahan Pertanian"),
                                           TextSpan(
                                             text: " Nusantara ",
                                             style: TextStyle(
@@ -412,26 +412,6 @@ class OlahanPage extends StatelessWidget {
                                                             const SizedBox(
                                                                 height: 8),
                                                             InkWell(
-                                                              // onTap: () {
-                                                              //   int idCat =
-                                                              //       int.tryParse(
-                                                              //               olahan['id'].toString()) ??
-                                                              //           0;
-                                                              //   // Navigator.push(
-                                                              //   //   context,
-                                                              //   //   MaterialPageRoute(
-                                                              //   //     builder: (context) =>
-                                                              //   //         CategoryOlahanPage(
-                                                              //   //             idCat:
-                                                              //   //                 idCat),
-                                                              //   //   ),
-                                                              //   // );
-                                                              //   Navigator.pushNamed(
-                                                              //       context,
-                                                              //       '/olahan-category',
-                                                              //       arguments:
-                                                              //           idCat);
-                                                              // },
                                                               onTap: () {
                                                                 int idCat =
                                                                     int.tryParse(

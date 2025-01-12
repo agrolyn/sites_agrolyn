@@ -1,10 +1,6 @@
 import 'package:agrolyn_web/provider/home_notifier.dart';
-import 'package:agrolyn_web/provider/menu_notifier.dart';
 import 'package:agrolyn_web/shared/constans.dart';
-import 'package:agrolyn_web/utils/responsive.dart';
 import 'package:agrolyn_web/view/chatbot/chatbot.dart';
-import 'package:agrolyn_web/view/community/community_page.dart';
-import 'package:agrolyn_web/view/detection/detection_screen.dart';
 import 'package:agrolyn_web/view/home/detection_section.dart';
 import 'package:agrolyn_web/view/home/harvest_calculator_section.dart';
 import 'package:agrolyn_web/view/home/recipe_section.dart';
@@ -25,7 +21,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-    void _showPopup(BuildContext context) {
+    void showPopup(BuildContext context) {
       showDialog(
         context: context,
         barrierColor: Colors.black54, // Latar belakang semi-transparan
@@ -53,7 +49,7 @@ class HomePage extends StatelessWidget {
                     color: Colors.white, // Warna latar popup
                     borderRadius:
                         BorderRadius.circular(12), // Membulatkan sudut
-                    boxShadow: [
+                    boxShadow: const [
                       BoxShadow(
                         color: Colors.black26, // Warna bayangan
                         blurRadius: 10, // Intensitas blur bayangan
@@ -61,7 +57,7 @@ class HomePage extends StatelessWidget {
                       ),
                     ],
                   ),
-                  child: Chatbot(),
+                  child: const Chatbot(),
                 ),
               ),
             ],
@@ -75,12 +71,12 @@ class HomePage extends StatelessWidget {
       child: Consumer<HomeNotifier>(builder: (context, value, child) {
         return Scaffold(
           floatingActionButton: FloatingActionButton(
-            onPressed: () => _showPopup(context), // Memanggil popup
-            child: Icon(
-              Icons.chat_rounded,
+            onPressed: () => showPopup(context),
+            backgroundColor: MyColors.secondaryColorDark, // Memanggil popup
+            child: const Icon(
+              Icons.smart_toy,
               color: Colors.white,
             ),
-            backgroundColor: MyColors.primaryColorDark,
           ),
           backgroundColor: Colors.white,
           key: scaffoldKey,
@@ -103,7 +99,7 @@ class HomePage extends StatelessWidget {
                   ),
                 ),
               ),
-              HarvestCalculatorSection(),
+              const HarvestCalculatorSection(),
               Container(
                 decoration: BoxDecoration(
                     color: Colors.white,
@@ -329,9 +325,9 @@ class HomePage extends StatelessWidget {
                   ),
                 ),
               ),
-              DetectionSection(),
-              RecipeSection(idCat: 0),
-              Footer()
+              const DetectionSection(),
+              const RecipeSection(idCat: 0),
+              const Footer()
             ]),
           ),
         );

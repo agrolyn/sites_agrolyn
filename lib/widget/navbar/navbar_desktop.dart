@@ -80,7 +80,7 @@ class NavbarDesktop extends StatelessWidget {
                         icon: Icons.camera_alt_outlined,
                         activePage: activePage),
                     NavbarDesktopItem(
-                        title: "Olahan Makanan",
+                        title: "Olahan Pertanian",
                         route: "/olahan",
                         icon: Icons.restaurant,
                         activePage: activePage),

@@ -167,7 +167,7 @@ class EducationPage extends StatelessWidget {
                                         text: "Temukan",
                                         style: headlineSecondaryTextStyle),
                                     TextSpan(
-                                        text: " Artikel dan Video ",
+                                        text: " Artikel ",
                                         style:
                                             headlineSecondaryTextStyle.copyWith(
                                                 color:
@@ -175,16 +175,6 @@ class EducationPage extends StatelessWidget {
                                     const TextSpan(
                                         text:
                                             "yang cocok untuk kamu yang ingin belajar lebih banyak tentang pertanian.",
-                                        style: headlineSecondaryTextStyle),
-                                    TextSpan(
-                                        text: " Agrolyn Edukasi ",
-                                        style:
-                                            headlineSecondaryTextStyle.copyWith(
-                                                color:
-                                                    MyColors.primaryColorDark)),
-                                    const TextSpan(
-                                        text:
-                                            " siap memberikan informasi yang kamu butuhkan.",
                                         style: headlineSecondaryTextStyle),
                                   ],
                                 ),
@@ -427,7 +417,7 @@ class EducationPage extends StatelessWidget {
                                         text: "Temukan",
                                         style: headlineSecondaryTextStyle),
                                     TextSpan(
-                                        text: " Artikel dan Video ",
+                                        text: " Video ",
                                         style:
                                             headlineSecondaryTextStyle.copyWith(
                                                 color:
@@ -435,16 +425,6 @@ class EducationPage extends StatelessWidget {
                                     const TextSpan(
                                         text:
                                             "yang cocok untuk kamu yang ingin belajar lebih banyak tentang pertanian.",
-                                        style: headlineSecondaryTextStyle),
-                                    TextSpan(
-                                        text: " Agrolyn Edukasi ",
-                                        style:
-                                            headlineSecondaryTextStyle.copyWith(
-                                                color:
-                                                    MyColors.primaryColorDark)),
-                                    const TextSpan(
-                                        text:
-                                            " siap memberikan informasi yang kamu butuhkan.",
                                         style: headlineSecondaryTextStyle),
                                   ],
                                 ),

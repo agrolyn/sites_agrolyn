@@ -315,9 +315,6 @@ class DetectionResultScreen extends StatelessWidget {
                                             ))
                                       ]),
                                 ),
-                                //
-
-                                //
                               ])),
                     ))));
   }
