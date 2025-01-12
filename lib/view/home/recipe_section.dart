@@ -53,7 +53,7 @@ class RecipeSection extends StatelessWidget {
                               style: headlineSecondaryTextStyle.copyWith(
                                   color: MyColors.primaryColorDark)),
                           const TextSpan(
-                              text: "masakan yang cocok dari hasil tani kamu",
+                              text: "makanan yang cocok dari hasil tani kamu",
                               style: headlineSecondaryTextStyle),
                           TextSpan(
                               text: " Agrolyn Resep ",

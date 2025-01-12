@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:agrolyn_web/provider/olahan_notifier.dart';
 import 'package:agrolyn_web/utils/assets_path.dart';
 import 'package:agrolyn_web/utils/responsive.dart';
+import 'package:agrolyn_web/view/chatbot/chatbot.dart';
 import 'package:agrolyn_web/widget/footer.dart';
 import 'package:agrolyn_web/widget/navbar/nav_drawer.dart';
 import 'package:agrolyn_web/widget/navbar/navbar_desktop.dart';
@@ -20,12 +21,65 @@ class OlahanPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+    void showPopup(BuildContext context) {
+      showDialog(
+        context: context,
+        barrierColor: Colors.black54, // Latar belakang semi-transparan
+        builder: (context) {
+          final isMobile =
+              MediaQuery.of(context).size.width < 600; // Deteksi mobile
+          return Stack(
+            children: [
+              Align(
+                alignment: Alignment.bottomRight, // Posisi di bawah kanan
+                child: Container(
+                  width: isMobile
+                      ? MediaQuery.of(context).size.width *
+                          0.9 // Hampir penuh pada mobile
+                      : 400, // Lebar tetap untuk desktop/tablet
+                  height: isMobile
+                      ? MediaQuery.of(context).size.height *
+                          0.8 // Hampir penuh pada mobile
+                      : 550, // Tinggi tetap untuk desktop/tablet
+                  margin: const EdgeInsets.only(
+                    bottom: 80, // Jarak dari bawah (di atas FAB)
+                    right: 16, // Jarak dari tepi kanan
+                  ),
+                  decoration: BoxDecoration(
+                    color: Colors.white, // Warna latar popup
+                    borderRadius:
+                        BorderRadius.circular(12), // Membulatkan sudut
+                    boxShadow: const [
+                      BoxShadow(
+                        color: Colors.black26, // Warna bayangan
+                        blurRadius: 10, // Intensitas blur bayangan
+                        offset: Offset(0, 4), // Posisi bayangan
+                      ),
+                    ],
+                  ),
+                  child: const Chatbot(),
+                ),
+              ),
+            ],
+          );
+        },
+      );
+    }
+
     return ChangeNotifierProvider(
       create: (_) => OlahanNotifier(idCat, context: context),
       child: Consumer<OlahanNotifier>(builder: (context, value, child) {
         return Scaffold(
           backgroundColor: Colors.white,
           key: scaffoldKey,
+          floatingActionButton: FloatingActionButton(
+            onPressed: () => showPopup(context),
+            backgroundColor: MyColors.secondaryColorDark, // Memanggil popup
+            child: const Icon(
+              Icons.smart_toy,
+              color: Colors.white,
+            ),
+          ),
           drawer: const NavDrawer(),
           body: SingleChildScrollView(
             child: Column(
