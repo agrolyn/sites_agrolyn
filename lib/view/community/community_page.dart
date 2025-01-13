@@ -329,13 +329,17 @@ class CommunityPage extends StatelessWidget {
                                         ? 3
                                         : 4, // Jumlah kolom
                             crossAxisSpacing: 8,
-                            mainAxisSpacing: 8,
+                            mainAxisSpacing: Responsive.isMobile(context)
+                                ? 0
+                                : Responsive.isTablet(context)
+                                    ? 0
+                                    : 100,
                             childAspectRatio: Responsive.isMobile(context)
                                 ? 4 / 3
                                 : Responsive.isTablet(context)
-                                    ? 4 / 3
+                                    ? 3.3 / 3
                                     : Responsive.isDesktop(context)
-                                        ? 4 / 4
+                                        ? 3.5 / 4
                                         : 1, // Rasio ukuran grid (lebar vs tinggi)
                           ),
                           physics: const NeverScrollableScrollPhysics(),
