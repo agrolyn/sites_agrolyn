@@ -27,10 +27,15 @@ class NavbarDesktop extends StatelessWidget {
             child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Image.asset(
-                    ImageAssets.logo,
-                    width: 50,
-                    height: 50,
+                  InkWell(
+                    onTap: () {
+                      Navigator.pushReplacementNamed(context, "/home");
+                    },
+                    child: Image.asset(
+                      ImageAssets.logo,
+                      width: 50,
+                      height: 50,
+                    ),
                   ),
                   IconButton(
                       style:
@@ -57,10 +62,15 @@ class NavbarDesktop extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Image.asset(
-                  ImageAssets.logo,
-                  width: 50,
-                  height: 50,
+                InkWell(
+                  onTap: () {
+                    Navigator.pushReplacementNamed(context, "/home");
+                  },
+                  child: Image.asset(
+                    ImageAssets.logo,
+                    width: 50,
+                    height: 50,
+                  ),
                 ),
                 Row(
                   children: [

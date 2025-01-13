@@ -45,12 +45,15 @@ class DetailOlahanPage extends StatelessWidget {
                 ),
                 SingleChildScrollView(
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       NavbarDesktop(
                         activePage: "Olahan Makanan",
                       ),
                       Container(
                         padding: const EdgeInsets.all(16.0),
+                        margin: const EdgeInsets.only(top: 8),
+                        width: 200,
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(16),
