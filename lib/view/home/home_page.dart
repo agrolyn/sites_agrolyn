@@ -271,11 +271,19 @@ class HomePage extends StatelessWidget {
                                                 WidgetState.pressed)) {
                                           return const RoundedRectangleBorder(
                                               borderRadius: BorderRadius.all(
-                                                  Radius.circular(16)));
+                                                  Radius.circular(16)),
+                                              side: BorderSide(
+                                                  width: 2,
+                                                  color:
+                                                      buttonPrimaryPressedOutline));
                                         }
                                         return const RoundedRectangleBorder(
                                             borderRadius: BorderRadius.all(
-                                                Radius.circular(16)));
+                                                Radius.circular(16)),
+                                            side: BorderSide(
+                                                width: 2,
+                                                color:
+                                                    MyColors.primaryColorDark));
                                       }),
                                       padding:
                                           WidgetStateProperty.all<EdgeInsetsGeometry>(

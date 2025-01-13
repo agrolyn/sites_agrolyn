@@ -164,7 +164,7 @@ class EducationPage extends StatelessWidget {
                                           ),
                                           const SizedBox(height: 8),
                                           Text(
-                                            "Tingkatkan pengetahuanmu tentang pertanian berkelanjutan.",
+                                            "Tingkatkan Pengetahuanmu Tentang Pertanian Berkelanjutan Melalui Artikel dan Video Edukasi",
                                             textAlign: TextAlign.center,
                                             maxLines: 4,
                                             style: TextStyle(

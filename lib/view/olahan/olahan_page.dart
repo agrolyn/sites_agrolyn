@@ -159,7 +159,7 @@ class OlahanPage extends StatelessWidget {
                                         ),
                                         const SizedBox(height: 8),
                                         Text(
-                                          "Temukan olahan Pertanian yang bernilai jual",
+                                          "Temukan Olahan Pertanian Yang Dapat Bernilai Jual Lebih Tinggi",
                                           textAlign: TextAlign.center,
                                           maxLines: 4,
                                           style: TextStyle(
@@ -228,9 +228,9 @@ class OlahanPage extends StatelessWidget {
                                                 children: [
                                                   TextSpan(
                                                       text:
-                                                          "Mau kami rekomendasikan olahan apa"),
+                                                          "Mau Kami Rekomendasikan Olahan Apa"),
                                                   TextSpan(
-                                                    text: "hari ini?",
+                                                    text: " Hari Ini? ",
                                                     style: TextStyle(
                                                         color: Colors.green,
                                                         decorationColor:
@@ -296,7 +296,7 @@ class OlahanPage extends StatelessWidget {
                                                                     .chef)),
                                                         const Center(
                                                           child: Text(
-                                                            "Mulai Olah Bahan Pertanian Menjadi Produk Yang Bernilai Jual",
+                                                            "Mulai Olah Bahan Pertanian Menjadi Produk Yang Bernilai Jual Lebih Tinggi",
                                                             maxLines: 2,
                                                             style: TextStyle(
                                                                 fontSize: 16,
@@ -358,7 +358,7 @@ class OlahanPage extends StatelessWidget {
                                                 decorationThickness: 2,
                                                 fontWeight: FontWeight.bold),
                                           ),
-                                          TextSpan(text: " Terpopuler"),
+                                          TextSpan(text: "Terpopuler"),
                                         ],
                                       ),
                                     ),

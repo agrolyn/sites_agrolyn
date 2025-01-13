@@ -97,7 +97,7 @@ class HistoryScanScreen extends StatelessWidget {
                                                   ? 4 / 2
                                                   : Responsive.isTablet(context)
                                                       ? 3 / 2
-                                                      : 4 / 2.3,
+                                                      : 4 / 3,
                                           // Rasio ukuran grid (lebar vs tinggi)
                                         ),
                                         physics:

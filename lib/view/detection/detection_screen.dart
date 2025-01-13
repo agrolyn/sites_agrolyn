@@ -163,7 +163,7 @@ class DetectionScreen extends StatelessWidget {
                                           ),
                                           const SizedBox(height: 8),
                                           Text(
-                                            "Memprediksi jenis penyakit tanaman dan memberi panduan agar petani dapat bertindak tepat dan menjaga hasil panen lebih optimal",
+                                            "Memprediksi Jenis Penyakit Tanaman Dan Memberi Panduan Agar Petani Dapat Bertindak Tepat Dan Menjaga Hasil Panen Lebih Optimal",
                                             textAlign: TextAlign.center,
                                             maxLines: 4,
                                             style: TextStyle(

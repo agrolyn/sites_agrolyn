@@ -61,7 +61,7 @@ class RecipeSection extends StatelessWidget {
                                   color: MyColors.primaryColorDark)),
                           const TextSpan(
                               text:
-                                  " siap membantu kamu untuk mengexplore hasil tani kamu.",
+                                  " siap membantu kamu untuk mengeksplorasi hasil tani kamu.",
                               style: headlineSecondaryTextStyle),
                         ],
                       ),
@@ -128,7 +128,7 @@ class RecipeSection extends StatelessWidget {
                                       width: 3, color: Colors.white);
                                 })),
                             child: Text(
-                              "Selengkapya",
+                              "Selengkapnya",
                               style: buttonTextStyle.copyWith(fontSize: 18),
                             ),
                           ),

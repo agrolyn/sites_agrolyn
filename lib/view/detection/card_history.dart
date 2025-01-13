@@ -57,7 +57,7 @@ class CardHistory extends StatelessWidget {
               Stack(children: [
                 Container(
                   width: double.infinity,
-                  height: 180,
+                  height: 175,
                   decoration: BoxDecoration(
                     image: DecorationImage(
                       image: Image.network(

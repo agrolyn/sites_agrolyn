@@ -84,7 +84,7 @@ class CardCommunity extends StatelessWidget {
                                       ? 200
                                       : Responsive.isTablet(context)
                                           ? 200
-                                          : 300,
+                                          : 280,
                                   errorBuilder: (context, error, stackTrace) {
                                     return Text('Error loading image: $error');
                                   },

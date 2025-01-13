@@ -49,18 +49,21 @@ class DetailOlahanPage extends StatelessWidget {
                       NavbarDesktop(
                         activePage: "Olahan Makanan",
                       ),
-                      Padding(
+                      Container(
                         padding: const EdgeInsets.all(16.0),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(16),
+                        ),
                         child: InkWell(
                           onTap: () => Navigator.pop(
                               context), // Kembali ke halaman sebelumnya
-                          child: Row(children: [
-                            const Icon(Icons.arrow_back),
-                            const SizedBox(
+                          child: const Row(children: [
+                            Icon(Icons.arrow_back),
+                            SizedBox(
                               width: 22,
                             ),
-                            const Text("Kembali",
-                                style: TextStyle(fontSize: 20)),
+                            Text("Kembali", style: TextStyle(fontSize: 20)),
                           ]),
                         ),
                       ),
@@ -112,7 +115,7 @@ class DetailOlahanPage extends StatelessWidget {
                                               color: Colors.white,
                                               borderRadius:
                                                   BorderRadius.circular(16),
-                                              boxShadow: [
+                                              boxShadow: const [
                                                 BoxShadow(
                                                     color: Colors.black12,
                                                     spreadRadius: 2,
@@ -184,7 +187,7 @@ class DetailOlahanPage extends StatelessWidget {
                                               color: Colors.white,
                                               borderRadius:
                                                   BorderRadius.circular(16),
-                                              boxShadow: [
+                                              boxShadow: const [
                                                 BoxShadow(
                                                     color: Colors.black12,
                                                     spreadRadius: 2,
@@ -236,7 +239,7 @@ class DetailOlahanPage extends StatelessWidget {
                                                   Text(
                                                     "${value.detailOlahans['ingredients'] ?? 'Unknown'}",
                                                     textAlign: TextAlign.start,
-                                                    style: TextStyle(
+                                                    style: const TextStyle(
                                                         fontSize: 16,
                                                         fontWeight:
                                                             FontWeight.normal),
@@ -280,7 +283,8 @@ class DetailOlahanPage extends StatelessWidget {
                                                     Container(
                                                       width: 8,
                                                       height: 8,
-                                                      decoration: BoxDecoration(
+                                                      decoration:
+                                                          const BoxDecoration(
                                                         shape: BoxShape.circle,
                                                         color: Colors
                                                             .white, // Warna lingkaran kecil
@@ -297,14 +301,15 @@ class DetailOlahanPage extends StatelessWidget {
                                                     Container(
                                                       width: 30,
                                                       height: 30,
-                                                      decoration: BoxDecoration(
+                                                      decoration:
+                                                          const BoxDecoration(
                                                         shape: BoxShape.circle,
                                                         color: Colors
                                                             .white, // Warna lingkaran
                                                       ),
                                                       alignment:
                                                           Alignment.center,
-                                                      child: Text(
+                                                      child: const Text(
                                                         '', // Angka di dalam lingkaran
                                                         style: TextStyle(
                                                           color: Colors
@@ -326,7 +331,8 @@ class DetailOlahanPage extends StatelessWidget {
                                                     Container(
                                                       width: 8,
                                                       height: 8,
-                                                      decoration: BoxDecoration(
+                                                      decoration:
+                                                          const BoxDecoration(
                                                         shape: BoxShape.circle,
                                                         color: Colors
                                                             .white, // Warna lingkaran kecil

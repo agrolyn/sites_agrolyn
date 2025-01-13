@@ -31,10 +31,10 @@ class VideoPage extends StatelessWidget {
                     child: InkWell(
                       onTap: () =>
                           Navigator.pushReplacementNamed(context, '/education'),
-                      child: Row(children: [
-                        const Icon(Icons.arrow_back),
-                        const SizedBox(width: 22),
-                        const Text("Kembali", style: TextStyle(fontSize: 20)),
+                      child: const Row(children: [
+                        Icon(Icons.arrow_back),
+                        SizedBox(width: 22),
+                        Text("Kembali", style: TextStyle(fontSize: 20)),
                       ]),
                     ),
                   ),
@@ -96,7 +96,7 @@ class VideoPage extends StatelessWidget {
                                         ),
                                         const SizedBox(height: 16),
                                         const Text(
-                                          "Tontoan Edukasi Pertanian Terbaik",
+                                          "Tonton Edukasi Pertanian Terbaik",
                                           maxLines: 3,
                                           style: TextStyle(
                                             color: Colors.black,

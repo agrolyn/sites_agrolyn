@@ -171,7 +171,7 @@ class CommunityPage extends StatelessWidget {
                                           ),
                                           const SizedBox(height: 8),
                                           Text(
-                                            "Temukan jawaban, inspirasi, dan jejaring dengan petani lainnya untuk bersama-sama memajukan pertanian di indonesia",
+                                            "Temukan Jawaban, Inspirasi, Dan Jejaring Dengan Petani Lainnya Untuk Bersama Sama Memajukan Pertanian Di Indonesia",
                                             textAlign: TextAlign.center,
                                             maxLines: 4,
                                             style: TextStyle(
@@ -359,6 +359,9 @@ class CommunityPage extends StatelessWidget {
                           margin: const EdgeInsets.only(top: 20),
                           child: const Text('Belum ada topik diskusi'),
                         ),
+                  const SizedBox(
+                    height: 16,
+                  ),
                   const Footer()
                 ],
               ),

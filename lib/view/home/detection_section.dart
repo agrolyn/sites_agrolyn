@@ -75,7 +75,7 @@ class DetectionSection extends StatelessWidget {
                           ),
                         ),
                       ),
-                      Padding(
+                      Container(
                         padding: const EdgeInsets.only(left: 32, right: 8),
                         child: TextButton(
                           onPressed: () {
