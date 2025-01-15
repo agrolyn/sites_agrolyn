@@ -3,8 +3,8 @@ import 'package:agrolyn_web/provider/detection_notifier.dart';
 import 'package:agrolyn_web/utils/assets_path.dart';
 import 'package:agrolyn_web/utils/responsive.dart';
 import 'package:agrolyn_web/view/detection/card_history.dart';
-import 'package:agrolyn_web/view/detection/detection_screen.dart';
 import 'package:agrolyn_web/widget/footer.dart';
+import 'package:agrolyn_web/widget/navbar/nav_drawer.dart';
 import 'package:agrolyn_web/widget/navbar/navbar_desktop.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -44,6 +44,7 @@ class HistoryScanScreen extends StatelessWidget {
         create: (_) => DetectionNotifier(context: context, page: 'history'),
         child: Consumer<DetectionNotifier>(
             builder: (context, value, child) => Scaffold(
+                  drawer: const NavDrawer(),
                   body: SafeArea(
                     child: SingleChildScrollView(
                       child: Column(
@@ -128,10 +129,10 @@ class HistoryScanScreen extends StatelessWidget {
                                         ],
                                       ),
                                 const SizedBox(height: 20),
-                                const Footer()
                               ],
                             ),
                           ),
+                          const Footer()
                         ],
                       ),
                     ),

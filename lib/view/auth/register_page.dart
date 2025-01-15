@@ -97,6 +97,8 @@ class RegisterPage extends StatelessWidget {
                                       columnCrossAxisAlignment:
                                           CrossAxisAlignment.center,
                                       columnMainAxisSize: MainAxisSize.min,
+                                      columnSpacing:
+                                          Responsive.isMobile(context) ? 8 : 16,
                                       children: [
                                         ResponsiveRowColumnItem(
                                           rowFlex: 1,
@@ -206,6 +208,8 @@ class RegisterPage extends StatelessWidget {
                                           CrossAxisAlignment.start,
                                       rowSpacing:
                                           Responsive.isMobile(context) ? 8 : 12,
+                                      columnSpacing:
+                                          Responsive.isMobile(context) ? 8 : 16,
                                       columnCrossAxisAlignment:
                                           CrossAxisAlignment.center,
                                       columnMainAxisSize: MainAxisSize.min,

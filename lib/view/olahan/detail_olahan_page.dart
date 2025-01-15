@@ -260,7 +260,6 @@ class DetailOlahanPage extends StatelessWidget {
                                     ? Padding(
                                         padding: const EdgeInsets.all(12.0),
                                         child: Container(
-                                          height: 280,
                                           width: double.infinity,
                                           decoration: BoxDecoration(
                                             color: MyColors.primaryColorDark,
